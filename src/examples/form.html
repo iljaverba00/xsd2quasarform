@@ -36,12 +36,12 @@
 			</style>
 <script type="text/javascript">
 				/* POLYFILLS */
-				
+
 				/* add .matches if not natively supported */
 				if (!Element.prototype.matches)
-					Element.prototype.matches = Element.prototype.msMatchesSelector || 
+					Element.prototype.matches = Element.prototype.msMatchesSelector ||
 												Element.prototype.webkitMatchesSelector;
-												
+
 				/* add .closest if not natively supported */
 				if (!Element.prototype.closest)
 					Element.prototype.closest = function(s) {
@@ -53,7 +53,7 @@
 						} while (el !== null);
 						return null;
 					};
-				
+
 				/* add .forEach if not natively supported */
 				if (!NodeList.prototype.forEach) {
 					NodeList.prototype.forEach = function(callback){
@@ -64,7 +64,7 @@
 						}
 					};
 				}
-        
+
         /* add .previousElementSibling if not supported */
         (function (arr) {
           arr.forEach(function (item) {
@@ -89,11 +89,11 @@
         })([Element.prototype, CharacterData.prototype]);
 			</script><script type="text/javascript">
 				/* XML GENERATORS */
-				
+
 				var htmlToXML = function(root) {
 					var namespaces = [];
 				    var prefixes = [];
-				    
+
 				    document.querySelectorAll("[data-xsd2html2xml-namespace]:not([data-xsd2html2xml-namespace=''])").forEach(function(o) {
 				    	if (namespaces.indexOf(
 				    		o.getAttribute("data-xsd2html2xml-namespace")
@@ -101,7 +101,7 @@
 					    	namespaces.push(
 					    		o.getAttribute("data-xsd2html2xml-namespace")
 					    	);
-					    	
+
 					    	prefixes.push(
 					    		o.getAttribute("data-xsd2html2xml-name").substring(
 				    				0, o.getAttribute("data-xsd2html2xml-name").indexOf(":")
@@ -109,9 +109,9 @@
 				    		);
 				    	}
 				    });
-				    
+
 				    var namespaceString = "";
-				    
+
 				    namespaces.forEach(function(o,i) {
 				    	namespaceString = namespaceString.concat(
 				    		"xmlns".concat(
@@ -121,10 +121,10 @@
 				    		)
 				    	)
 				    });
-				    
+
 				    return String.fromCharCode(60).concat("?xml version=\"1.0\"?").concat(String.fromCharCode(62)).concat(getXML(root, false, namespaceString.trim()));
 				};
-				
+
 				var getXML = function(parent, attributesOnly, namespaceString) {
 				    var xml = "";
 				    var children = [].slice.call(parent.children);
@@ -154,13 +154,13 @@
 				                    if (!attributesOnly) {
 				                    	if (!o.getAttribute("data-xsd2html2xml-choice"))
 				                    		xml = xml.concat(getXML(o));
-				                    		
+
 				                    	if (o.getAttribute("data-xsd2html2xml-choice")) {
 				                    		var node = o.previousElementSibling;
 				                    		while (node.hasAttribute("data-xsd2html2xml-choice")) {
 				                    			node = node.previousElementSibling;
 				                    		};
-				                    		
+
 				                    		if (node.getElementsByTagName("input")[0].checked)
 				                    			xml = xml.concat(getXML(o));
 				                    	};
@@ -169,14 +169,14 @@
 				            }
 				        }
 				    });
-				    
+
 				    if (namespaceString) {
 				    	xml = xml.substring(0, xml.indexOf(String.fromCharCode(62))).concat(" ").concat(namespaceString).concat(xml.substring(xml.indexOf(String.fromCharCode(62))));
 				    }
-				    
+
 				    return xml;
 				};
-				
+
 				var getContent = function(node) {
 				    if (node.getElementsByTagName("input").length != 0) {
 				        switch (node.getElementsByTagName("input")[0].getAttribute("type").toLowerCase()) {
@@ -216,24 +216,24 @@
 				}
 			</script><script type="text/javascript">
 				/* HTML POPULATORS */
-				
+
 				var addHiddenFields = function() {
 					document.querySelectorAll("[data-xsd2html2xml-min], [data-xsd2html2xml-max]").forEach(function(o) {
 						//add hidden element
 						var newNode = o.previousElementSibling.cloneNode(true);
-						
+
 						newNode.setAttribute("hidden", "");
-						
+
 						newNode.querySelectorAll("input, textarea, select").forEach(function(p) {
 							p.setAttribute("disabled", "");
 						});
-						
+
 						o.parentElement.insertBefore(
 							newNode, o
 						);
 					});
 				};
-				
+
 				var ensureMinimum = function() {
 					document.querySelectorAll("[data-xsd2html2xml-min], [data-xsd2html2xml-max]").forEach(function(o) {
 						//add minimum number of elements
@@ -257,7 +257,7 @@
 							//else, add up to minimum number of elements
 							} else {
 								var remainder = o.getAttribute("data-xsd2html2xml-min") - (o.parentNode.children.length - 2);
-								
+
 								for (i=0; i<remainder; i++) {
 									clickAddButton(o);
 								};
@@ -265,18 +265,18 @@
 						};
 					});
 				};
-				
+
 				var xmlToHTML = function(root) {
 					var xmlDocument;
-					
-					//check if form was generated from an XML document 
+
+					//check if form was generated from an XML document
 					if (document.querySelector("meta[name='generator'][content='XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml']").getAttribute("data-xsd2html2xml-source")) {
 						//parse xml document from attribute
 						xmlDocument = new DOMParser().parseFromString(
 							document.querySelector("meta[name='generator'][content='XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml']").getAttribute("data-xsd2html2xml-source"),
 							"application/xml"
 						);
-						
+
 						//start parsing nodes, providing the root node and the corresponding document element
 						parseNode(
 							xmlDocument.childNodes[0],
@@ -284,10 +284,10 @@
 						);
 					};
 				};
-				
+
 				var setValue = function(element, value) {
 					element.querySelector("input, textarea, select").setAttribute("data-xsd2html2xml-filled", "true");
-					
+
 					if (element.querySelector("input") !== null) {
 						if (element.querySelector("input").getAttribute("data-xsd2html2xml-primitive") === "boolean") {
 							if (value === "true") {
@@ -296,17 +296,17 @@
 						} else {
 							element.querySelector("input").setAttribute("value", value);
 						};
-						
+
 						if (element.querySelector("input").getAttribute("type") === "file") {
 							element.querySelector("input").removeAttribute("required");
 							element.querySelector("input").setAttribute("data-xsd2html2xml-required", "true");
 						};
 					};
-					
+
 					if (element.querySelector("textarea") !== null) {
 						element.querySelector("textarea").textContent = value;
 					};
-					
+
 					if (element.querySelector("select") !== null) {
 						if (element.querySelector("select").getAttribute("data-xsd2html2xml-primitive") === "idref"
 							|| element.querySelector("select").getAttribute("data-xsd2html2xml-primitive") === "idrefs") {
@@ -323,7 +323,7 @@
 						}
 					};
 				};
-				
+
 				var parseNode = function(node, element) {
 					//iterate through the node's attributes and fill them out
 					for (var i=0; i<node.attributes.length; i++) {
@@ -335,12 +335,12 @@
 								)
 							).concat("']")
 						);
-						
+
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};
 					};
-					
+
 					//if there is only one (non-element) node, it must contain the value; note: this will not work for potential mixed="true" support
 					if (node.childNodes.length === 1 && node.childNodes[0].nodeType === Node.TEXT_NODE) {
 						//in the case of complexTypes with simpleContents, select the sub-element that actually contains the input element
@@ -352,10 +352,10 @@
 					//else, iterate through the children
 					} else {
 						var previousChildName;
-						
+
 						for (var i=0; i<node.childNodes.length; i++) {
 							var childNode = node.childNodes[i];
-							
+
 							if (childNode.nodeType === Node.ELEMENT_NODE) {
 								//find the corresponding element
 								var childElement = element.querySelector(
@@ -366,20 +366,20 @@
 										)
 									).concat("']")
 								);
-								
+
 								//if there is an add-button (and it is not the first child node being parsed), add an element
 								var button;
-								
+
 								if (childElement.parentElement.lastElementChild.nodeName.toLowerCase() === "button") {
 									button = childElement.parentElement.lastElementChild;
 								} else if (childElement.parentElement.parentElement.parentElement.lastElementChild.nodeName.toLowerCase() === "button"
 									&& !childElement.parentElement.parentElement.parentElement.lastElementChild.hasAttribute("data-xsd2html2xml-element")) {
 									button = childElement.parentElement.parentElement.parentElement.lastElementChild;
 								};
-								
+
 								if (button !== null && childNode.nodeName === previousChildName) {
 									clickAddButton(button);
-									
+
 									parseNode(
 										childNode,
 										button.previousElementSibling.previousElementSibling
@@ -392,13 +392,13 @@
 										childElement
 									);
 								};
-								
+
 								previousChildName = childNode.nodeName;
 							}
 						};
 					}
 				};
-				
+
 				var setDynamicValues = function() {
 					for (var i=0; i<globalValuesMap.length; i++) {
 						for (var j=0; j<globalValuesMap[i].values.length; j++) {
@@ -410,7 +410,7 @@
 				};
 			</script><script type="text/javascript">
 				/* VALUE FIXERS */
-				
+
 				var setValues = function() {
 					/* specifically set values on ranges */
 					document.querySelectorAll("[type='range']").forEach(function(o) {
@@ -424,10 +424,10 @@
 							o.value = 0;
 							o.onchange();
 						};
-						
+
 						o.previousElementSibling.textContent = o.value;
 					});
-					
+
 					/* specifically set values on datepickers */
 					document.querySelectorAll("[data-xsd2html2xml-primitive='gday']").forEach(function(o) {
 						if (o.getAttribute("value")) {
@@ -447,17 +447,17 @@
 				};
 			</script><script type="text/javascript">
 				/* EVENT HANDLERS */
-				
+
 				var clickAddButton = function(button) {
 					var newNode = button.previousElementSibling.cloneNode(true);
-					
+
 					newNode.removeAttribute("hidden");
-					
+
 					newNode.querySelectorAll("input, select, textarea").forEach(function(o) {
 						if (o.closest("[hidden]") == null)
 							o.removeAttribute("disabled");
 					});
-					
+
 					//set a new random id for radio buttons
 					newNode.querySelectorAll("input[type='radio']").forEach(function(o) {
 						if (o.parentElement.previousElementSibling != null
@@ -471,59 +471,59 @@
 								Math.random().toString().substring(2)
 							));
 						};
-						
+
 						o.setAttribute("onclick", "clickRadioInput(this, '".concat(o.getAttribute("name")).concat("');"));
 					});
-					
+
 					button.parentNode.insertBefore(
 						newNode, button.previousElementSibling
 					);
-					
+
 					if ((button.parentNode.children.length - 2) == button.getAttribute("data-xsd2html2xml-max"))
 						button.setAttribute("disabled", "disabled");
-						
+
 					if (newNode.querySelectorAll("[data-xsd2html2xml-primitive='id']").length > 0)
 						updateIdentifiers();
 				}
-				
+
 				var clickRemoveButton = function(button) {
 					var section = button.closest("section");
-					
+
 					if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-min"))
 						button.closest("section").lastElementChild.click();
-					
+
 					if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-max"))
 						button.closest("section").lastElementChild.removeAttribute("disabled");
-					
+
 					button.closest("section").removeChild(
 						button.closest("fieldset, label")
 					);
-					
+
 					if (section.querySelectorAll("[data-xsd2html2xml-primitive = 'id']").length > 0)
 						updateIdentifiers();
 				}
-				
+
 				var clickRadioInput = function(input, name) {
 					var activeSections = [];
 					var currentSection = input.parentElement.nextElementSibling;
-					
+
 					while (currentSection && currentSection.hasAttribute("data-xsd2html2xml-choice")) {
 						activeSections.push(currentSection);
 						currentSection = currentSection.nextElementSibling;
 					};
-					
+
 					document.querySelectorAll("[name=".concat(name).concat("]")).forEach(function(o) {
 						o.removeAttribute("checked");
-						
+
 						var section = o.parentElement.nextElementSibling;
-						
+
 						while (section && section.hasAttribute("data-xsd2html2xml-choice")) {
 							section.querySelectorAll("input, select, textarea").forEach(function(p) {
 								var contained = false;
 								activeSections.forEach(function(q) {
 									if (q.contains(p)) contained = true;
 								});
-								
+
 								if (contained) {
 									if (p.closest("[data-xsd2html2xml-choice]") === section) {
 										if (p.closest("*[hidden]") === null)
@@ -535,34 +535,34 @@
 									p.setAttribute("disabled", "disabled");
 								};
 							});
-							
+
 							section = section.nextElementSibling;
 						};
 					});
-					
+
 					input.setAttribute("checked","checked");
 				}
-				
+
 				var updateIdentifiers = function() {
 					var globalIdentifiers = [];
-					
+
 					document.querySelectorAll("[data-xsd2html2xml-primitive='id']:not([disabled])").forEach(function(o) {
 						if (o.hasAttribute("value")) {
 							globalIdentifiers.push(o.getAttribute("value"));
 						}
 					});
-					
+
 					globalIdentifiers = globalIdentifiers.filter(
-						function uniques(value, index, self) { 
+						function uniques(value, index, self) {
 							return self.indexOf(value) === index;
 						}
 					);
-					
+
 					document.querySelectorAll("[data-xsd2html2xml-primitive='idref'], [data-xsd2html2xml-primitive='idrefs']").forEach(function(o) {
 						while(o.firstChild) {
 							o.removeChild(o.firstChild);
 						}
-						
+
 						for (var i=0; i<globalIdentifiers.length; i++) {
 							var option = document.createElement('option');
 							option.textContent = globalIdentifiers[i];
@@ -571,16 +571,16 @@
 						}
 					});
 				}
-				
+
 				var pickFile = function(input, file, type) {
 					var resetFilePicker = function(input) {
 						input.removeAttribute("value");
 						input.removeAttribute("type");
 						input.setAttribute("type", "file");
 					}
-					
+
 					var fileReader = new FileReader();
-					
+
 					fileReader.onloadend = function() {
 						if (fileReader.error) {
 							alert(fileReader.error);
@@ -600,36 +600,36 @@
 							);
 						};
 					};
-					
+
 					if(file) {
 						fileReader.readAsDataURL(file);
 					} else {
 						resetFilePicker(input);
 					}
-					
+
 					if (input.getAttribute("data-xsd2html2xml-required")) input.setAttribute("required", "required");
 				}
 			</script><script type="text/javascript">
 				var globalValuesMap = [];
-				
+
 				document.addEventListener("DOMContentLoaded",
 					function() {
 						/* INITIAL CALLS */
-						
+
 						addHiddenFields();
 						xmlToHTML(document);
 						updateIdentifiers();
 						setDynamicValues();
 						setValues();
 						ensureMinimum();
-						
+
 						document.querySelectorAll("[data-xsd2html2xml-filled='true']").forEach(function(o) {
 							if (o.closest("[data-xsd2html2xml-choice]")) {
 								var node = o.closest("[data-xsd2html2xml-choice]").previousElementSibling;
 								while (node) {
 									if (!node.hasAttribute("data-xsd2html2xml-choice")) {
 										node.querySelector("input[type='radio']").click();
-										break;										
+										break;
 									} else {
 										node = node.previousElementSibling;
 									};
@@ -653,7 +653,7 @@
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="string" data-xsd2html2xml-xpath="/rootElement/simpleTypes/string"><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="string"><span>string</span></label>
 </section>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="multiline-string" data-xsd2html2xml-xpath="/rootElement/simpleTypes/multiline-string"><textarea onchange="this.textContent = this.value.replace(/\s+/g, &quot; &quot;).trim()" required="required" data-xsd2html2xml-description="multiline-string" pattern=".*(\n)?.*">multiline sample</textarea><span>multiline-string</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="multiline-string" data-xsd2html2xml-xpath="/rootElement/simpleTypes/multiline-string"><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="multiline-string" value="multiline sample"><span>multiline-string</span></label>
 </section>
 <section>
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="byte" data-xsd2html2xml-xpath="/rootElement/simpleTypes/byte"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="byte (-128 to 127)"><span>byte (-128 to 127)</span></label>
@@ -715,7 +715,7 @@
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonth" data-xsd2html2xml-xpath="/rootElement/dates/gMonth"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.length == 2 ? &quot;--&quot; : &quot;--0&quot;).concat(this.value)); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="1" max="12" step="1" data-xsd2html2xml-primitive="gmonth" data-xsd2html2xml-description="gMonth"><span>gMonth</span></label>
 </section>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonthEnum" data-xsd2html2xml-xpath="/rootElement/dates/gMonthEnum"><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="gMonth as enumeration" data-xsd2html2xml-primitive="gmonth"><option value="--01">January</option><option value="--02">February</option><option value="--03">March</option></select><span>gMonth as enumeration</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonthEnum" data-xsd2html2xml-xpath="/rootElement/dates/gMonthEnum"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.length == 2 ? &quot;--&quot; : &quot;--0&quot;).concat(this.value)); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="1" max="12" step="1" data-xsd2html2xml-primitive="gmonth" data-xsd2html2xml-description="gMonth as enumeration"><span>gMonth as enumeration</span></label>
 </section>
 <section>
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonthDay" data-xsd2html2xml-xpath="/rootElement/dates/gMonthDay"><input type="date" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/^\d+/, &quot;-&quot;)); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="gmonthday" data-xsd2html2xml-description="gMonthDay"><span>gMonthDay</span></label>
@@ -734,12 +734,16 @@
 <section>
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="dateDuration" data-xsd2html2xml-xpath="/rootElement/durations/dateDuration">
 <output data-xsd2html2xml-description="dateDuration"></output>
-<input type="range" onchange="this.setAttribute(&quot;value&quot;, &quot;P&quot;.concat(this.value).concat(&quot;D&quot;)); this.previousElementSibling.textContent = this.value;" required="required" pattern="P\d{1,3}D" step="1" data-xsd2html2xml-primitive="duration" data-xsd2html2xml-description="dateDuration" data-xsd2html2xml-duration="days"><span>dateDuration</span></label>
+<input type="range" onchange="this.setAttribute(&quot;value&quot;, &quot;P
+                        &quot;.concat(this.value).concat(&quot;
+                        &quot;)); this.previousElementSibling.textContent = this.value;" required="required" pattern="P\d{1,3}D" step="1" data-xsd2html2xml-primitive="duration" data-xsd2html2xml-description="dateDuration" data-xsd2html2xml-duration=""><span>dateDuration</span></label>
 </section>
 <section>
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="timeDuration" data-xsd2html2xml-xpath="/rootElement/durations/timeDuration">
 <output data-xsd2html2xml-description="timeDuration"></output>
-<input type="range" onchange="this.setAttribute(&quot;value&quot;, &quot;PT&quot;.concat(this.value).concat(&quot;M&quot;)); this.previousElementSibling.textContent = this.value;" required="required" min="1" max="10" pattern="PT\d{1,2}M" step="1" data-xsd2html2xml-primitive="duration" data-xsd2html2xml-description="timeDuration" data-xsd2html2xml-duration="minutes"><span>timeDuration</span></label>
+<input type="range" onchange="this.setAttribute(&quot;value&quot;, &quot;P
+                        &quot;.concat(this.value).concat(&quot;
+                        &quot;)); this.previousElementSibling.textContent = this.value;" required="required" min="1" max="10" pattern="PT\d{1,2}M" step="1" data-xsd2html2xml-primitive="duration" data-xsd2html2xml-description="timeDuration" data-xsd2html2xml-duration=""><span>timeDuration</span></label>
 </section>
 </fieldset>
 </section>
@@ -767,7 +771,7 @@
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="unsignedInt" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/unsignedInt"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="4294967295" pattern="{0,}" data-xsd2html2xml-primitive="unsignedint" data-xsd2html2xml-description="unsignedInt"><span>unsignedInt</span></label>
 </section>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="integer" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/integer"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="2147483647" pattern="[-]?{0,}" data-xsd2html2xml-primitive="int" data-xsd2html2xml-description="integer with min restriction"><span>integer with min restriction</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="integer" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/integer"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-2147483648" max="2147483647" pattern="[-]?{0,}" data-xsd2html2xml-primitive="int" data-xsd2html2xml-description="integer with min restriction"><span>integer with min restriction</span></label>
 </section>
 </fieldset>
 </section>
@@ -775,10 +779,10 @@
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="restrictions" data-xsd2html2xml-xpath="/rootElement/restrictions">
 <legend>Simple type with enumerations:</legend>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="enumeration" data-xsd2html2xml-xpath="/rootElement/restrictions/enumeration"><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="enumeration" data-xsd2html2xml-primitive="string"><option value="Option 1">Option 1</option><option value="Option 2">Custom labeled option 2</option><option value="Option 3">Option 3</option></select><span>enumeration</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="enumeration" data-xsd2html2xml-xpath="/rootElement/restrictions/enumeration"><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="enumeration"><span>enumeration</span></label>
 </section>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="fixed-enumeration" data-xsd2html2xml-xpath="/rootElement/restrictions/fixed-enumeration"><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="fixed-enumeration" data-xsd2html2xml-primitive="string"><option disabled value="Option 1">Option 1</option><option disabled value="Option 2">Option 2</option><option selected value="Option 3">Option 3</option></select><span>fixed-enumeration</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="fixed-enumeration" data-xsd2html2xml-xpath="/rootElement/restrictions/fixed-enumeration"><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="fixed-enumeration" readonly value="Option 3"><span>fixed-enumeration</span></label>
 </section>
 </fieldset>
 </section>
@@ -786,13 +790,13 @@
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="extensions" data-xsd2html2xml-xpath="/rootElement/extensions">
 <legend>Various nested (and double nested) extensions:</legend>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="nestedString" data-xsd2html2xml-xpath="/rootElement/extensions/nestedString"><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="nestedString-type determines the enumaration values" data-xsd2html2xml-primitive="string"><option value="nestedString Option 1">nestedString Option 1</option><option value="nestedString Option 2">nestedString Option 2</option></select><span>nestedString-type determines the enumaration values</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="nestedString" data-xsd2html2xml-xpath="/rootElement/extensions/nestedString"><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="nestedString-type determines the enumaration values"><span>nestedString-type determines the enumaration values</span></label>
 </section>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="nestedByte" data-xsd2html2xml-xpath="/rootElement/extensions/nestedByte"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="nestedByte-type restricts the byte to min=0"><span>nestedByte-type restricts the byte to min=0</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="nestedByte" data-xsd2html2xml-xpath="/rootElement/extensions/nestedByte"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="nestedByte-type restricts the byte to min=0"><span>nestedByte-type restricts the byte to min=0</span></label>
 </section>
 <section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="doubleNestedByte" data-xsd2html2xml-xpath="/rootElement/extensions/doubleNestedByte"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="10" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="doubleNestedByte-type restricts nestedByte to max=10"><span>doubleNestedByte-type restricts nestedByte to max=10</span></label>
+<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="doubleNestedByte" data-xsd2html2xml-xpath="/rootElement/extensions/doubleNestedByte"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="doubleNestedByte-type restricts nestedByte to max=10"><span>doubleNestedByte-type restricts nestedByte to max=10</span></label>
 </section>
 </fieldset>
 </section>
@@ -817,15 +821,18 @@
 </section>
 <section>
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="choice" data-xsd2html2xml-xpath="/rootElement/choice">
-<legend>Element with xs:choice:</legend><label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');" data-xsd2html2xml-description="1"><span>1</span></label>
+<legend>Element with xs:choice:</legend><label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');
+                " data-xsd2html2xml-description="1"><span>1</span></label>
 <section data-xsd2html2xml-choice="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="byte" data-xsd2html2xml-xpath="/rootElement/choice/byte"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="byte"><span>byte</span></label>
 </section>
-<label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');" data-xsd2html2xml-description="2"><span>2</span></label>
+<label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');
+                " data-xsd2html2xml-description="2"><span>2</span></label>
 <section data-xsd2html2xml-choice="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="short" data-xsd2html2xml-xpath="/rootElement/choice/short"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-32768" max="32767" pattern="[-]?{0,}" data-xsd2html2xml-primitive="short" data-xsd2html2xml-description="short"><span>short</span></label>
 </section>
-<label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');" data-xsd2html2xml-description="3"><span>3</span></label>
+<label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');
+                " data-xsd2html2xml-description="3"><span>3</span></label>
 <section data-xsd2html2xml-choice="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="long" data-xsd2html2xml-xpath="/rootElement/choice/long"><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-9223372036854775808" max="9223372036854775807" pattern="[-]?{0,}" data-xsd2html2xml-primitive="long" data-xsd2html2xml-description="long"><span>long</span></label>
 </section>

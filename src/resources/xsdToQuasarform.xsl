@@ -3,20 +3,22 @@
 	version="3.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:exsl="http://exslt.org/common"
+	xmlns:dyn="http://exslt.org/dynamic">
+
 	<xsl:include href="css/default-style.xsl" />
-	
+
 	<xsl:include href="js/event-handlers.xsl" />
 	<xsl:include href="js/html-populators.xsl" />
 	<xsl:include href="js/initial-calls.xsl" />
 	<xsl:include href="js/polyfills.xsl" />
 	<xsl:include href="js/value-fixers.xsl" />
 	<xsl:include href="js/xml-generators.xsl" />
-	
+
 	<xsl:include href="init.xsl" />
 	<xsl:include href="config.xsl" />
-	
+
 	<xsl:include href="utils/appinfo.xsl" />
 	<xsl:include href="utils/attr-value.xsl" />
 	<xsl:include href="utils/documentation.xsl" />
@@ -28,7 +30,7 @@
 	<xsl:include href="utils/serialize.xsl" />
 	<xsl:include href="utils/strings.xsl" />
 	<xsl:include href="utils/types.xsl" />
-	
+
 	<xsl:include href="matchers/all.xsl" />
 	<xsl:include href="matchers/attributeGroup@ref.xsl" />
 	<xsl:include href="matchers/attributes.xsl" />
@@ -41,7 +43,7 @@
 	<xsl:include href="matchers/group@ref.xsl" />
 	<xsl:include href="matchers/sequence.xsl" />
 	<xsl:include href="matchers/unsupported.xsl" />
-	
+
 	<xsl:include href="handlers/complex-elements.xsl" />
 	<xsl:include href="handlers/default-types.xsl" />
 	<xsl:include href="handlers/enumerations.xsl" />
@@ -49,7 +51,7 @@
 	<xsl:include href="handlers/multiline-strings.xsl" />
 	<xsl:include href="handlers/root-element.xsl" />
 	<xsl:include href="handlers/simple-elements.xsl" />
-	
+
 	<xsl:variable name="templates" select="document('')/*/xsl:template"/>
 	<xsl:variable name="root-element-stylesheet" select="document('handlers/root-element.xsl')" />
 	<xsl:variable name="complex-elements-stylesheet" select="document('handlers/complex-elements.xsl')" />
@@ -66,9 +68,9 @@
 	<xsl:variable name="gui-attributes-stylesheet" select="document('utils/gui-attributes.xsl')" />
  	<xsl:variable name="namespaces-stylesheet" select="document('utils/namespaces.xsl')" />
 	<xsl:variable name="types-stylesheet" select="document('utils/types.xsl')" />
-	
+
 	<xsl:template match="*" />
-	
+
 	<xsl:template match="/*">
 		<xsl:element name="html">
 			<xsl:choose>
@@ -79,11 +81,11 @@
 							<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="@xsi:noNamespaceSchemaLocation" />
 						</xsl:with-param>
 					</xsl:call-template>
-					
+
 					<xsl:call-template name="add-metadata">
 						<xsl:with-param name="xml-document" select="." />
 					</xsl:call-template>
-					
+
 					<xsl:for-each select="document(@xsi:noNamespaceSchemaLocation)/*">
 						<xsl:call-template name="handle-schema" />
 					</xsl:for-each>
@@ -97,12 +99,12 @@
 							<xsl:variable name="default-namespace">
 								<xsl:value-of select="namespace::*[name() = substring-before(name(), concat(':', local-name()))]" />
 							</xsl:variable>
-							
+
 							<!-- extract schema location relative to default namespace -->
 							<xsl:variable name="schema-location">
 								<xsl:value-of select="normalize-space(substring-after(@xsi:schemaLocation, $default-namespace))" />
 							</xsl:variable>
-							
+
 							<xsl:choose>
 								<!-- if schema-location still contains spaces, break off before the first one to find the schema location -->
 								<xsl:when test="contains($schema-location, ' ')">
@@ -111,11 +113,11 @@
 											<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="normalize-space(substring-before($schema-location, ' '))" />
 										</xsl:with-param>
 									</xsl:call-template>
-									
+
 									<xsl:call-template name="add-metadata">
 										<xsl:with-param name="xml-document" select="." />
 									</xsl:call-template>
-									
+
 									<xsl:for-each select="document(normalize-space(substring-before($schema-location, ' ')))/*">
 										<xsl:call-template name="handle-schema" />
 									</xsl:for-each>
@@ -127,11 +129,11 @@
 											<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="$schema-location" />
 										</xsl:with-param>
 									</xsl:call-template>
-									
+
 									<xsl:call-template name="add-metadata">
 										<xsl:with-param name="xml-document" select="." />
 									</xsl:call-template>
-									
+
 									<xsl:for-each select="document($schema-location)/*">
 										<xsl:call-template name="handle-schema" />
 									</xsl:for-each>
@@ -145,11 +147,11 @@
 									<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="@xsi:schemaLocation" />
 								</xsl:with-param>
 							</xsl:call-template>
-							
+
 							<xsl:call-template name="add-metadata">
 								<xsl:with-param name="xml-document" select="." />
 							</xsl:call-template>
-							
+
 							<xsl:for-each select="document(@xsi:schemaLocation)/*">
 								<xsl:call-template name="handle-schema" />
 							</xsl:for-each>
@@ -164,16 +166,16 @@
 			</xsl:choose>
 		</xsl:element>
 	</xsl:template>
-	
+
 	<!-- add metadata, including optionally xml document, to head section -->
 	<xsl:template name="add-metadata">
 		<xsl:param name="xml-document"></xsl:param>
-		
+
 		<xsl:element name="head">
 			<xsl:element name="title">
 				<xsl:value-of select="$config-title" />
 			</xsl:element>
-			
+
 			<!-- add stylesheet and script elements -->
 			<xsl:if test="not($config-style = '')">
 				<xsl:element name="link">
@@ -184,16 +186,16 @@
 					</xsl:attribute>
 				</xsl:element>
 			</xsl:if>
-			
+
 			<xsl:call-template name="add-style" />
-			
+
 			<xsl:call-template name="add-polyfills" />
 			<xsl:call-template name="add-xml-generators" />
 			<xsl:call-template name="add-html-populators" />
 			<xsl:call-template name="add-value-fixers" />
 			<xsl:call-template name="add-event-handlers" />
 			<xsl:call-template name="add-initial-calls" />
-			
+
 			<xsl:if test="not($config-script = '')">
 				<xsl:element name="script">
 					<xsl:attribute name="type">text/javascript</xsl:attribute>
@@ -202,12 +204,12 @@
 					</xsl:attribute>
 				</xsl:element>
 			</xsl:if>
-			
+
 			<!-- add a generator meta element -->
 			<xsl:element name="meta">
 				<xsl:attribute name="name">generator</xsl:attribute>
 				<xsl:attribute name="content">XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml</xsl:attribute>
-				
+
 				<!-- if an xml document has been provided, save it as an attribute to the meta element -->
 				<xsl:if test="not($xml-document = '')">
 					<xsl:attribute name="data-xsd2html2xml-source">
@@ -217,7 +219,7 @@
 			</xsl:element>
 		</xsl:element>
 	</xsl:template>
-	
+
 	<!-- root match from which all other templates are invoked -->
 	<xsl:template name="handle-schema">
 		<xsl:call-template name="inform">
@@ -225,16 +227,16 @@
 				<text>XSD file detected.</text>
 			</xsl:with-param>
 		</xsl:call-template>
-		
+
 		<xsl:call-template name="init" />
-			
+
 		<xsl:call-template name="log">
 			<xsl:with-param name="reference">xs:schema</xsl:with-param>
 		</xsl:call-template>
-		
+
 		<!-- save root-document for future use -->
 		<xsl:variable name="root-document" select="/*" />
-		
+
 		<!-- load root-namespaces for future use -->
 		<xsl:variable name="root-namespaces">
 			<xsl:call-template name="inform">
@@ -242,7 +244,7 @@
 					<xsl:text>Namespaces in root document:</xsl:text>
 				</xsl:with-param>
 			</xsl:call-template>
-			
+
 			<xsl:for-each select="namespace::*">
 				<xsl:element name="root-namespace">
 					<xsl:call-template name="inform">
@@ -254,7 +256,7 @@
 							<xsl:value-of select="." />
 						</xsl:with-param>
 					</xsl:call-template>
-					
+
 					<xsl:if test="not(name() = '')">
 						<xsl:attribute name="prefix">
 							<xsl:value-of select="name()" />
@@ -267,26 +269,26 @@
 				</xsl:element>
 			</xsl:for-each>
 		</xsl:variable>
-		
+
 		<xsl:element name="body">
 			<xsl:element name="form">
 				<!-- disable default form action -->
 				<xsl:attribute name="action">javascript:void(0);</xsl:attribute>
-				
+
 				<!-- add class for scoping -->
 				<xsl:attribute name="class">xsd2html2xml</xsl:attribute>
-				
+
 				<!-- specify action on submit -->
 				<xsl:attribute name="onsubmit">
 					<xsl:value-of select="$config-callback" />
 					<xsl:text>(htmlToXML(this));</xsl:text>
 				</xsl:attribute>
-				
+
 				<!-- add custom appinfo data -->
 				<xsl:for-each select="xs:annotation/xs:appinfo/*">
 					<xsl:call-template name="add-appinfo" />
 				</xsl:for-each>
-				
+
 				<!-- start parsing the XSD from the top -->
 				<xsl:for-each select="xs:element">
 					<!-- use the element with the position indicated in config-root as root, or default to the first (usually the only) root element -->
@@ -299,18 +301,18 @@
 						</xsl:call-template>
 					</xsl:if>
 				</xsl:for-each>
-				
+
 				<xsl:element name="button">
 					<xsl:attribute name="type">submit</xsl:attribute>
 				</xsl:element>
 			</xsl:element>
 		</xsl:element>
-		
+
 		<xsl:call-template name="inform">
 			<xsl:with-param name="message">
 				<xsl:text>XSLT processing completed.</xsl:text>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
-	
+
 </xsl:stylesheet>
