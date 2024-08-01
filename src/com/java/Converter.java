@@ -15,6 +15,7 @@ public class Converter {
 
     // Путь к XSD файлу
     private static String xsdFilePath = "src/examples/schema.xsd";
+    // "src/examples/interact_map_plan_v01_R04/interact_map_plan/interact_map_plan_v01.xsd";
 
     // Путь к выходному HTML файлу
     private static String htmlFilePath = "src/examples/form.html";
