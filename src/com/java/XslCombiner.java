@@ -13,15 +13,15 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+@Deprecated
 public class XslCombiner {
 
     public static String basePath = "src/resources/";
 
     public static void main(String[] args) {
-        String xslFiles = basePath + "xsdToQuasarform.xsl";
+        String xslFiles = basePath + "XslCombined.xsl";
         String outputFilePath = "src/resources/XslCombined.xsl";
 
         try {

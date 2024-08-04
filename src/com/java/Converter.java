@@ -8,10 +8,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+
 public class Converter {
 
     // Путь к XSLT файлу
-    private static String xslFilePath = "src/resources/xsdToQuasarform.xsl";
+    private static String xslFilePath = "src/resources/XslCombined.xsl";
 
     // Путь к XSD файлу
     private static String xsdFilePath = "src/examples/schema.xsd";

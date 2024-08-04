@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+@Deprecated
 public class XsdCombiner {
     public static String basePath = "src/examples/interact_map_plan_v01_R04/interact_map_plan/";
     public static String baseFolder = "src/examples/interact_map_plan_v01_R04/SchemaCommon/";
@@ -65,7 +66,7 @@ public class XsdCombiner {
                     (includeElement.getNodeName().contains("include") || includeElement.getNodeName().contains("import"))) {
                 String schemaLocation = includeElement.getAttributes().item(1).getNodeValue();
                 if (includedFiles.add(schemaLocation)) {
-                    String finalPath = (schemaLocation.contains("..") ? basePath:baseFolder)+schemaLocation;
+                    String finalPath = (schemaLocation.contains("..") ? basePath : baseFolder) + schemaLocation;
                     Document includeDoc = builder.parse(new File(finalPath));
                     Element includeRoot = includeDoc.getDocumentElement();
                     processIncludesAndImports(mainDoc, includeRoot, includedFiles, builder);

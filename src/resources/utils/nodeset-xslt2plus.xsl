@@ -6,7 +6,7 @@
 
 	<!-- forwards all provided parameters to $template in $stylesheet; forwards $namespace-documents as nodeset -->
 	<xsl:template name="forward">
-		<xsl:param name="stylesheet" /> <!-- stylesheet file in which template is declared; variable declared in xsdToQuasarform.xsl -->
+		<xsl:param name="stylesheet" /> <!-- stylesheet file in which template is declared; variable declared in XslCombined.xsl -->
 		<xsl:param name="template" /> <!-- template name to be called; must contain @name attribute in declaration -->
 
 		<xsl:param name="namespace-documents" /> <!-- namespace documents as nodeset -->
@@ -80,7 +80,7 @@
 
 	<!-- forwards all provided parameters to $template in $stylesheet; forwards $root-namespaces as nodeset -->
 	<xsl:template name="forward-root">
-		<xsl:param name="stylesheet" /> <!-- stylesheet file in which template is declared; variable declared in xsdToQuasarform.xsl -->
+		<xsl:param name="stylesheet" /> <!-- stylesheet file in which template is declared; variable declared in XslCombined.xsl -->
 		<xsl:param name="template" /> <!-- template name to be called; must contain @name attribute in declaration -->
 
 		<xsl:param name="root-document" /> <!-- contains root document -->
