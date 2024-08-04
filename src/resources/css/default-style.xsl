@@ -64,7 +64,26 @@
 				label {
     				margin-bottom: 10px;
     				min-height: 29px;
+					display: inline-grid
 				}
+
+				span {
+					font-size: 16px;
+    				color: #0009;
+				}
+
+				textarea {
+					border-radius: 5px;
+					border-width: 1.5px;
+				}
+
+				select {
+					border-style: solid;
+					padding: 5px;
+					border-radius: 5px;
+					border-width: 1.5px;
+				}
+
 			</xsl:text>
         </xsl:element>
     </xsl:template>
