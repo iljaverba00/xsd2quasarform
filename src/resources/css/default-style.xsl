@@ -38,7 +38,8 @@
 				}
 				fieldset {
     				border-style: none none none solid;
-    				border-width: 1px;
+    				border-width: 2px;
+					display: grid;
 				}
 
 				legend {
@@ -62,7 +63,6 @@
 				}
 
 				label {
-    				margin-bottom: 10px;
     				min-height: 29px;
 					display: inline-grid
 				}
@@ -82,6 +82,17 @@
 					padding: 5px;
 					border-radius: 5px;
 					border-width: 1.5px;
+				}
+
+				section {
+					display:grid;
+					margin-top:10px;
+				}
+
+				button {
+					border-radius: 5px;
+    				border-style: none;
+    				margin: 5px;
 				}
 
 			</xsl:text>
