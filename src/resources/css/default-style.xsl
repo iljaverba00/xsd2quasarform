@@ -82,6 +82,7 @@
 					padding: 5px;
 					border-radius: 5px;
 					border-width: 1.5px;
+					width: 100%
 				}
 
 				section {
