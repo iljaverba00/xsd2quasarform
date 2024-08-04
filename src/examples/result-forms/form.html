@@ -41,6 +41,39 @@
         input[data-xsd2html2xml-duration='minutes'] + span:after {
             content: " (minutes)";
         }
+
+        fieldset {
+            border-style: none none none solid;
+            border-width: 1px;
+        }
+
+        legend {
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 1.2rem;
+            transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .4s cubic-bezier(.25,.8,.5,1);
+
+        }
+
+        legend:hover {
+            border-radius: 5px;
+            background: #dddddd;
+        }
+
+        input {
+            padding: 5px;
+            border-style: solid;
+            border-color: grey !important;
+            border-width: 1.5px;
+            border-radius: 5px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            min-height: 29px;
+        }
+
+
     </style>
     <script type="text/javascript">
         /* POLYFILLS */
@@ -679,6 +712,36 @@
             }
         );
     </script>
+
+    <script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", () => {
+
+            // set all sections hidden
+
+            const allSections = document.getElementsByTagName('section');
+            // for (const child of allSections) {
+            //     child.style.display = child.style.display !== 'none' ? 'none' : 'block'
+            // }
+
+            const legends = document.getElementsByTagName('legend');
+
+            for (const legend of legends) {
+                legend.addEventListener('click', () => {
+                    const fieldset = legend.parentNode;
+                    const children = fieldset.children;
+                    for (const child of children) {
+                        console.log(child.tagName)
+                        if (child.tagName.toLowerCase() === 'section') {
+                            child.style.display = child.style.display !== 'none' ? 'none' : 'block'
+                        }
+                    }
+                })
+            }
+
+
+        })
+    </script>
+
     <meta name="generator" content="XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml">
 </head>
 <body>
