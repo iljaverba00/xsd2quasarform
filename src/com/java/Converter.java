@@ -14,12 +14,12 @@ public class Converter {
     // Путь к XSLT файлу
     private static String xslFilePath = "src/resources/XslCombined.xsl";
 
-    // Путь к XSD файлу
-    private static String xsdFilePath = "src/examples/schema.xsd";
-    // "src/examples/interact_map_plan_v01_R04/interact_map_plan/interact_map_plan_v01.xsd";
 
-    // Путь к выходному HTML файлу
-    private static String htmlFilePath = "src/examples/form.html";
+    private static String xsdFilePath = "src/examples/example-interact-map-plan-v01-R04/interact_map_plan/interact_map_plan_v01.xsd";
+    private static String htmlFilePath = "src/examples/example-interact-map-plan-v01-R04/form.html";
+
+//    private static String xsdFilePath = "src/examples/example-new-design/schema.xsd";
+//    private static String htmlFilePath = "src/examples/example-new-design/form.html";
 
     public static void main(String[] args) throws FileNotFoundException {
 
