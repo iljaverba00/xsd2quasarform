@@ -79,6 +79,7 @@
 					padding: 5px;
 					border-radius: 5px;
 					border-width: 1.5px;
+					width: 100%
 				}
 
 				section {
@@ -701,7 +702,7 @@
 <meta name="generator" content="XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml">
 </head>
 <body>
-<form action="javascript:void(0);" class="xsd2html2xml" onsubmit="console.log(htmlToXML(this));">
+<form action="javascript:void(0);" class="xsd2html2xml" onsubmit="(function(str){window.parent.postMessage(str,'*')})(htmlToXML(this));">
 <section>
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="rootElement" data-xsd2html2xml-xpath="/rootElement">
 <legend>Root Element</legend>
