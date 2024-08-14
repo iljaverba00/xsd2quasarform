@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.3 move">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.3.1 set java 8">
       <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/namespaces/form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/css/default-style.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/default-style.xsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/handlers/complex-elements.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/handlers/complex-elements.xsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +41,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.NameSpaces.test.executor": "Debug",
+    "JUnit.NameSpaces.test.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -105,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723628885529</updated>
-      <workItem from="1723628886648" duration="513000" />
+      <workItem from="1723628886648" duration="819000" />
     </task>
     <task id="LOCAL-00001" summary="4.3 move">
       <option name="closed" value="true" />
@@ -115,16 +116,36 @@
       <option name="project" value="LOCAL" />
       <updated>1723629355623</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="4.3.1 set java 8">
+      <option name="closed" value="true" />
+      <created>1723629457889</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723629457889</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="4.3 move" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.3 move" />
+    <MESSAGE value="4.3.1 set java 8" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.3.1 set java 8" />
   </component>
 </project>
