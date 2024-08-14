@@ -4,23 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.4 no collapsed">
-      <change afterPath="$PROJECT_DIR$/src/resources/double-import-doc.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/import-doc1.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/import-doc2.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/include-doc.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/namespaces-sample.xsd" afterDir="false" />
+    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.5.1 namespaces">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form-filled.xhtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/namespaces/form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form.xhtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/namespaces-sample.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/namespaces/namespaces-sample.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/NameSpaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/NameSpaces.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/P_CommonSimpleTypeAll_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/P_CommonSimpleTypeAll_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAllDocuments_v05.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAllDocuments_v05.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAppliedFiles_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAppliedFiles_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dBoundaryType_v02.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dBoundaryType_v02.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dGeopointOpred_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dGeopointOpred_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dRegionsRF_v02.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dRegionsRF_v02.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dTypeTopology_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dTypeTopology_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tAddressCity_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tAddressCity_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tArea_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tArea_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tDocumentRequisitesAndAttachment_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tDocumentRequisitesAndAttachment_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tEntitySpatial_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tEntitySpatial_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tFIO_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tFIO_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/interact_map_plan_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/interact_map_plan_v01.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/ЋЇЁб ­ЁҐ_бвагЄвгал_interact_map_plan_v01.doc" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan_v01.doc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/朌丰鄏憗言 P_CommonSimpleTypeAll.doc" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/P_CommonSimpleTypeAll.doc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/double-import-doc.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/import-doc1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/import-doc2.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/include-doc.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/namespaces-sample.xsd" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,6 +65,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.NameSpaces.test.executor": "Run",
     "Repository.Attach.Annotations": "false",
@@ -56,7 +74,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/verba/Documents/projects/xsd2quasarform/src/resources",
+    "last_opened_file_path": "/Users/verba/Library/Application Support/JetBrains/IntelliJIdea2024.1/scratches",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,6 +88,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$APPLICATION_CONFIG_DIR$/scratches" />
       <recent name="$PROJECT_DIR$/src/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -118,7 +137,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723628885529</updated>
-      <workItem from="1723628886648" duration="1516000" />
+      <workItem from="1723628886648" duration="2904000" />
     </task>
     <task id="LOCAL-00001" summary="4.3 move">
       <option name="closed" value="true" />
@@ -144,7 +163,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723629887843</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="4.5 namespaces">
+      <option name="closed" value="true" />
+      <created>1723630496473</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723630496473</updated>
+    </task>
+    <task id="LOCAL-00005" summary="4.5.1 namespaces">
+      <option name="closed" value="true" />
+      <created>1723630549639</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723630549639</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +202,8 @@
     <MESSAGE value="4.3 move" />
     <MESSAGE value="4.3.1 set java 8" />
     <MESSAGE value="4.4 no collapsed" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.4 no collapsed" />
+    <MESSAGE value="4.5 namespaces" />
+    <MESSAGE value="4.5.1 namespaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.5.1 namespaces" />
   </component>
 </project>

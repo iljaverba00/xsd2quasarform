@@ -1,787 +1,854 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SimAll1="urn://x-artefacts-rosreestr-ru/commons/simple-types-all/1.0" xmlns:Are1="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1" xmlns:EnSpa1="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/1.0.1" xmlns:DocAtt1="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" xmlns:AdrCi1="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-city/1.0.1" xmlns:Fio1="urn://x-artefacts-rosreestr-ru/commons/complex-types/Fio/1.0.1" xmlns:dBnd2="urn://x-artefacts-rosreestr-ru/commons/directories/boundary-type/2.0.1" xmlns:dRF2="urn://x-artefacts-rosreestr-ru/commons/directories/regions/2.0.1" xmlns:dAU="urn://x-artefacts-rosreestr-ru/commons/directories/allowed-use/2.0.1" xmlns:iMAP1="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/1.0.1" targetNamespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/1.0.1" elementFormDefault="qualified">
-	<!--ПРОСТЫЕ ТИПЫ ДАННЫХ:-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/simple-types-all/1.0" schemaLocation="../SchemaCommon/P_CommonSimpleTypeAll_v01.xsd"/>
-	<!--СОСТАВНЫЕ ТИПЫ ДАННЫХ:-->
-	<!--Площадь-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1" schemaLocation="../SchemaCommon/tArea_v01.xsd"/>
-	<!--Описание местоположения границ-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/1.0.1" schemaLocation="../SchemaCommon/tEntitySpatial_v01.xsd"/>
-	<!--Реквизиты документа-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" schemaLocation="../SchemaCommon/tDocumentRequisitesAndAttachment_v01.xsd"/>
-	<!--Структурированный адрес (описание местоположения) до уровня населённого пункта-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-city/1.0.1" schemaLocation="../SchemaCommon/tAddressCity_v01.xsd"/>
-	<!--Фамилия, имя, отчество физического лица-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/Fio/1.0.1" schemaLocation="../SchemaCommon/tFIO_v01.xsd"/>
-	<!--КЛАССИФИКАТОРЫ И СПРАВОЧНИКИ:-->
-	<!--Справочник субъектов РФ-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/regions/2.0.1" schemaLocation="../SchemaCommon/dRegionsRF_v02.xsd"/>
-	<!--Виды объектов реестра границ-->
-	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/boundary-type/2.0.1" schemaLocation="../SchemaCommon/dBoundaryType_v02.xsd"/>
-	<!--===ВЕРСИЯ 01===================-->
-	<xs:element name="map_plan">
-		<xs:annotation>
-			<xs:documentation>Карта (план) объекта землеустройства</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="title" type="iMAP1:Title">
-					<xs:annotation>
-						<xs:documentation>Титульный лист</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="underlying_documents" type="iMAP1:UnderlyingDocuments">
-					<xs:annotation>
-						<xs:documentation>Основания для проведения землеустроительных работ и исходные данные</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="information_registry_boundary" type="iMAP1:InformationRegistryBoundary">
-					<xs:annotation>
-						<xs:documentation>Сведения об объекте землеустройства</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="border_plan">
-					<xs:annotation>
-						<xs:documentation>План границ объекта землеустройства</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="attachment_pdf" type="DocAtt1:AttachmentPDF" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Приложенный файл в формате PDF</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute name="guid" type="SimAll1:sGUID" use="required">
-				<xs:annotation>
-					<xs:documentation>Глобальный уникальный идентификатор пакета (GUID)</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="version" type="SimAll1:s2" use="required" fixed="01">
-				<xs:annotation>
-					<xs:documentation>Версия схемы</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-		</xs:complexType>
-	</xs:element>
-	<xs:complexType name="InformationRegistryBoundary">
-		<xs:annotation>
-			<xs:documentation>Сведения об объекте землеустройства (установление или изменение (уточнение) местоположения границы либо части (частей) границы)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="type_boundary" type="dBnd2:dBoundaryType">
-				<xs:annotation>
-					<xs:documentation>Вид объекта реестра границ</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="name_land_object" type="SimAll1:s1_1000">
-				<xs:annotation>
-					<xs:documentation>Наименование объекта землеустройства</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="all_border_or_part_border" type="SimAll1:sAllOrPartBorder">
-				<xs:annotation>
-					<xs:documentation>Описание границы (1 - вся граница, 0 - часть (части) границы)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="information_boundary" type="iMAP1:InformationBoundary">
-				<xs:annotation>
-					<xs:documentation>Описание объекта землеустройства (местоположение границы либо части (частей) границы)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="area" type="iMAP1:AreaMeterOrHectare" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Площадь и величина погрешности (в квадратных метрах или гектарах)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="InformationBoundary">
-		<xs:annotation>
-			<xs:documentation>Сведения о границе (части (частях) границы) объекта</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="subject_boundary" type="iMAP1:SubjectBoundary">
-				<xs:annotation>
-					<xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей) границы) между субъектами Российской Федерации</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="municipal_boundary" type="iMAP1:MunicipalBoundary">
-				<xs:annotation>
-					<xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей) границы) муниципального образования</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<!--===============ГРАНИЦЫ===============-->
-	<!--Граница между субъектами Российской Федерации-->
-	<xs:complexType name="SubjectBoundary">
-		<xs:annotation>
-			<xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей) границы) между субъектами Российской Федерации</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="establishment_subject_boundary" type="iMAP1:EstablishmentSubjectBoundary">
-				<xs:annotation>
-					<xs:documentation>Установление границы (части (частей) границы) между субъектами Российской Федерации</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="changing_subject_boundary" type="iMAP1:ChangingSubjectBoundary">
-				<xs:annotation>
-					<xs:documentation>Изменение (уточнение) границы (части (частей) границы) между субъектами Российской Федерации</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<xs:complexType name="EstablishmentSubjectBoundary">
-		<xs:annotation>
-			<xs:documentation>Установление границы границы (части (частей) границы) между субъектами Российской Федерации</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="neighbour_regions">
-				<xs:annotation>
-					<xs:documentation>Смежные субъекты Российской Федерации</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="neighbour_region" type="iMAP1:NeighbourRegion" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Смежный субъект Российской Федерации</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="cadastral_regions">
-				<xs:annotation>
-					<xs:documentation>Номера кадастровых округов</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="cadastral_region" type="iMAP1:CadastralRegion" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Номер кадастрового округа</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="contours_location" type="EnSpa1:BoundContoursLocationBorders">
-				<xs:annotation>
-					<xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ChangingSubjectBoundary">
-		<xs:annotation>
-			<xs:documentation>Изменение (уточнение) границы (части (частей) границы) между субъектами Российской Федерации, , в том числе дополнение границы, которая ранее была предоставлена в виде части (частей), новыми частями</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="reg_numb_border" type="SimAll1:s1_50">
-				<xs:annotation>
-					<xs:documentation>Реестровый номер границы</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="neighbour_regions">
-				<xs:annotation>
-					<xs:documentation>Смежные субъекты Российской Федерации</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="neighbour_region" type="iMAP1:NeighbourRegion" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Смежный субъект Российской Федерации</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="cadastral_regions">
-				<xs:annotation>
-					<xs:documentation>Номера кадастровых округов</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="cadastral_region" type="iMAP1:CadastralRegion" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Номер кадастрового округа</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="contours_location" type="EnSpa1:BoundContoursLocationOldNew">
-				<xs:annotation>
-					<xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="NeighbourRegion">
-		<xs:annotation>
-			<xs:documentation>Смежный субъект Российской Федерации</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name_neighbour_region" type="dRF2:dRegionsRF">
-				<xs:annotation>
-					<xs:documentation source="http://192.168.14.254:8000/catalogs/4/items?hierarchy_view=false">Наименование смежного субъекта Российской Федерации (код по справочнику)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="CadastralRegion">
-		<xs:annotation>
-			<xs:documentation>Номер кадастрового округа</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="number_cadastral_region" type="SimAll1:nn2">
-				<xs:annotation>
-					<xs:documentation>Номер кадастрового округа</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<!--Граница муниципального образования-->
-	<xs:complexType name="MunicipalBoundary">
-		<xs:annotation>
-			<xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей) границы) муниципального образования</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="establishment_municipal_boundary" type="iMAP1:EstablishmentMunicipalInhabitedBoundary">
-				<xs:annotation>
-					<xs:documentation>Установление границы (части (частей) границы) муниципального образования</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="changing_municipal_boundary" type="iMAP1:ChangingMunicipalInhabitedBoundary">
-				<xs:annotation>
-					<xs:documentation>Изменение (уточнение) границы (части (частей) границы) муниципального образования</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<xs:complexType name="EstablishmentMunicipalInhabitedBoundary">
-		<xs:annotation>
-			<xs:documentation>Установление границы (части (частей) границы)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="cadastral_district" type="SimAll1:sCadastralDistrictNull">
-				<xs:annotation>
-					<xs:documentation>Номер кадастрового района</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="location" type="AdrCi1:AddressCity">
-				<xs:annotation>
-					<xs:documentation>Местоположение объекта</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="contours_location" type="EnSpa1:BoundContoursLocationBorders">
-				<xs:annotation>
-					<xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ChangingMunicipalInhabitedBoundary">
-		<xs:annotation>
-			<xs:documentation>Изменение (уточнение) границы (части (частей) границы), в том числе дополнение границы, которая ранее была предоставлена в виде части (частей), новыми частями</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="reg_numb_border" type="SimAll1:s1_50">
-				<xs:annotation>
-					<xs:documentation>Реестровый номер границы</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="cadastral_district" type="SimAll1:sCadastralDistrictNull">
-				<xs:annotation>
-					<xs:documentation>Номер кадастрового района</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="location" type="AdrCi1:AddressCity">
-				<xs:annotation>
-					<xs:documentation>Местоположение объекта</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="contours_location" type="EnSpa1:BoundContoursLocationOldNew">
-				<xs:annotation>
-					<xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<!--Общие типы-->
-	<xs:complexType name="Number">
-		<xs:annotation>
-			<xs:documentation>Регистрационный номер или ранее присвоенный учетный номер</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="reg_numb_border" type="SimAll1:s1_50">
-				<xs:annotation>
-					<xs:documentation>Реестровый номер границы</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="old_account_number">
-				<xs:annotation>
-					<xs:documentation>Ранее присвоенный учетный номер</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="account_number" type="SimAll1:s1_40">
-							<xs:annotation>
-								<xs:documentation>Учётный номер</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<xs:complexType name="AreaMeterOrHectare">
-		<xs:annotation>
-			<xs:documentation>Площадь и величина погрешности (в кв. метрах или гектарах)</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="area_meter" type="Are1:AreaMeter">
-				<xs:annotation>
-					<xs:documentation>Площадь в квадратных метрах</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="area_hectare" type="Are1:AreaHectare">
-				<xs:annotation>
-					<xs:documentation>Площадь в гектарах</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<xs:complexType name="IncludedParcels">
-		<xs:annotation>
-			<xs:documentation>Кадастровые номера земельных участков, входящих в зону или территорию</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="includ_parcel" type="iMAP1:CadNumber" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Земельный участок</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="CadNumber">
-		<xs:annotation>
-			<xs:documentation>Кадастровый номер земельного участка</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="cad_number" type="SimAll1:sCadastralNumber">
-				<xs:annotation>
-					<xs:documentation>Кадастровый номер земельного участка</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<!--ТИТУЛЬНЫЙ ЛИСТ И ОБЩИЕ СВЕДЕНИЯ-->
-	<xs:complexType name="Title">
-		<xs:annotation>
-			<xs:documentation>Титульный лист</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="clients">
-				<xs:annotation>
-					<xs:documentation>Сведения о заказчиках землеустроительных работ</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="client" type="iMAP1:Client" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Заказчик</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="contractor">
-				<xs:annotation>
-					<xs:documentation>Сведения об исполнителе землеустроительных работ</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="date_drawing" type="xs:date">
-							<xs:annotation>
-								<xs:documentation>Дата составления</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="information_contractor" type="iMAP1:InformationContractor">
-							<xs:annotation>
-								<xs:documentation>Сведения об исполнителе</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="coordinations">
-				<xs:annotation>
-					<xs:documentation>Сведения о согласованиях карты (плана) объекта землеустройства</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="coordination" type="iMAP1:Coordination" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Сведения о согласовании карты (плана) объекта землеустройства</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="map_plan_Information" type="iMAP1:InformationFund">
-				<xs:annotation>
-					<xs:documentation>Информация о передаче карты (плана) объекта землеустройства в государственный фонд данных, полученных в результате проведения землеустройства</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="Client">
-		<xs:annotation>
-			<xs:documentation>Заказчик</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="date_signing" type="xs:date">
-				<xs:annotation>
-					<xs:documentation>Дата подписания</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="information_client">
-				<xs:annotation>
-					<xs:documentation>Сведения о заказчике</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:choice>
-						<xs:element name="individual" type="Fio1:Fio">
-							<xs:annotation>
-								<xs:documentation>Физическое лицо</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="resident" type="iMAP1:EntityRepresentative">
-							<xs:annotation>
-								<xs:documentation>Российское юридическое лицо</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="not_resident" type="iMAP1:NotResidentRepresentative">
-							<xs:annotation>
-								<xs:documentation>Иностранное юридическое лицо</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="government_entity" type="iMAP1:EntityRepresentative">
-							<xs:annotation>
-								<xs:documentation>Орган государственной власти, орган местного самоуправления</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:choice>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="InformationContractor">
-		<xs:annotation>
-			<xs:documentation>Сведения об исполнителе</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="cadastral_engineer" type="iMAP1:CadastralEngineer">
-				<xs:annotation>
-					<xs:documentation>Кадастровый инженер</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="individual_entrepreneur" type="iMAP1:ContactsIndividual">
-				<xs:annotation>
-					<xs:documentation>Индивидуальный предприниматель</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="legal_entity" type="iMAP1:ContactsLegalEntityRepresentative">
-				<xs:annotation>
-					<xs:documentation>Юридическое лицо</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<xs:complexType name="Coordination">
-		<xs:annotation>
-			<xs:documentation>Сведения о согласовании карты (плана) объекта землеустройства</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="coordination_title">
-				<xs:annotation>
-					<xs:documentation>Согласование карты (плана) на титульном листе</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="name" type="SimAll1:sNameNew500">
-							<xs:annotation>
-								<xs:documentation>Наименование органа (организации)</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="date_coordination" type="xs:date">
-							<xs:annotation>
-								<xs:documentation>Дата согласования</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="representative" type="iMAP1:Representative">
-							<xs:annotation>
-								<xs:documentation>Представитель</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="letterhead_document" type="DocAtt1:DocumentRequisites">
-				<xs:annotation>
-					<xs:documentation>Согласование карты (плана) в виде письма на бланке соответствующего органа (организации)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:complexType>
-	<xs:complexType name="InformationFund">
-		<xs:annotation>
-			<xs:documentation>Информация о передаче карты (плана) объекта землеустройства в государственный фонд данных, полученных в результате проведения землеустройства</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="number_reg" type="SimAll1:s1_50">
-				<xs:annotation>
-					<xs:documentation>Регистрационный номер</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="date_reg" type="xs:date">
-				<xs:annotation>
-					<xs:documentation>Дата передачи</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="name_archive" type="SimAll1:sNameNew500">
-				<xs:annotation>
-					<xs:documentation>Наименование органа (организации), осуществляющего хранение землеустроительной документации</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="CadastralEngineer">
-		<xs:annotation>
-			<xs:documentation>Кадастровый инженер</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="contact_cadastral_engineer" type="iMAP1:ContactsIndividual">
-				<xs:annotation>
-					<xs:documentation>Сведения о кадастровом инженере</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="cadastral_engineer_attest_number" type="SimAll1:sCertificate50" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Номер квалификационного аттестата кадастрового инженера</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="cadastral_engineer_snils" type="SimAll1:SSNILS">
-				<xs:annotation>
-					<xs:documentation>Страховой номер индивидуального лицевого счета</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="self_regulatory_organization" type="SimAll1:sNameNew255">
-				<xs:annotation>
-					<xs:documentation>Наименование саморегулируемой организации кадастровых инженеров, членом которой является кадастровый инженер</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="contact_legal_entity" type="iMAP1:ContactsLegalEntity" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Сведения о юридическом лице, если кадастровый инженер является работником юридического лица</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ContactsIndividual">
-		<xs:annotation>
-			<xs:documentation>Контактная информация</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="fio" type="Fio1:Fio">
-				<xs:annotation>
-					<xs:documentation>Фамилия Имя Отчество</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="inn" type="SimAll1:PhysicalPersonINNType">
-				<xs:annotation>
-					<xs:documentation>Идентификационный номер налогоплательщика</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="telefon" type="SimAll1:s1_50">
-				<xs:annotation>
-					<xs:documentation>Телефон</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="mailing_addess" type="SimAll1:s1_4000">
-				<xs:annotation>
-					<xs:documentation>Почтовый адрес</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ContactsLegalEntity">
-		<xs:annotation>
-			<xs:documentation>Контактная информация о юридическом лице</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="org_name" type="SimAll1:sNameNew500">
-				<xs:annotation>
-					<xs:documentation>Полное наименование</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ogrn" type="SimAll1:OGRNCompanyType">
-				<xs:annotation>
-					<xs:documentation>ОГРН</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="telefon" type="SimAll1:s1_50">
-				<xs:annotation>
-					<xs:documentation>Телефон</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="mailing_addess" type="SimAll1:s1_4000">
-				<xs:annotation>
-					<xs:documentation>Почтовый адрес</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ContactsLegalEntityRepresentative">
-		<xs:annotation>
-			<xs:documentation>Юридическое лицо (контактная информация) и его представитель</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="contact_legal_entity" type="iMAP1:ContactsLegalEntity">
-				<xs:annotation>
-					<xs:documentation>Сведения о юридическом лице</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="authorized_representative" type="iMAP1:AuthorizedRepresentative">
-				<xs:annotation>
-					<xs:documentation>Уполномоченный представитель</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="EntityRepresentative">
-		<xs:annotation>
-			<xs:documentation>Юридическое лицо, орган власти, местного управления, и его представитель</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name" type="SimAll1:sNameNew500">
-				<xs:annotation>
-					<xs:documentation>Полное наименование</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="authorized_representative" type="iMAP1:AuthorizedRepresentative">
-				<xs:annotation>
-					<xs:documentation>Уполномоченный представитель</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="NotResidentRepresentative">
-		<xs:annotation>
-			<xs:documentation>Иностранное юридическое лицо и его представитель</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="name" type="SimAll1:sNameNew500">
-				<xs:annotation>
-					<xs:documentation>Полное наименование</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="incorporate_country" type="SimAll1:s1_255">
-				<xs:annotation>
-					<xs:documentation>Наименование страны регистрации (инкорпорации)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="authorized_representative" type="iMAP1:AuthorizedRepresentative">
-				<xs:annotation>
-					<xs:documentation>Уполномоченный представитель</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="AuthorizedRepresentative">
-		<xs:annotation>
-			<xs:documentation>Уполномоченный представитель</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="representative" type="iMAP1:Representative">
-				<xs:annotation>
-					<xs:documentation>Представитель</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="attorney_document" type="DocAtt1:DocumentAndAttachment" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Доверенность</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="Representative">
-		<xs:annotation>
-			<xs:documentation>Официальное лицо (представитель)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="fio" type="Fio1:Fio">
-				<xs:annotation>
-					<xs:documentation>Фамилия Имя Отчество</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="appointment" type="SimAll1:s1_255">
-				<xs:annotation>
-					<xs:documentation>Должность удостоверяющего</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="UnderlyingDocuments">
-		<xs:annotation>
-			<xs:documentation>Основания для проведения землеустроительных работ и исходные данные</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="underlying_document" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Наименование и реквизиты документов (в том числе картографических)</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="document_requisites" type="DocAtt1:DocumentRequisites">
-							<xs:annotation>
-								<xs:documentation>Реквизиты документа</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="additional_map" type="iMAP1:AdditionalMap">
-							<xs:annotation>
-								<xs:documentation>Дополнительная информация к картографическому материалу</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="AdditionalMap">
-		<xs:annotation>
-			<xs:documentation>Дополнительная информация к картографическому материалу</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="scale" type="SimAll1:s1_255">
-				<xs:annotation>
-					<xs:documentation>Масштаб соответствующего картографического произведения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="date_create" type="xs:date">
-				<xs:annotation>
-					<xs:documentation>Дата создания картографического произведения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="date_update" type="xs:date" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Дата последнего обновления картографического произведения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:SimAll1="urn://x-artefacts-rosreestr-ru/commons/simple-types-all/1.0"
+           xmlns:Are1="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1"
+           xmlns:EnSpa1="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/1.0.1"
+           xmlns:DocAtt1="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1"
+           xmlns:AdrCi1="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-city/1.0.1"
+           xmlns:Fio1="urn://x-artefacts-rosreestr-ru/commons/complex-types/Fio/1.0.1"
+           xmlns:dBnd2="urn://x-artefacts-rosreestr-ru/commons/directories/boundary-type/2.0.1"
+           xmlns:dRF2="urn://x-artefacts-rosreestr-ru/commons/directories/regions/2.0.1"
+           xmlns:dAU="urn://x-artefacts-rosreestr-ru/commons/directories/allowed-use/2.0.1"
+           xmlns:iMAP1="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/1.0.1"
+           targetNamespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/1.0.1"
+           elementFormDefault="qualified">
+    <!--ПРОСТЫЕ ТИПЫ ДАННЫХ:-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/simple-types-all/1.0"
+               schemaLocation="../SchemaCommon/P_CommonSimpleTypeAll_v01.xsd"/>
+    <!--СОСТАВНЫЕ ТИПЫ ДАННЫХ:-->
+    <!--Площадь-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1"
+               schemaLocation="../SchemaCommon/tArea_v01.xsd"/>
+    <!--Описание местоположения границ-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/1.0.1"
+               schemaLocation="../SchemaCommon/tEntitySpatial_v01.xsd"/>
+    <!--Реквизиты документа-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1"
+               schemaLocation="../SchemaCommon/tDocumentRequisitesAndAttachment_v01.xsd"/>
+    <!--Структурированный адрес (описание местоположения) до уровня населённого пункта-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-city/1.0.1"
+               schemaLocation="../SchemaCommon/tAddressCity_v01.xsd"/>
+    <!--Фамилия, имя, отчество физического лица-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/Fio/1.0.1"
+               schemaLocation="../SchemaCommon/tFIO_v01.xsd"/>
+    <!--КЛАССИФИКАТОРЫ И СПРАВОЧНИКИ:-->
+    <!--Справочник субъектов РФ-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/regions/2.0.1"
+               schemaLocation="../SchemaCommon/dRegionsRF_v02.xsd"/>
+    <!--Виды объектов реестра границ-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/boundary-type/2.0.1"
+               schemaLocation="../SchemaCommon/dBoundaryType_v02.xsd"/>
+    <!--===ВЕРСИЯ 01===================-->
+    <xs:element name="map_plan">
+        <xs:annotation>
+            <xs:documentation>Карта (план) объекта землеустройства</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="iMAP1:Title">
+                    <xs:annotation>
+                        <xs:documentation>Титульный лист</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="underlying_documents" type="iMAP1:UnderlyingDocuments">
+                    <xs:annotation>
+                        <xs:documentation>Основания для проведения землеустроительных работ и исходные данные
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="information_registry_boundary" type="iMAP1:InformationRegistryBoundary">
+                    <xs:annotation>
+                        <xs:documentation>Сведения об объекте землеустройства</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="border_plan">
+                    <xs:annotation>
+                        <xs:documentation>План границ объекта землеустройства</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="attachment_pdf" type="DocAtt1:AttachmentPDF" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>Приложенный файл в формате PDF</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="guid" type="SimAll1:sGUID" use="required">
+                <xs:annotation>
+                    <xs:documentation>Глобальный уникальный идентификатор пакета (GUID)</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="version" type="SimAll1:s2" use="required" fixed="01">
+                <xs:annotation>
+                    <xs:documentation>Версия схемы</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="InformationRegistryBoundary">
+        <xs:annotation>
+            <xs:documentation>Сведения об объекте землеустройства (установление или изменение (уточнение) местоположения
+                границы либо части (частей) границы)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="type_boundary" type="dBnd2:dBoundaryType">
+                <xs:annotation>
+                    <xs:documentation>Вид объекта реестра границ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name_land_object" type="SimAll1:s1_1000">
+                <xs:annotation>
+                    <xs:documentation>Наименование объекта землеустройства</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="all_border_or_part_border" type="SimAll1:sAllOrPartBorder">
+                <xs:annotation>
+                    <xs:documentation>Описание границы (1 - вся граница, 0 - часть (части) границы)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="information_boundary" type="iMAP1:InformationBoundary">
+                <xs:annotation>
+                    <xs:documentation>Описание объекта землеустройства (местоположение границы либо части (частей)
+                        границы)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="area" type="iMAP1:AreaMeterOrHectare" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Площадь и величина погрешности (в квадратных метрах или гектарах)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InformationBoundary">
+        <xs:annotation>
+            <xs:documentation>Сведения о границе (части (частях) границы) объекта</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="subject_boundary" type="iMAP1:SubjectBoundary">
+                <xs:annotation>
+                    <xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей)
+                        границы) между субъектами Российской Федерации
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="municipal_boundary" type="iMAP1:MunicipalBoundary">
+                <xs:annotation>
+                    <xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей)
+                        границы) муниципального образования
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <!--===============ГРАНИЦЫ===============-->
+    <!--Граница между субъектами Российской Федерации-->
+    <xs:complexType name="SubjectBoundary">
+        <xs:annotation>
+            <xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей) границы) между
+                субъектами Российской Федерации
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="establishment_subject_boundary" type="iMAP1:EstablishmentSubjectBoundary">
+                <xs:annotation>
+                    <xs:documentation>Установление границы (части (частей) границы) между субъектами Российской
+                        Федерации
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="changing_subject_boundary" type="iMAP1:ChangingSubjectBoundary">
+                <xs:annotation>
+                    <xs:documentation>Изменение (уточнение) границы (части (частей) границы) между субъектами Российской
+                        Федерации
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="EstablishmentSubjectBoundary">
+        <xs:annotation>
+            <xs:documentation>Установление границы границы (части (частей) границы) между субъектами Российской
+                Федерации
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="neighbour_regions">
+                <xs:annotation>
+                    <xs:documentation>Смежные субъекты Российской Федерации</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="neighbour_region" type="iMAP1:NeighbourRegion" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Смежный субъект Российской Федерации</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cadastral_regions">
+                <xs:annotation>
+                    <xs:documentation>Номера кадастровых округов</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cadastral_region" type="iMAP1:CadastralRegion" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Номер кадастрового округа</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="contours_location" type="EnSpa1:BoundContoursLocationBorders">
+                <xs:annotation>
+                    <xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChangingSubjectBoundary">
+        <xs:annotation>
+            <xs:documentation>Изменение (уточнение) границы (части (частей) границы) между субъектами Российской
+                Федерации, , в том числе дополнение границы, которая ранее была предоставлена в виде части (частей),
+                новыми частями
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="reg_numb_border" type="SimAll1:s1_50">
+                <xs:annotation>
+                    <xs:documentation>Реестровый номер границы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="neighbour_regions">
+                <xs:annotation>
+                    <xs:documentation>Смежные субъекты Российской Федерации</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="neighbour_region" type="iMAP1:NeighbourRegion" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Смежный субъект Российской Федерации</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cadastral_regions">
+                <xs:annotation>
+                    <xs:documentation>Номера кадастровых округов</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cadastral_region" type="iMAP1:CadastralRegion" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Номер кадастрового округа</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="contours_location" type="EnSpa1:BoundContoursLocationOldNew">
+                <xs:annotation>
+                    <xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NeighbourRegion">
+        <xs:annotation>
+            <xs:documentation>Смежный субъект Российской Федерации</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name_neighbour_region" type="dRF2:dRegionsRF">
+                <xs:annotation>
+                    <xs:documentation source="http://192.168.14.254:8000/catalogs/4/items?hierarchy_view=false">
+                        Наименование смежного субъекта Российской Федерации (код по справочнику)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CadastralRegion">
+        <xs:annotation>
+            <xs:documentation>Номер кадастрового округа</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="number_cadastral_region" type="SimAll1:nn2">
+                <xs:annotation>
+                    <xs:documentation>Номер кадастрового округа</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <!--Граница муниципального образования-->
+    <xs:complexType name="MunicipalBoundary">
+        <xs:annotation>
+            <xs:documentation>Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
+                муниципального образования
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="establishment_municipal_boundary" type="iMAP1:EstablishmentMunicipalInhabitedBoundary">
+                <xs:annotation>
+                    <xs:documentation>Установление границы (части (частей) границы) муниципального образования
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="changing_municipal_boundary" type="iMAP1:ChangingMunicipalInhabitedBoundary">
+                <xs:annotation>
+                    <xs:documentation>Изменение (уточнение) границы (части (частей) границы) муниципального
+                        образования
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="EstablishmentMunicipalInhabitedBoundary">
+        <xs:annotation>
+            <xs:documentation>Установление границы (части (частей) границы)</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cadastral_district" type="SimAll1:sCadastralDistrictNull">
+                <xs:annotation>
+                    <xs:documentation>Номер кадастрового района</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="location" type="AdrCi1:AddressCity">
+                <xs:annotation>
+                    <xs:documentation>Местоположение объекта</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contours_location" type="EnSpa1:BoundContoursLocationBorders">
+                <xs:annotation>
+                    <xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChangingMunicipalInhabitedBoundary">
+        <xs:annotation>
+            <xs:documentation>Изменение (уточнение) границы (части (частей) границы), в том числе дополнение границы,
+                которая ранее была предоставлена в виде части (частей), новыми частями
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="reg_numb_border" type="SimAll1:s1_50">
+                <xs:annotation>
+                    <xs:documentation>Реестровый номер границы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadastral_district" type="SimAll1:sCadastralDistrictNull">
+                <xs:annotation>
+                    <xs:documentation>Номер кадастрового района</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="location" type="AdrCi1:AddressCity">
+                <xs:annotation>
+                    <xs:documentation>Местоположение объекта</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contours_location" type="EnSpa1:BoundContoursLocationOldNew">
+                <xs:annotation>
+                    <xs:documentation>Текстовое и графическое описание местоположения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <!--Общие типы-->
+    <xs:complexType name="Number">
+        <xs:annotation>
+            <xs:documentation>Регистрационный номер или ранее присвоенный учетный номер</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="reg_numb_border" type="SimAll1:s1_50">
+                <xs:annotation>
+                    <xs:documentation>Реестровый номер границы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="old_account_number">
+                <xs:annotation>
+                    <xs:documentation>Ранее присвоенный учетный номер</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="account_number" type="SimAll1:s1_40">
+                            <xs:annotation>
+                                <xs:documentation>Учётный номер</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="AreaMeterOrHectare">
+        <xs:annotation>
+            <xs:documentation>Площадь и величина погрешности (в кв. метрах или гектарах)</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="area_meter" type="Are1:AreaMeter">
+                <xs:annotation>
+                    <xs:documentation>Площадь в квадратных метрах</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="area_hectare" type="Are1:AreaHectare">
+                <xs:annotation>
+                    <xs:documentation>Площадь в гектарах</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="IncludedParcels">
+        <xs:annotation>
+            <xs:documentation>Кадастровые номера земельных участков, входящих в зону или территорию</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="includ_parcel" type="iMAP1:CadNumber" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Земельный участок</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CadNumber">
+        <xs:annotation>
+            <xs:documentation>Кадастровый номер земельного участка</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cad_number" type="SimAll1:sCadastralNumber">
+                <xs:annotation>
+                    <xs:documentation>Кадастровый номер земельного участка</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <!--ТИТУЛЬНЫЙ ЛИСТ И ОБЩИЕ СВЕДЕНИЯ-->
+    <xs:complexType name="Title">
+        <xs:annotation>
+            <xs:documentation>Титульный лист</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="clients">
+                <xs:annotation>
+                    <xs:documentation>Сведения о заказчиках землеустроительных работ</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="client" type="iMAP1:Client" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Заказчик</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="contractor">
+                <xs:annotation>
+                    <xs:documentation>Сведения об исполнителе землеустроительных работ</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="date_drawing" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>Дата составления</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="information_contractor" type="iMAP1:InformationContractor">
+                            <xs:annotation>
+                                <xs:documentation>Сведения об исполнителе</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="coordinations">
+                <xs:annotation>
+                    <xs:documentation>Сведения о согласованиях карты (плана) объекта землеустройства</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="coordination" type="iMAP1:Coordination" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Сведения о согласовании карты (плана) объекта землеустройства
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="map_plan_Information" type="iMAP1:InformationFund">
+                <xs:annotation>
+                    <xs:documentation>Информация о передаче карты (плана) объекта землеустройства в государственный фонд
+                        данных, полученных в результате проведения землеустройства
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Client">
+        <xs:annotation>
+            <xs:documentation>Заказчик</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="date_signing" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Дата подписания</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="information_client">
+                <xs:annotation>
+                    <xs:documentation>Сведения о заказчике</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="individual" type="Fio1:Fio">
+                            <xs:annotation>
+                                <xs:documentation>Физическое лицо</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="resident" type="iMAP1:EntityRepresentative">
+                            <xs:annotation>
+                                <xs:documentation>Российское юридическое лицо</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="not_resident" type="iMAP1:NotResidentRepresentative">
+                            <xs:annotation>
+                                <xs:documentation>Иностранное юридическое лицо</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="government_entity" type="iMAP1:EntityRepresentative">
+                            <xs:annotation>
+                                <xs:documentation>Орган государственной власти, орган местного самоуправления
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InformationContractor">
+        <xs:annotation>
+            <xs:documentation>Сведения об исполнителе</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="cadastral_engineer" type="iMAP1:CadastralEngineer">
+                <xs:annotation>
+                    <xs:documentation>Кадастровый инженер</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="individual_entrepreneur" type="iMAP1:ContactsIndividual">
+                <xs:annotation>
+                    <xs:documentation>Индивидуальный предприниматель</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="legal_entity" type="iMAP1:ContactsLegalEntityRepresentative">
+                <xs:annotation>
+                    <xs:documentation>Юридическое лицо</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="Coordination">
+        <xs:annotation>
+            <xs:documentation>Сведения о согласовании карты (плана) объекта землеустройства</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="coordination_title">
+                <xs:annotation>
+                    <xs:documentation>Согласование карты (плана) на титульном листе</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="SimAll1:sNameNew500">
+                            <xs:annotation>
+                                <xs:documentation>Наименование органа (организации)</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="date_coordination" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>Дата согласования</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="representative" type="iMAP1:Representative">
+                            <xs:annotation>
+                                <xs:documentation>Представитель</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="letterhead_document" type="DocAtt1:DocumentRequisites">
+                <xs:annotation>
+                    <xs:documentation>Согласование карты (плана) в виде письма на бланке соответствующего органа
+                        (организации)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="InformationFund">
+        <xs:annotation>
+            <xs:documentation>Информация о передаче карты (плана) объекта землеустройства в государственный фонд данных,
+                полученных в результате проведения землеустройства
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="number_reg" type="SimAll1:s1_50">
+                <xs:annotation>
+                    <xs:documentation>Регистрационный номер</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="date_reg" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Дата передачи</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name_archive" type="SimAll1:sNameNew500">
+                <xs:annotation>
+                    <xs:documentation>Наименование органа (организации), осуществляющего хранение землеустроительной
+                        документации
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CadastralEngineer">
+        <xs:annotation>
+            <xs:documentation>Кадастровый инженер</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contact_cadastral_engineer" type="iMAP1:ContactsIndividual">
+                <xs:annotation>
+                    <xs:documentation>Сведения о кадастровом инженере</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadastral_engineer_attest_number" type="SimAll1:sCertificate50" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Номер квалификационного аттестата кадастрового инженера</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadastral_engineer_snils" type="SimAll1:SSNILS">
+                <xs:annotation>
+                    <xs:documentation>Страховой номер индивидуального лицевого счета</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="self_regulatory_organization" type="SimAll1:sNameNew255">
+                <xs:annotation>
+                    <xs:documentation>Наименование саморегулируемой организации кадастровых инженеров, членом которой
+                        является кадастровый инженер
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contact_legal_entity" type="iMAP1:ContactsLegalEntity" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о юридическом лице, если кадастровый инженер является работником
+                        юридического лица
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContactsIndividual">
+        <xs:annotation>
+            <xs:documentation>Контактная информация</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="fio" type="Fio1:Fio">
+                <xs:annotation>
+                    <xs:documentation>Фамилия Имя Отчество</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="inn" type="SimAll1:PhysicalPersonINNType">
+                <xs:annotation>
+                    <xs:documentation>Идентификационный номер налогоплательщика</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="telefon" type="SimAll1:s1_50">
+                <xs:annotation>
+                    <xs:documentation>Телефон</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mailing_addess" type="SimAll1:s1_4000">
+                <xs:annotation>
+                    <xs:documentation>Почтовый адрес</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContactsLegalEntity">
+        <xs:annotation>
+            <xs:documentation>Контактная информация о юридическом лице</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="org_name" type="SimAll1:sNameNew500">
+                <xs:annotation>
+                    <xs:documentation>Полное наименование</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ogrn" type="SimAll1:OGRNCompanyType">
+                <xs:annotation>
+                    <xs:documentation>ОГРН</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="telefon" type="SimAll1:s1_50">
+                <xs:annotation>
+                    <xs:documentation>Телефон</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mailing_addess" type="SimAll1:s1_4000">
+                <xs:annotation>
+                    <xs:documentation>Почтовый адрес</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContactsLegalEntityRepresentative">
+        <xs:annotation>
+            <xs:documentation>Юридическое лицо (контактная информация) и его представитель</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contact_legal_entity" type="iMAP1:ContactsLegalEntity">
+                <xs:annotation>
+                    <xs:documentation>Сведения о юридическом лице</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="authorized_representative" type="iMAP1:AuthorizedRepresentative">
+                <xs:annotation>
+                    <xs:documentation>Уполномоченный представитель</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EntityRepresentative">
+        <xs:annotation>
+            <xs:documentation>Юридическое лицо, орган власти, местного управления, и его представитель
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="SimAll1:sNameNew500">
+                <xs:annotation>
+                    <xs:documentation>Полное наименование</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="authorized_representative" type="iMAP1:AuthorizedRepresentative">
+                <xs:annotation>
+                    <xs:documentation>Уполномоченный представитель</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NotResidentRepresentative">
+        <xs:annotation>
+            <xs:documentation>Иностранное юридическое лицо и его представитель</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="SimAll1:sNameNew500">
+                <xs:annotation>
+                    <xs:documentation>Полное наименование</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="incorporate_country" type="SimAll1:s1_255">
+                <xs:annotation>
+                    <xs:documentation>Наименование страны регистрации (инкорпорации)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="authorized_representative" type="iMAP1:AuthorizedRepresentative">
+                <xs:annotation>
+                    <xs:documentation>Уполномоченный представитель</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AuthorizedRepresentative">
+        <xs:annotation>
+            <xs:documentation>Уполномоченный представитель</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="representative" type="iMAP1:Representative">
+                <xs:annotation>
+                    <xs:documentation>Представитель</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="attorney_document" type="DocAtt1:DocumentAndAttachment" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Доверенность</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Representative">
+        <xs:annotation>
+            <xs:documentation>Официальное лицо (представитель)</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="fio" type="Fio1:Fio">
+                <xs:annotation>
+                    <xs:documentation>Фамилия Имя Отчество</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="appointment" type="SimAll1:s1_255">
+                <xs:annotation>
+                    <xs:documentation>Должность удостоверяющего</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="UnderlyingDocuments">
+        <xs:annotation>
+            <xs:documentation>Основания для проведения землеустроительных работ и исходные данные</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="underlying_document" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Наименование и реквизиты документов (в том числе картографических)
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="document_requisites" type="DocAtt1:DocumentRequisites">
+                            <xs:annotation>
+                                <xs:documentation>Реквизиты документа</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="additional_map" type="iMAP1:AdditionalMap">
+                            <xs:annotation>
+                                <xs:documentation>Дополнительная информация к картографическому материалу
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AdditionalMap">
+        <xs:annotation>
+            <xs:documentation>Дополнительная информация к картографическому материалу</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="scale" type="SimAll1:s1_255">
+                <xs:annotation>
+                    <xs:documentation>Масштаб соответствующего картографического произведения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="date_create" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Дата создания картографического произведения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="date_update" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дата последнего обновления картографического произведения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>
