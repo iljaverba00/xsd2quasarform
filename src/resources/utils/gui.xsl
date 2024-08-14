@@ -59,6 +59,7 @@
 		<xsl:param name="disabled">false</xsl:param>
 		
 		<xsl:element name="label">
+			<xsl:attribute name="radio"></xsl:attribute>
 			<xsl:element name="input">
 				<xsl:attribute name="type">radio</xsl:attribute>
 				<xsl:attribute name="name">
@@ -75,7 +76,8 @@
 			</xsl:element>
 			
 			<xsl:element name="span">
-				<xsl:value-of select="$description" />
+				<xsl:value-of select="concat($description,'. ')" />
+				<xsl:call-template name="get-description" />
 			</xsl:element>
 		</xsl:element>
 	</xsl:template>

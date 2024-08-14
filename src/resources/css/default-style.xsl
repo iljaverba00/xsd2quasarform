@@ -42,6 +42,10 @@
 					display: grid;
 				}
 
+				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) {
+					border: 0;
+				}
+
 				legend {
     				cursor: pointer;
     				font-family: Arial, sans-serif;
@@ -54,6 +58,17 @@
     				background: #dddddd;
 				}
 
+				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) > legend:before {
+					content: "\002795\FE0E";
+    				color: blue;
+				}
+
+				legend:before {
+					content: "\002796\FE0E";
+    				color: red;
+					margin-right: 4px;
+				}
+
 				input {
     				padding: 5px;
     				border-style: solid;
@@ -64,7 +79,16 @@
 
 				label {
     				min-height: 29px;
-					display: inline-grid
+					display: flex;
+    				align-items: center;
+				}
+
+				label > input {
+					margin-right: 8px;
+				}
+
+				input[type="radio"] + span {
+					font-size: 1.5em;
 				}
 
 				span {
@@ -85,9 +109,18 @@
 					width: 100%
 				}
 
+				body > form > section {
+					height: calc(100vh - 50px);
+    				overflow: auto;
+				}
+
 				section {
-					display:grid;
+					//display:grid;
 					margin-top:10px;
+				}
+
+				section[collapsed="true"] {
+					display: none;
 				}
 
 				button {

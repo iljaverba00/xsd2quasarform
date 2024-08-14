@@ -10,6 +10,7 @@
 	<xsl:include href="css/default-style.xsl" />
 
 	<xsl:include href="js/event-handlers.xsl" />
+	<xsl:include href="js/ui-handlers.xsl" />
 	<xsl:include href="js/html-populators.xsl" />
 	<xsl:include href="js/initial-calls.xsl" />
 	<xsl:include href="js/polyfills.xsl" />
@@ -194,6 +195,7 @@
 			<xsl:call-template name="add-html-populators" />
 			<xsl:call-template name="add-value-fixers" />
 			<xsl:call-template name="add-event-handlers" />
+			<xsl:call-template name="add-ui-handlers" />
 			<xsl:call-template name="add-initial-calls" />
 
 			<xsl:if test="not($config-script = '')">

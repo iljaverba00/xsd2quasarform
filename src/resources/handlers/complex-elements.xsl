@@ -76,6 +76,7 @@
 			
 			<!-- wrap complex elements in section elements -->
 			<xsl:element name="section">
+				<xsl:attribute name="collapsed">true</xsl:attribute>
 				<!-- add an attribute to indicate a choice element -->
 				<xsl:if test="$choice = 'true'">
 					<xsl:attribute name="data-xsd2html2xml-choice">true</xsl:attribute>
@@ -210,6 +211,7 @@
 					
 					<!-- use a legend element to contain the description -->
 					<xsl:element name="legend">
+						<xsl:attribute name="onclick">collapseSections(this);</xsl:attribute>
 						<xsl:value-of select="$description" />
 						<xsl:call-template name="add-remove-button">
 							<xsl:with-param name="min-occurs" select="$min-occurs" />
