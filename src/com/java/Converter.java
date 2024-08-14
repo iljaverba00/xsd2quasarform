@@ -1,7 +1,6 @@
 package com.java;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -11,27 +10,21 @@ import javax.xml.transform.stream.StreamSource;
 
 public class Converter {
 
-    // Путь к XSLT файлу
-    private static String xslFilePath = "src/resources/XslCombined.xsl";
+    public void run(String xsdFilePath, String htmlFilePath)  {
 
-
-    private static String xsdFilePath = "src/examples/example-interact-map-plan-v01-R04/interact_map_plan/interact_map_plan_v01.xsd";
-    private static String htmlFilePath = "src/examples/example-interact-map-plan-v01-R04/form.html";
-
-//    private static String xsdFilePath = "src/examples/example-new-design/schema.xsd";
-//    private static String htmlFilePath = "src/examples/example-new-design/form.html";
-
-    public static void main(String[] args) throws FileNotFoundException {
+        // Путь к XSL файлу
+        String xslFilePath = "src/resources/XslCombined.xsl";
+        String examplesFolder = "src/examples/";
 
         File xslFile = new File(xslFilePath);
-        File xsdFile = new File(xsdFilePath);
-        File htmlFile = new File(htmlFilePath);
+        File xsdFile = new File(examplesFolder + xsdFilePath);
+        File htmlFile = new File(examplesFolder + htmlFilePath);
 
         generateForm(xsdFile, xslFile, htmlFile);
     }
 
 
-    public static void generateForm(File xsdSchemaPath, File xslSchemaPath, File htmlResultPath) {
+    private void generateForm(File xsdSchemaPath, File xslSchemaPath, File htmlResultPath) {
         try {
             // Создание источников для XSD и XSLT
             StreamSource xsdSource = new StreamSource(xsdSchemaPath);

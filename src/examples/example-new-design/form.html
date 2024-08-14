@@ -39,6 +39,10 @@
 					display: grid;
 				}
 
+				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) {
+					border: 0;
+				}
+
 				legend {
     				cursor: pointer;
     				font-family: Arial, sans-serif;
@@ -51,6 +55,17 @@
     				background: #dddddd;
 				}
 
+				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) > legend:before {
+					content: "\002795\FE0E";
+    				color: blue;
+				}
+
+				legend:before {
+					content: "\002796\FE0E";
+    				color: red;
+					margin-right: 4px;
+				}
+
 				input {
     				padding: 5px;
     				border-style: solid;
@@ -61,7 +76,16 @@
 
 				label {
     				min-height: 29px;
-					display: inline-grid
+					display: flex;
+    				align-items: center;
+				}
+
+				label > input {
+					margin-right: 8px;
+				}
+
+				input[type="radio"] + span {
+					font-size: 1.5em;
 				}
 
 				span {
@@ -82,9 +106,18 @@
 					width: 100%
 				}
 
+				body > form > section {
+					height: calc(100vh - 50px);
+    				overflow: auto;
+				}
+
 				section {
-					display:grid;
+					//display:grid;
 					margin-top:10px;
+				}
+
+				section[collapsed="true"] {
+					display: none;
 				}
 
 				button {
@@ -670,6 +703,34 @@
 					if (input.getAttribute("data-xsd2html2xml-required")) input.setAttribute("required", "required");
 				}
 			</script><script type="text/javascript">
+				/* UI HANDLERS */
+				console.log('ui handlers inited');
+				///////
+
+function collapseSections (element) {
+  Array.from(element.closest('fieldset').children).forEach(function (element) {
+    if (element.tagName != 'SECTION') {
+        return;
+    }
+    var value = JSON.parse(element.getAttribute('collapsed') || 'false');
+    element.setAttribute('collapsed', !value);
+  });
+};
+
+function startExpandSections() {
+    var sectionElement = document.querySelector('body > form > section');
+    if (!sectionElement) {
+        return;
+    }
+    sectionElement.setAttribute('collapsed', 'false');
+}
+
+window.addEventListener('DOMContentLoaded', startExpandSections);
+
+
+				///////
+
+			</script><script type="text/javascript">
 				var globalValuesMap = [];
 				
 				document.addEventListener("DOMContentLoaded",
@@ -699,194 +760,244 @@
 					}
 				);
 			</script>
-<meta name="generator" content="XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml">
+<meta name="generator" content="XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml" data-xsd2html2xml-source="<rootElement xmlns:xml=&quot;http://www.w3.org/XML/1998/namespace&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;schema.xsd&quot;>
+    <simpleTypes>
+        <string>wew</string>
+        <multiline-string>multiline sample</multiline-string>
+        <byte>12</byte>
+        <short>1</short>
+        <int>123</int>
+        <long>332</long>
+        <decimal>23</decimal>
+        <float>233</float>
+        <double>23.3</double>
+        <boolean>true</boolean>
+        <date>2024-07-21</date>
+        <time>19:44:34</time>
+        <dateTime>2024-07-21T19:44:36</dateTime>
+        <anyURI>https:\\we</anyURI>
+    </simpleTypes>
+    <dates>
+        <date>2024-07-21</date>
+        <time>19:44:00</time>
+        <dateTime>2024-07-21T19:45:02</dateTime>
+        <gDay>---01</gDay>
+        <gMonth>--02</gMonth>
+        <gMonthEnum>--01</gMonthEnum>
+        <gMonthDay>--07-21</gMonthDay>
+        <gYear>2017</gYear>
+        <gYearMonth>2024-07</gYearMonth>
+    </dates>
+    <durations>
+        <dateDuration>P49D</dateDuration>
+        <timeDuration>PT5M</timeDuration>
+    </durations>
+    <defaults>
+        <defaultString>this is the default value</defaultString>
+        <fixedString>this is a fixed value</fixedString>
+    </defaults>
+    <positiveIntegers>
+        <positiveInteger>1</positiveInteger>
+        <negativeInteger>132</negativeInteger>
+        <unsignedInt>22</unsignedInt>
+        <integer>23</integer>
+    </positiveIntegers>
+    <restrictions>
+        <enumeration>Option 1</enumeration>
+        <fixed-enumeration>Option 3</fixed-enumeration>
+    </restrictions>
+    <extensions>
+        <nestedString>nestedString Option 1</nestedString>
+        <nestedByte>2</nestedByte>
+        <doubleNestedByte>2</doubleNestedByte>
+    </extensions>
+    <occurrencesSimple>21</occurrencesSimple>
+    <occurrencesComplex>
+        <child />
+    </occurrencesComplex>
+    <complexSimpleContent attribute=&quot;12&quot;>12</complexSimpleContent>
+    <choice>
+        <byte>1</byte>
+    </choice>
+</rootElement>">
 </head>
 <body>
-<form action="javascript:void(0);" class="xsd2html2xml" onsubmit="(function(str){window.parent.postMessage(str,'*')})(htmlToXML(this));">
-<section>
+<form action="javascript:void(0);" class="xsd2html2xml" onsubmit="(function(str){window.parent.postMessage(str,'*');console.log(str)})(htmlToXML(this));">
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="rootElement" data-xsd2html2xml-xpath="/rootElement">
-<legend>Root Element</legend>
-<section>
+<legend onclick="collapseSections(this);">Root Element</legend>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="simpleTypes" data-xsd2html2xml-xpath="/rootElement/simpleTypes">
-<legend>Simple xs:* types with default restrictions:</legend>
-<section>
+<legend onclick="collapseSections(this);">Simple xs:* types with default restrictions:</legend>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="string" data-xsd2html2xml-xpath="/rootElement/simpleTypes/string"><span>string</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="string"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="multiline-string" data-xsd2html2xml-xpath="/rootElement/simpleTypes/multiline-string"><span>multiline-string</span><textarea onchange="this.textContent = this.value.replace(/\s+/g, &quot; &quot;).trim()" required="required" data-xsd2html2xml-description="multiline-string" pattern=".*(\n)?.*">multiline sample</textarea></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="byte" data-xsd2html2xml-xpath="/rootElement/simpleTypes/byte"><span>byte (-128 to 127)</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="byte (-128 to 127)"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="short" data-xsd2html2xml-xpath="/rootElement/simpleTypes/short"><span>short</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-32768" max="32767" pattern="[-]?{0,}" data-xsd2html2xml-primitive="short" data-xsd2html2xml-description="short"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="int" data-xsd2html2xml-xpath="/rootElement/simpleTypes/int"><span>int</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-2147483648" max="2147483647" pattern="[-]?{0,}" data-xsd2html2xml-primitive="int" data-xsd2html2xml-description="int"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="long" data-xsd2html2xml-xpath="/rootElement/simpleTypes/long"><span>long</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-9223372036854775808" max="9223372036854775807" pattern="[-]?{0,}" data-xsd2html2xml-primitive="long" data-xsd2html2xml-description="long"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="decimal" data-xsd2html2xml-xpath="/rootElement/simpleTypes/decimal"><span>decimal</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="0.1" pattern="[-]?{0,}" data-xsd2html2xml-primitive="decimal" data-xsd2html2xml-description="decimal"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="float" data-xsd2html2xml-xpath="/rootElement/simpleTypes/float"><span>float</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="0.1" pattern="[-]?{0,}" data-xsd2html2xml-primitive="float" data-xsd2html2xml-description="float"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="double" data-xsd2html2xml-xpath="/rootElement/simpleTypes/double"><span>double</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="0.1" pattern="[-]?{0,}" data-xsd2html2xml-primitive="double" data-xsd2html2xml-description="double"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="boolean" data-xsd2html2xml-xpath="/rootElement/simpleTypes/boolean"><span>boolean</span><input type="checkbox" onchange="if (this.checked) { this.setAttribute(&quot;checked&quot;,&quot;checked&quot;) } else { this.removeAttribute(&quot;checked&quot;) }" pattern=".{0,}" data-xsd2html2xml-primitive="boolean" data-xsd2html2xml-description="boolean"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="date" data-xsd2html2xml-xpath="/rootElement/simpleTypes/date"><span>date</span><input type="date" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="date" data-xsd2html2xml-description="date"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="time" data-xsd2html2xml-xpath="/rootElement/simpleTypes/time"><span>time</span><input type="time" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.match(/.*\d\d:\d\d:\d\d/) ? this.value : this.value.concat(&quot;:00&quot;))); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="1" data-xsd2html2xml-primitive="time" data-xsd2html2xml-description="time"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="dateTime" data-xsd2html2xml-xpath="/rootElement/simpleTypes/dateTime"><span>dateTime</span><input type="datetime-local" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.match(/.*\d\d:\d\d:\d\d/) ? this.value : this.value.concat(&quot;:00&quot;))); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="1" data-xsd2html2xml-primitive="datetime" data-xsd2html2xml-description="dateTime"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="anyURI" data-xsd2html2xml-xpath="/rootElement/simpleTypes/anyURI"><span>anyURI</span><input type="url" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="anyuri" data-xsd2html2xml-description="anyURI"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="hexBinary" data-xsd2html2xml-xpath="/rootElement/simpleTypes/hexBinary"><span>hexBinary</span><input type="file" onchange="pickFile(this, arguments[0].target.files[0], &quot;hexbinary&quot;);" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="hexbinary" data-xsd2html2xml-description="hexBinary"></label>
 </section>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="dates" data-xsd2html2xml-xpath="/rootElement/dates">
-<legend>dates</legend>
-<section>
+<legend onclick="collapseSections(this);">dates</legend>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="date" data-xsd2html2xml-xpath="/rootElement/dates/date"><span>date</span><input type="date" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="date" data-xsd2html2xml-description="date"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="time" data-xsd2html2xml-xpath="/rootElement/dates/time"><span>time</span><input type="time" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.match(/.*\d\d:\d\d:\d\d/) ? this.value : this.value.concat(&quot;:00&quot;))); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="1" data-xsd2html2xml-primitive="time" data-xsd2html2xml-description="time"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="dateTime" data-xsd2html2xml-xpath="/rootElement/dates/dateTime"><span>dateTime</span><input type="datetime-local" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.match(/.*\d\d:\d\d:\d\d/) ? this.value : this.value.concat(&quot;:00&quot;))); } else { this.removeAttribute(&quot;value&quot;); };" required="required" step="1" data-xsd2html2xml-primitive="datetime" data-xsd2html2xml-description="dateTime"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gDay" data-xsd2html2xml-xpath="/rootElement/dates/gDay"><span>gDay</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.length == 2 ? &quot;---&quot; : &quot;---0&quot;).concat(this.value)); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="1" max="31" step="1" data-xsd2html2xml-primitive="gday" data-xsd2html2xml-description="gDay"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonth" data-xsd2html2xml-xpath="/rootElement/dates/gMonth"><span>gMonth</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, (this.value.length == 2 ? &quot;--&quot; : &quot;--0&quot;).concat(this.value)); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="1" max="12" step="1" data-xsd2html2xml-primitive="gmonth" data-xsd2html2xml-description="gMonth"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonthEnum" data-xsd2html2xml-xpath="/rootElement/dates/gMonthEnum"><span>gMonth as enumeration</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="gMonth as enumeration" data-xsd2html2xml-primitive="gmonth"><option value="--01">January</option><option value="--02">February</option><option value="--03">March</option></select></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gMonthDay" data-xsd2html2xml-xpath="/rootElement/dates/gMonthDay"><span>gMonthDay</span><input type="date" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/^\d+/, &quot;-&quot;)); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="gmonthday" data-xsd2html2xml-description="gMonthDay"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gYear" data-xsd2html2xml-xpath="/rootElement/dates/gYear"><span>gYear</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="1000" max="9999" step="1" data-xsd2html2xml-primitive="gyear" data-xsd2html2xml-description="gYear"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="gYearMonth" data-xsd2html2xml-xpath="/rootElement/dates/gYearMonth"><span>gYearMonth</span><input type="month" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="gyearmonth" data-xsd2html2xml-description="gYearMonth"></label>
 </section>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="durations" data-xsd2html2xml-xpath="/rootElement/durations">
-<legend>Various durations:</legend>
-<section>
+<legend onclick="collapseSections(this);">Various durations:</legend>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="dateDuration" data-xsd2html2xml-xpath="/rootElement/durations/dateDuration">
 <output data-xsd2html2xml-description="dateDuration"></output>
 <span>dateDuration</span><input type="range" onchange="this.setAttribute(&quot;value&quot;, &quot;P&quot;.concat(this.value).concat(&quot;D&quot;)); this.previousElementSibling.textContent = this.value;" required="required" pattern="P\d{1,3}D" step="1" data-xsd2html2xml-primitive="duration" data-xsd2html2xml-description="dateDuration" data-xsd2html2xml-duration="days"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="timeDuration" data-xsd2html2xml-xpath="/rootElement/durations/timeDuration">
 <output data-xsd2html2xml-description="timeDuration"></output>
 <span>timeDuration</span><input type="range" onchange="this.setAttribute(&quot;value&quot;, &quot;PT&quot;.concat(this.value).concat(&quot;M&quot;)); this.previousElementSibling.textContent = this.value;" required="required" min="1" max="10" pattern="PT\d{1,2}M" step="1" data-xsd2html2xml-primitive="duration" data-xsd2html2xml-description="timeDuration" data-xsd2html2xml-duration="minutes"></label>
 </section>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="defaults" data-xsd2html2xml-xpath="/rootElement/defaults">
-<legend>Simple elements with default and fixed values:</legend>
-<section>
+<legend onclick="collapseSections(this);">Simple elements with default and fixed values:</legend>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="defaultString" data-xsd2html2xml-xpath="/rootElement/defaults/defaultString"><span>defaultString</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="defaultString" value="this is the default value"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="fixedString" data-xsd2html2xml-xpath="/rootElement/defaults/fixedString"><span>fixedString</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="fixedString" readonly value="this is a fixed value"></label>
 </section>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="positiveIntegers" data-xsd2html2xml-xpath="/rootElement/positiveIntegers">
-<legend>Integers that all allow only positive values:</legend>
-<section>
+<legend onclick="collapseSections(this);">Integers that all allow only positive values:</legend>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="positiveInteger" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/positiveInteger"><span>positiveInteger</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="1" pattern="{0,}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="positiveInteger"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="negativeInteger" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/negativeInteger"><span>negativeInteger</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" pattern="{0,}" data-xsd2html2xml-primitive="nonnegativeinteger" data-xsd2html2xml-description="negativeInteger"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="unsignedInt" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/unsignedInt"><span>unsignedInt</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="4294967295" pattern="{0,}" data-xsd2html2xml-primitive="unsignedint" data-xsd2html2xml-description="unsignedInt"></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="integer" data-xsd2html2xml-xpath="/rootElement/positiveIntegers/integer"><span>integer with min restriction</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="2147483647" pattern="[-]?{0,}" data-xsd2html2xml-primitive="int" data-xsd2html2xml-description="integer with min restriction"></label>
 </section>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="restrictions" data-xsd2html2xml-xpath="/rootElement/restrictions">
-<legend>Simple type with enumerations:</legend>
-<section>
+<legend onclick="collapseSections(this);">Simple type with enumerations:</legend>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="enumeration" data-xsd2html2xml-xpath="/rootElement/restrictions/enumeration"><span>enumeration</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="enumeration" data-xsd2html2xml-primitive="string"><option value="Option 1">Option 1</option><option value="Option 2">Custom labeled option 2</option><option value="Option 3">Option 3</option></select></label>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="fixed-enumeration" data-xsd2html2xml-xpath="/rootElement/restrictions/fixed-enumeration"><span>fixed-enumeration</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="fixed-enumeration" data-xsd2html2xml-primitive="string"><option disabled value="Option 1">Option 1</option><option disabled value="Option 2">Option 2</option><option selected value="Option 3">Option 3</option></select></label>
 </section>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="extensions" data-xsd2html2xml-xpath="/rootElement/extensions">
-<legend>Various nested (and double nested) extensions:</legend>
-<section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="nestedString" data-xsd2html2xml-xpath="/rootElement/extensions/nestedString"><span>nestedString-type determines the enumaration values</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="nestedString-type determines the enumaration values" data-xsd2html2xml-primitive="string"><option value="nestedString Option 1">nestedString Option 1</option><option value="nestedString Option 2">nestedString Option 2</option></select></label>
-</section>
-<section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="nestedByte" data-xsd2html2xml-xpath="/rootElement/extensions/nestedByte"><span>nestedByte-type restricts the byte to min=0</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="nestedByte-type restricts the byte to min=0"></label>
-</section>
-<section>
-<label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="doubleNestedByte" data-xsd2html2xml-xpath="/rootElement/extensions/doubleNestedByte"><span>doubleNestedByte-type restricts nestedByte to max=10</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="10" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="doubleNestedByte-type restricts nestedByte to max=10"></label>
-</section>
+<legend onclick="collapseSections(this);">Various nested (and double nested) extensions:</legend>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="occurrencesSimple" data-xsd2html2xml-xpath="/rootElement/occurrencesSimple"><span>Recurring simple<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Recurring simple"></label><button type="button" class="add" data-xsd2html2xml-min="1" data-xsd2html2xml-max="3" onclick="clickAddButton(this);">Recurring simple</button>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="occurrencesComplex" data-xsd2html2xml-xpath="/rootElement/occurrencesComplex">
-<legend>Recurring complex<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend>
-<section>
+<legend onclick="collapseSections(this);">Recurring complex<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="child" data-xsd2html2xml-xpath="/rootElement/occurrencesComplex/child">
-<legend>child</legend><label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="attribute" data-xsd2html2xml-name="attribute" data-xsd2html2xml-xpath="/rootElement/occurrencesComplex/child/@attribute"><span>attribute</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="attribute"></label>
+<legend onclick="collapseSections(this);">child</legend><label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="attribute" data-xsd2html2xml-name="attribute" data-xsd2html2xml-xpath="/rootElement/occurrencesComplex/child/@attribute"><span>attribute</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="attribute"></label>
 </fieldset>
 </section>
 </fieldset>
 <button type="button" class="add" data-xsd2html2xml-min="1" data-xsd2html2xml-max="3" onclick="clickAddButton(this);">Recurring complex</button>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="complexSimpleContent" data-xsd2html2xml-xpath="/rootElement/complexSimpleContent">
-<legend>Complex element with simple content</legend><label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="content" data-xsd2html2xml-name="complexSimpleContent" data-xsd2html2xml-xpath="/rootElement/complexSimpleContent"><span>Complex element with simple content</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Complex element with simple content"></label><label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="attribute" data-xsd2html2xml-name="attribute" data-xsd2html2xml-xpath="/rootElement/complexSimpleContent/@attribute"><span>attribute</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="attribute"></label>
+<legend onclick="collapseSections(this);">Complex element with simple content</legend><label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="content" data-xsd2html2xml-name="complexSimpleContent" data-xsd2html2xml-xpath="/rootElement/complexSimpleContent"><span>Complex element with simple content</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Complex element with simple content"></label><label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="attribute" data-xsd2html2xml-name="attribute" data-xsd2html2xml-xpath="/rootElement/complexSimpleContent/@attribute"><span>attribute</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="attribute"></label>
 </fieldset>
 </section>
-<section>
+<section collapsed="true">
 <fieldset data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="choice" data-xsd2html2xml-xpath="/rootElement/choice">
-<legend>Element with xs:choice:</legend><label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');" data-xsd2html2xml-description="1"><span>1</span></label>
-<section data-xsd2html2xml-choice="true">
+<legend onclick="collapseSections(this);">Element with xs:choice:</legend><label radio=""><input type="radio" name="N1376813" required="required" onclick="clickRadioInput(this, 'N1376813');" data-xsd2html2xml-description="1"><span>1. byte</span></label>
+<section collapsed="true" data-xsd2html2xml-choice="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="byte" data-xsd2html2xml-xpath="/rootElement/choice/byte"><span>byte</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="byte"></label>
 </section>
-<label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');" data-xsd2html2xml-description="2"><span>2</span></label>
-<section data-xsd2html2xml-choice="true">
+<label radio=""><input type="radio" name="N1376813" required="required" onclick="clickRadioInput(this, 'N1376813');" data-xsd2html2xml-description="2"><span>2. short</span></label>
+<section collapsed="true" data-xsd2html2xml-choice="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="short" data-xsd2html2xml-xpath="/rootElement/choice/short"><span>short</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-32768" max="32767" pattern="[-]?{0,}" data-xsd2html2xml-primitive="short" data-xsd2html2xml-description="short"></label>
 </section>
-<label><input type="radio" name="N66093" required="required" onclick="clickRadioInput(this, 'N66093');" data-xsd2html2xml-description="3"><span>3</span></label>
-<section data-xsd2html2xml-choice="true">
+<label radio=""><input type="radio" name="N1376813" required="required" onclick="clickRadioInput(this, 'N1376813');" data-xsd2html2xml-description="3"><span>3. long</span></label>
+<section collapsed="true" data-xsd2html2xml-choice="true">
 <label data-xsd2html2xml-namespace="" data-xsd2html2xml-type="element" data-xsd2html2xml-name="long" data-xsd2html2xml-xpath="/rootElement/choice/long"><span>long</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-9223372036854775808" max="9223372036854775807" pattern="[-]?{0,}" data-xsd2html2xml-primitive="long" data-xsd2html2xml-description="long"></label>
 </section>
 </fieldset>
