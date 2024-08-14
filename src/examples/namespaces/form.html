@@ -760,7 +760,26 @@ window.addEventListener('DOMContentLoaded', startExpandSections);
 					}
 				);
 			</script>
-<meta name="generator" content="XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml">
+<meta name="generator" content="XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml" data-xsd2html2xml-source="<root xmlns:xml=&quot;http://www.w3.org/XML/1998/namespace&quot; xmlns=&quot;https://github.com/MichielCM/xsd2html2xml/default&quot; xmlns:dblimp=&quot;https://github.com/MichielCM/xsd2html2xml/doubleImport&quot; xmlns:imp=&quot;https://github.com/MichielCM/xsd2html2xml/import&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;https://github.com/MichielCM/xsd2html2xml/default namespaces-sample.xsd&quot;>
+	<test1>TRUE</test1>
+	<test2>true</test2>
+	<defaultType>true</defaultType>
+	<includedType>1</includedType>
+	<importedType1>TRUE</importedType1>
+	<importedType2>1</importedType2>
+	<importedComplexType>
+		<imp:importedComplexElement1>1</imp:importedComplexElement1>
+		<imp:importedComplexElement2>TRUE</imp:importedComplexElement2>
+		<imp:importedComplexElement3>true</imp:importedComplexElement3>
+	</importedComplexType>
+	<imp:importedElement1>true</imp:importedElement1>
+	<imp:importedElement2>1</imp:importedElement2>
+	<imp:importedComplexParentElement>
+		<imp:importedSimpleElement>TRUE</imp:importedSimpleElement>
+		<imp:doubleImportedType>TRUE</imp:doubleImportedType>
+		<dblimp:doubleImportedElement>true</dblimp:doubleImportedElement>
+	</imp:importedComplexParentElement>
+</root>">
 </head>
 <body>
 <form action="javascript:void(0);" class="xsd2html2xml" onsubmit="(function(str){window.parent.postMessage(str,'*');console.log(str)})(htmlToXML(this));">
@@ -768,50 +787,7 @@ window.addEventListener('DOMContentLoaded', startExpandSections);
 <fieldset data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="root" data-xsd2html2xml-xpath="/root">
 <legend onclick="collapseSections(this);">root</legend>
 <section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="test1" data-xsd2html2xml-xpath="/root/test1"><span>test1</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="test1" data-xsd2html2xml-primitive="string"><option value="FALSE">FALSE</option><option value="TRUE">TRUE</option></select></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="test2" data-xsd2html2xml-xpath="/root/test2"><span>test2</span><input type="checkbox" onchange="if (this.checked) { this.setAttribute(&quot;checked&quot;,&quot;checked&quot;) } else { this.removeAttribute(&quot;checked&quot;) }" pattern=".{0,}" data-xsd2html2xml-primitive="boolean" data-xsd2html2xml-description="test2"></label>
-</section>
-<section collapsed="false">
 <label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="defaultType" data-xsd2html2xml-xpath="/root/defaultType"><span>defaultType</span><input type="checkbox" onchange="if (this.checked) { this.setAttribute(&quot;checked&quot;,&quot;checked&quot;) } else { this.removeAttribute(&quot;checked&quot;) }" pattern=".{0,}" data-xsd2html2xml-primitive="boolean" data-xsd2html2xml-description="defaultType"></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="includedType" data-xsd2html2xml-xpath="/root/includedType"><span>includedType</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="1" pattern="[-]?{0,}" data-xsd2html2xml-primitive="int" data-xsd2html2xml-description="includedType"></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedType1" data-xsd2html2xml-xpath="/root/importedType1"><span>importedType1</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="importedType1" data-xsd2html2xml-primitive="string"><option value="FALSE">FALSE</option><option value="TRUE">TRUE</option></select></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedType2" data-xsd2html2xml-xpath="/root/importedType2"><span>importedType2</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="importedType2" data-xsd2html2xml-primitive="int"><option value="0">0</option><option value="1">1</option></select></label>
-</section>
-<section collapsed="false">
-<fieldset data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/default" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedComplexType" data-xsd2html2xml-xpath="/root/importedComplexType">
-<legend onclick="collapseSections(this);">importedComplexType</legend>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedComplexElement1" data-xsd2html2xml-xpath="/root/importedComplexType/importedComplexElement1"><span>importedComplexElement1</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="-128" max="127" pattern="[-]?{0,}" data-xsd2html2xml-primitive="byte" data-xsd2html2xml-description="importedComplexElement1"></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedComplexElement2" data-xsd2html2xml-xpath="/root/importedComplexType/importedComplexElement2"><span>importedComplexElement2</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&quot;selected&quot;); }); this.children[this.selectedIndex].setAttribute(&quot;selected&quot;,&quot;selected&quot;);" required="required" data-xsd2html2xml-description="importedComplexElement2" data-xsd2html2xml-primitive="string"><option value="FALSE">FALSE</option><option value="TRUE">TRUE</option></select></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedComplexElement3" data-xsd2html2xml-xpath="/root/importedComplexType/importedComplexElement3"><span>importedComplexElement3</span><input type="checkbox" onchange="if (this.checked) { this.setAttribute(&quot;checked&quot;,&quot;checked&quot;) } else { this.removeAttribute(&quot;checked&quot;) }" pattern=".{0,}" data-xsd2html2xml-primitive="boolean" data-xsd2html2xml-description="importedComplexElement3"></label>
-</section>
-</fieldset>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedElement1" data-xsd2html2xml-xpath="/root/importedElement1"><span>importedElement1</span><input type="checkbox" onchange="if (this.checked) { this.setAttribute(&quot;checked&quot;,&quot;checked&quot;) } else { this.removeAttribute(&quot;checked&quot;) }" pattern=".{0,}" data-xsd2html2xml-primitive="boolean" data-xsd2html2xml-description="importedElement1"></label>
-</section>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedElement2" data-xsd2html2xml-xpath="/root/importedElement2"><span>importedElement2</span><input type="number" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value.replace(/\s+/g, &quot; &quot;).trim()); } else { this.removeAttribute(&quot;value&quot;); };" required="required" min="0" max="1" pattern="[-]?{0,}" data-xsd2html2xml-primitive="int" data-xsd2html2xml-description="importedElement2"></label>
-</section>
-<section collapsed="false">
-<fieldset data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedComplexParentElement" data-xsd2html2xml-xpath="/root/importedComplexParentElement">
-<legend onclick="collapseSections(this);">importedComplexParentElement</legend>
-<section collapsed="false">
-<label data-xsd2html2xml-namespace="https://github.com/MichielCM/xsd2html2xml/import" data-xsd2html2xml-type="element" data-xsd2html2xml-name="importedSimpleElement" data-xsd2html2xml-xpath="/root/importedComplexParentElement/importedSimpleElement"><span>importedSimpleElement</span><input type="text" onchange="if (this.value) { this.setAttribute(&quot;value&quot;, this.value); } else { this.removeAttribute(&quot;value&quot;); };" required="required" pattern=".{0,}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="importedSimpleElement"></label>
-</section>
-</fieldset>
 </section>
 </fieldset>
 </section>

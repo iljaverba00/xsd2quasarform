@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
-<root xmlns="https://github.com/MichielCM/xsd2html2xml/default" xmlns:dblimp="https://github.com/MichielCM/xsd2html2xml/doubleImport" xmlns:imp="https://github.com/MichielCM/xsd2html2xml/import" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/MichielCM/xsd2html2xml/default namespaces-sample.xsd">
+<root xmlns="https://github.com/MichielCM/xsd2html2xml/default"
+	  xmlns:dblimp="https://github.com/MichielCM/xsd2html2xml/doubleImport"
+	  xmlns:imp="https://github.com/MichielCM/xsd2html2xml/import"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="https://github.com/MichielCM/xsd2html2xml/default namespaces-sample.xsd">
 	<test1>TRUE</test1>
 	<test2>true</test2>
 	<defaultType>true</defaultType>
