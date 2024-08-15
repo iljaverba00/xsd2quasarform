@@ -10,32 +10,41 @@ import javax.xml.transform.stream.StreamSource;
 
 public class Converter {
 
-    public void generateForm(String xsdFilePath, String htmlFilePath) throws Exception {
+    public void generateForm(String xsdFilePath, String htmlFilePath, Integer engineVersion) {
 
-        // Путь к XSL файлу
-        String xslFilePath = "src/resources/XslCombined.xsl";
-        String examplesFolder = "src/examples/";
+        try {
+            // Путь к XSL файлу
+            String xslFilePath = "src/resources/engine"+engineVersion+"/XslCombined.xsl";
+            String examplesFolder = "src/examples/";
 
-        File xslFile = new File(xslFilePath);
-        File xsdFile = new File(examplesFolder + xsdFilePath);
-        File htmlFile = new File(examplesFolder + htmlFilePath);
+            File xslFile = new File(xslFilePath);
+            File xsdFile = new File(examplesFolder + xsdFilePath);
+            File htmlFile = new File(examplesFolder + htmlFilePath);
 
-        // Создание источников для XSD и XSLT
-        StreamSource xsdSource = new StreamSource(xsdFile);
-        StreamSource xsltSource = new StreamSource(xslFile);
+            // Создание источников для XSD и XSLT
+            StreamSource xsdSource = new StreamSource(xsdFile);
+            StreamSource xsltSource = new StreamSource(xslFile);
 
-        // Создание результата для выходного HTML файла
-        StreamResult htmlResult = new StreamResult(Files.newOutputStream(htmlFile.toPath()));
+            // Создание результата для выходного HTML файла
+            StreamResult htmlResult = new StreamResult(Files.newOutputStream(htmlFile.toPath()));
 
-        // Создание фабрики трансформеров
-        TransformerFactory factory = TransformerFactory.newInstance();
+            // Создание фабрики трансформеров c xslt процессором xalan
+            TransformerFactory factory = TransformerFactory.newInstance(
+                    "org.apache.xalan.processor.TransformerFactoryImpl",
+                    this.getClass().getClassLoader()
+            );
 
-        // Создание трансформера для XSLT
-        Transformer transformer = factory.newTransformer(xsltSource);
 
-        // Преобразование XSD в HTML
-        transformer.transform(xsdSource, htmlResult);
+            // Создание трансформера для XSLT
+            Transformer transformer = factory.newTransformer(xsltSource);
 
-        System.out.println("Преобразование завершено. HTML форма создана: " + htmlFile.length());
+            // Преобразование XSD в HTML
+            transformer.transform(xsdSource, htmlResult);
+
+            System.out.println("Преобразование завершено. HTML форма создана: " + htmlFile.length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

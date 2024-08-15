@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="xalan-2.7.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/xalan-2.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/serializer-2.7.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

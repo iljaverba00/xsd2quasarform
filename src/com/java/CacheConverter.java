@@ -8,6 +8,7 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.nio.file.Files;
 
+@Deprecated
 public class CacheConverter {
 
     public void generateForm(String xsdFilePath, String htmlFilePath) throws Exception {
