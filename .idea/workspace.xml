@@ -5,29 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.5.2">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/namespaces/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/namespaces/test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/namespaces/test.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/java/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/java/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/java/XsdCombiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/java/XsdCombiner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/example-new-design/filled-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/example-new-design/filled-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/full/form-filled.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/full/form-filled.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/interact_map_plan_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/root.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/test.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/test.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/double-import-doc.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form-filled.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/import-doc1.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/import-doc2.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/include-doc.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/namespaces-sample.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/namespaces-sample.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/GlobalTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/NameSpaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/NameSpaces.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/NameSpaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +84,7 @@
       <recent name="tests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.NameSpaces">
+  <component name="RunManager" selected="JUnit.Test">
     <configuration name="MapPlan.test_filledForm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
@@ -123,37 +101,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NameSpaces" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xsd2quasarform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.mapplanv01.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
-      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.NameSpaces" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NameSpaces.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xsd2quasarform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.mapplanv01.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
-      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.NameSpaces" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
@@ -164,6 +111,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="examples.namespaces" />
       <option name="MAIN_CLASS_NAME" value="examples.namespaces.Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.mapplanv01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
+      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.Test" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,12 +147,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.mapplanv01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
+      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.Test" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.NameSpaces" />
+        <item itemvalue="JUnit.Test" />
         <item itemvalue="JUnit.Test" />
         <item itemvalue="JUnit.Test.test" />
-        <item itemvalue="JUnit.NameSpaces.test (1)" />
+        <item itemvalue="JUnit.Test.test" />
         <item itemvalue="JUnit.MapPlan.test_filledForm" />
       </list>
     </recent_temporary>
@@ -215,7 +193,7 @@
       <option name="presentableId" value="Default" />
       <updated>1723628885529</updated>
       <workItem from="1723628886648" duration="11102000" />
-      <workItem from="1723682234347" duration="928000" />
+      <workItem from="1723682234347" duration="1354000" />
     </task>
     <task id="LOCAL-00001" summary="4.3 move">
       <option name="closed" value="true" />
@@ -265,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723632238007</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="4.5.2">
+      <option name="closed" value="true" />
+      <created>1723683564950</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1723683564950</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
