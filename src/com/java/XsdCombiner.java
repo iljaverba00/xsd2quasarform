@@ -22,7 +22,7 @@ public class XsdCombiner {
 
     public static void main(String[] args) {
 
-        String mainXsdPath = "src/examples/interact_map_plan_v01_R04/interact_map_plan/interact_map_plan_v01.xsd";
+        String mainXsdPath = "src/examples/interact_map_plan_v01_R04/interact_map_plan/root.xsd";
         String outputFilePath = "src/examples/interact_map_plan_v01_R04/combined.xsd";
 
         try {

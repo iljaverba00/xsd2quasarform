@@ -4,28 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.5.1 namespaces">
+    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.5.2">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/namespaces/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/namespaces/test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/namespaces/test.xsd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/P_CommonSimpleTypeAll_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/P_CommonSimpleTypeAll_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAllDocuments_v05.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAllDocuments_v05.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAppliedFiles_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dAppliedFiles_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dBoundaryType_v02.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dBoundaryType_v02.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dGeopointOpred_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dGeopointOpred_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dRegionsRF_v02.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dRegionsRF_v02.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dTypeTopology_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/dTypeTopology_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tAddressCity_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tAddressCity_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tArea_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tArea_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tDocumentRequisitesAndAttachment_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tDocumentRequisitesAndAttachment_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tEntitySpatial_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tEntitySpatial_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tFIO_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon/tFIO_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/interact_map_plan_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/interact_map_plan_v01.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/ЋЇЁб ­ЁҐ_бвагЄвгал_interact_map_plan_v01.doc" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan_v01.doc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/朌丰鄏憗言 P_CommonSimpleTypeAll.doc" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/P_CommonSimpleTypeAll.doc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/double-import-doc.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/import-doc1.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/import-doc2.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/include-doc.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/namespaces-sample.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/java/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/java/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/java/XsdCombiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/java/XsdCombiner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/example-new-design/filled-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/example-new-design/filled-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/full/form-filled.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/full/form-filled.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/interact_map_plan_v01.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/root.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/double-import-doc.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form-filled.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/import-doc1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/import-doc2.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/include-doc.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/namespaces-sample.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/namespaces-sample.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/GlobalTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/NameSpaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/NameSpaces.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +44,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "iljaverba00"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;iljaverba00&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/iljaverba00/xsd2quasarform",
-    "accountId": "0c423181-8bbf-4e34-b09c-c4dfeb60a8d1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/iljaverba00/xsd2quasarform&quot;,
+    &quot;accountId&quot;: &quot;0c423181-8bbf-4e34-b09c-c4dfeb60a8d1&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2ke0lWKR1Pqn7V4L3gxBvPQ1tJ0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -67,14 +69,20 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.MapPlan.test.executor": "Run",
+    "JUnit.MapPlan.test_filledForm.executor": "Run",
+    "JUnit.NameSpaces.executor": "Run",
+    "JUnit.NameSpaces.test (1).executor": "Run",
     "JUnit.NameSpaces.test.executor": "Run",
+    "JUnit.Test.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/verba/Library/Application Support/JetBrains/IntelliJIdea2024.1/scratches",
+    "last_opened_file_path": "/Users/verba/Documents/projects/xsd2quasarform/src/examples/mapplanv01",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,24 +96,89 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$APPLICATION_CONFIG_DIR$/scratches" />
+      <recent name="$PROJECT_DIR$/src/examples/mapplanv01" />
       <recent name="$PROJECT_DIR$/src/resources" />
+      <recent name="$APPLICATION_CONFIG_DIR$/scratches" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="examples.mapplanv01" />
+      <recent name="examples.namespaces" />
       <recent name="tests" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="NameSpaces.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.NameSpaces">
+    <configuration name="MapPlan.test_filledForm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.*" />
+          <option name="PATTERN" value="examples.namespaces.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.NameSpaces" />
+      <option name="MAIN_CLASS_NAME" value="tests.MapPlan" />
+      <option name="METHOD_NAME" value="test_filledForm" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NameSpaces" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.mapplanv01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
+      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.NameSpaces" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NameSpaces.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.mapplanv01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
+      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.NameSpaces" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.namespaces.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="examples.namespaces" />
+      <option name="MAIN_CLASS_NAME" value="examples.namespaces.Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.namespaces.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="examples.namespaces" />
+      <option name="MAIN_CLASS_NAME" value="examples.namespaces.Test" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -114,7 +187,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.NameSpaces.test" />
+        <item itemvalue="JUnit.NameSpaces" />
+        <item itemvalue="JUnit.Test" />
+        <item itemvalue="JUnit.Test.test" />
+        <item itemvalue="JUnit.NameSpaces.test (1)" />
+        <item itemvalue="JUnit.MapPlan.test_filledForm" />
       </list>
     </recent_temporary>
   </component>
@@ -137,7 +214,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723628885529</updated>
-      <workItem from="1723628886648" duration="2904000" />
+      <workItem from="1723628886648" duration="11102000" />
+      <workItem from="1723682234347" duration="928000" />
     </task>
     <task id="LOCAL-00001" summary="4.3 move">
       <option name="closed" value="true" />
@@ -179,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723630549639</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="4.5.2">
+      <option name="closed" value="true" />
+      <created>1723632238007</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723632238007</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +290,7 @@
     <MESSAGE value="4.4 no collapsed" />
     <MESSAGE value="4.5 namespaces" />
     <MESSAGE value="4.5.1 namespaces" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.5.1 namespaces" />
+    <MESSAGE value="4.5.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.5.2" />
   </component>
 </project>

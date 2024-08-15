@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rootElement
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="interact_map_plan_v01.xsd"
+        xsi:noNamespaceSchemaLocation="root.xsd"
 >
     <title>
         <clients>

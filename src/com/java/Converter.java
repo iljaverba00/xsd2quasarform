@@ -10,7 +10,7 @@ import javax.xml.transform.stream.StreamSource;
 
 public class Converter {
 
-    public void run(String xsdFilePath, String htmlFilePath)  {
+    public void generateForm(String xsdFilePath, String htmlFilePath) throws Exception {
 
         // Путь к XSL файлу
         String xslFilePath = "src/resources/XslCombined.xsl";
@@ -20,31 +20,22 @@ public class Converter {
         File xsdFile = new File(examplesFolder + xsdFilePath);
         File htmlFile = new File(examplesFolder + htmlFilePath);
 
-        generateForm(xsdFile, xslFile, htmlFile);
-    }
+        // Создание источников для XSD и XSLT
+        StreamSource xsdSource = new StreamSource(xsdFile);
+        StreamSource xsltSource = new StreamSource(xslFile);
 
+        // Создание результата для выходного HTML файла
+        StreamResult htmlResult = new StreamResult(Files.newOutputStream(htmlFile.toPath()));
 
-    private void generateForm(File xsdSchemaPath, File xslSchemaPath, File htmlResultPath) {
-        try {
-            // Создание источников для XSD и XSLT
-            StreamSource xsdSource = new StreamSource(xsdSchemaPath);
-            StreamSource xsltSource = new StreamSource(xslSchemaPath);
+        // Создание фабрики трансформеров
+        TransformerFactory factory = TransformerFactory.newInstance();
 
-            // Создание результата для выходного HTML файла
-            StreamResult htmlResult = new StreamResult(Files.newOutputStream(htmlResultPath.toPath()));
+        // Создание трансформера для XSLT
+        Transformer transformer = factory.newTransformer(xsltSource);
 
-            // Создание фабрики трансформеров
-            TransformerFactory factory = TransformerFactory.newInstance();
+        // Преобразование XSD в HTML
+        transformer.transform(xsdSource, htmlResult);
 
-            // Создание трансформера для XSLT
-            Transformer transformer = factory.newTransformer(xsltSource);
-
-            // Преобразование XSD в HTML
-            transformer.transform(xsdSource, htmlResult);
-
-            System.out.println("Преобразование завершено. HTML форма создана: " + htmlResultPath.getAbsolutePath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("Преобразование завершено. HTML форма создана: " + htmlFile.getAbsolutePath());
     }
 }

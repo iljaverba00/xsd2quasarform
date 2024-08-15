@@ -1,0 +1,5 @@
+<example:myThing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="test.xsd"
+                 xmlns:example="http://my.example.com">
+    <example:integerField>1974</example:integerField>
+</example:myThing>

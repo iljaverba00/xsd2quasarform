@@ -1,20 +1,7 @@
 <?xml version="1.0"?>
 <map_plan guid="12312312-1233-1223-1234-123412341123" version="01"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:xs="http://www.w3.org/2001/XMLSchema"
-          xmlns:SimAll1="urn://x-artefacts-rosreestr-ru/commons/simple-types-all/1.0"
-          xmlns:Are1="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1"
-          xmlns:EnSpa1="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/1.0.1"
-          xmlns:DocAtt1="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1"
-          xmlns:AdrCi1="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-city/1.0.1"
-          xmlns:Fio1="urn://x-artefacts-rosreestr-ru/commons/complex-types/Fio/1.0.1"
-          xmlns:dBnd2="urn://x-artefacts-rosreestr-ru/commons/directories/boundary-type/2.0.1"
-          xmlns:dRF2="urn://x-artefacts-rosreestr-ru/commons/directories/regions/2.0.1"
-          xmlns:dAU="urn://x-artefacts-rosreestr-ru/commons/directories/allowed-use/2.0.1"
-          xmlns:iMAP1="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/1.0.1"
-
-
-          xsi:schemaLocation="interact_map_plan/interact_map_plan_v01.xsd"
+          xsi:schemaLocation="interact_map_plan/root.xsd"
 >
     <title>
         <clients>
