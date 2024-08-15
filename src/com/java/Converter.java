@@ -36,6 +36,6 @@ public class Converter {
         // Преобразование XSD в HTML
         transformer.transform(xsdSource, htmlResult);
 
-        System.out.println("Преобразование завершено. HTML форма создана: " + htmlFile.getAbsolutePath());
+        System.out.println("Преобразование завершено. HTML форма создана: " + htmlFile.length());
     }
 }
