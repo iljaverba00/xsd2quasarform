@@ -74,7 +74,7 @@
 
 			<!-- wrap simple element in section element -->
 			<xsl:element name="section">
-				<xsl:attribute name="collapsed">false</xsl:attribute>
+				<xsl:attribute name="collapsed">true</xsl:attribute>
 				<!-- add an attribute to indicate a choice element -->
 				<xsl:if test="$choice = 'true'">
 					<xsl:attribute name="data-xsd2html2xml-choice">true</xsl:attribute>
