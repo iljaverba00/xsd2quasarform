@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.5.2">
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/NameSpaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/Test.java" afterDir="false" />
+    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="4.5.6">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/garbage/mapplan-bad.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/garbage/mapplan-bad.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -60,7 +62,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/verba/Documents/projects/xsd2quasarform/src/examples/mapplanv01",
+    "last_opened_file_path": "C:/gitlab/xsd2quasarform/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +76,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\gitlab\xsd2quasarform\src" />
       <recent name="$PROJECT_DIR$/src/examples/mapplanv01" />
       <recent name="$PROJECT_DIR$/src/resources" />
       <recent name="$APPLICATION_CONFIG_DIR$/scratches" />
@@ -176,8 +179,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -194,6 +197,7 @@
       <updated>1723628885529</updated>
       <workItem from="1723628886648" duration="11102000" />
       <workItem from="1723682234347" duration="1354000" />
+      <workItem from="1723688350400" duration="1142000" />
     </task>
     <task id="LOCAL-00001" summary="4.3 move">
       <option name="closed" value="true" />
@@ -251,7 +255,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723683564950</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="4.5.5">
+      <option name="closed" value="true" />
+      <created>1723688398669</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1723688398669</updated>
+    </task>
+    <task id="LOCAL-00009" summary="4.5.6">
+      <option name="closed" value="true" />
+      <created>1723689178599</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1723689178599</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,6 +297,8 @@
     <MESSAGE value="4.5 namespaces" />
     <MESSAGE value="4.5.1 namespaces" />
     <MESSAGE value="4.5.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.5.2" />
+    <MESSAGE value="4.5.5" />
+    <MESSAGE value="4.5.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.5.6" />
   </component>
 </project>
