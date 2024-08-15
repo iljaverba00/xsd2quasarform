@@ -21,14 +21,72 @@
 					margin-right: 5px;
 					min-width: 200px;
 				}
+				button {
+					transition: background .28s ease-in-out;
+					cursor: pointer;
+				}
+				button[type='submit'] {
+					position: absolute !important;
+					right: 4px;
+				}
 				button[type='submit']:before {
 					content: "OK";
+					color: white;
+				}
+				button.add,
+				button[type="submit"] {
+					display: inline-flex;
+    				flex-direction: row;
+    				align-items: center;
+    				position: relative;
+    				outline: 0;
+    				border: 0;
+    				vertical-align: middle;
+    				font-size: 14px;
+    				line-height: 1.715em;
+    				text-decoration: none;
+    				font-weight: 500;
+    				text-transform: uppercase;
+    				text-align: center;
+    				width: auto;
+    				height: auto;
+    				padding: 4px 16px;
+    				min-height: 2.572em;
+    				background: #1976d2;
+    				color: white;
+    				font-weight: 600;
+				}
+				button:hover {
+					background: #0389e9;
 				}
 				button.add:before {
-					content: "+ ";
+					content: "\002795\FE0E  ";
+					margin-right: 4px;
+				}
+				button.remove {
+					border-radius: 50%;
+					border-style: none;
+					margin: 5px;
+					height: 20px;
+					width: 20px;
+					padding: 5px;
+					font-size: small;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: #1976d2;
+    				color: white;
+				}
+				*:has( > button.remove) {
+					display: flex;
+    				align-items: center;
+				}
+				legend:has( > button.remove):before {
+					padding-bottom: 3px;
 				}
 				button.remove:before {
-					content: "-";
+    				content: "\01F5D9\FE0E";
+					padding-bottom: 3px;
 				}
 				input[data-xsd2html2xml-duration='days'] + span:after {
 					content: " (days)";
@@ -51,6 +109,7 @@
     				font-family: Arial, sans-serif;
     				font-size: 1.2rem;
     				transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .4s cubic-bezier(.25,.8,.5,1);
+					user-select: none;
 				}
 
 				legend:hover {
@@ -58,23 +117,49 @@
     				background: #dddddd;
 				}
 
+				label[radio] + section > fieldset > legend:hover,
+				legend:has(+ label[radio]):hover {
+    				border-radius: 0 !important;
+    				background: 0 !important;			
+				}
+
+				label[radio] + section > fieldset > legend:before,
+				legend:has(+ label[radio]):before {
+    				content: "" !important;				
+				}				
+
 				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) > legend:before {
-					content: "\002795\FE0E";
-    				color: blue;
+					rotate: 210deg;
+				}
+				
+				label[radio]:has( > input[checked="checked"]) + section {
+					display: block !important;
+				}
+
+				label[radio] + section > fieldset > legend {
+					display: none !important;
+				}
+
+				label[radio] + section > fieldset > section {
+					display: block !important;
 				}
 
 				legend:before {
-					content: "\002796\FE0E";
-    				color: red;
+					content: "\01F53A\FE0E";
+					color: black;
 					margin-right: 4px;
+					rotate: 180deg;
+					display: inline-block;
+					transition: rotate .28s ease-in-out;
+					font-size: small;
 				}
 
 				input {
-    				padding: 5px;
     				border-style: solid;
     				border-color: grey !important;
     				border-width: 1.5px;
-    				border-radius: 5px;
+					border-radius: 4px;
+    				padding: 6px;
 				}
 
 				label {
@@ -110,7 +195,7 @@
 				}
 
 				body > form > section {
-					height: calc(100vh - 50px);
+					height: calc(100vh - 70px);
     				overflow: auto;
 				}
 

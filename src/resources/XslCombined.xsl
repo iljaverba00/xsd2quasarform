@@ -306,6 +306,7 @@
 
 				<xsl:element name="button">
 					<xsl:attribute name="type">submit</xsl:attribute>
+					<xsl:attribute name="onclick">onOk()</xsl:attribute>
 				</xsl:element>
 			</xsl:element>
 		</xsl:element>
