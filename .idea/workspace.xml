@@ -4,86 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="file test">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/xalan_2_7_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/serializer-2.7.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/xalan-2.7.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/P_CommonSimpleTypeAll_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dAllDocuments_v05.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dAllowedUse_v04.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dBoundaryType_v03.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dCategories_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dCountries_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dGeopointOpred_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dIndividuals_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dMethod_v02.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dParcels_v02.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dPersonType_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dPurposePublicEasement_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dRegionsRF_v03.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dSubjectLegalRelations_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dTypeTopology_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dWaterObjectType_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/dZone_v04.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/main.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/tAddressCity_v02.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/tArea_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/tEntitySpatial_v02.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/tHolder_v02.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema/tResolutionRequisitesLaw_v01.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/engine0/config.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/BoundariesToRosreestr.java" afterDir="false" />
+    <list default="true" id="dcc728fa-d450-46e4-8b20-e268e5ef3629" name="Changes" comment="xalan">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/xalan.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/doc0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/P_CommonSimpleTypeAll_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/dAllDocuments_v05.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/dAppliedFiles_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/dBoundaryType_v02.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/dGeopointOpred_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/dRegionsRF_v02.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/dTypeTopology_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/doc0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/tAddressCity_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/tArea_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/tDocumentRequisitesAndAttachment_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/tEntitySpatial_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan/tFIO_v01.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/MapPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/xalan_2_7_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/java/CacheConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/java/CacheConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/serializer-2.7.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/xalan-2.7.2.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/java/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/java/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/namespaces/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/XslCombined.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/XslCombined.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/config.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/config.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/css/default-style.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/css/default-style.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/complex-elements.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/complex-elements.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/default-types.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/default-types.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/enumerations.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/enumerations.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/extensions.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/extensions.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/multiline-strings.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/multiline-strings.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/root-element.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/root-element.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/handlers/simple-elements.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/handlers/simple-elements.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/init.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/init.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/event-handlers.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/event-handlers.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/html-populators.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/html-populators.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/initial-calls.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/initial-calls.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/polyfills.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/polyfills.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/ui-handlers.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/ui-handlers.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/value-fixers.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/value-fixers.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/xml-generators.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/js/xml-generators.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/all.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/all.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/attributeGroup@ref.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/attributeGroup@ref.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/attributes.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/attributes.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/choice.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/choice.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/element-attribute@ref.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/element-attribute@ref.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/element-complexType.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/element-complexType.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/element-simpleContent.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/element-simpleContent.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/element-simpleType.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/element-simpleType.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/element@type.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/element@type.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/group@ref.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/group@ref.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/sequence.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/sequence.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/matchers/unsupported.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/matchers/unsupported.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/appinfo.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/appinfo.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/attr-value.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/attr-value.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/documentation.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/documentation.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/gui-attributes.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/gui-attributes.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/gui.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/gui.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/log.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/log.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/namespaces.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/namespaces.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/nodeset-exsl.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/nodeset-exsl.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/nodeset-msxsl.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/nodeset-msxsl.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/nodeset-xslt2plus.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/nodeset-xslt2plus.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/serialize.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/serialize.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/strings.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/strings.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/utils/types.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/engine1/utils/types.xsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/mapplanv01/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/mapplanv01/test.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xsd2quasarform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/xsd2quasarform.iml" afterDir="false" />
     </list>
     <list id="b95d3931-1a41-4216-95ed-b27f3e8146da" name="ignore" comment="">
@@ -103,6 +46,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="i.verba &lt;iv@vv.ee&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
@@ -134,7 +82,11 @@
     "JUnit.BoundariesToRosreestr.executor": "Run",
     "JUnit.BoundariesToRosreestr.test.executor": "Run",
     "JUnit.BoundariesToRosreestr.test0.executor": "Run",
+    "JUnit.MapPlan.doc0.executor": "Run",
+    "JUnit.MapPlan.executor": "Run",
     "JUnit.MapPlan.test.executor": "Run",
+    "JUnit.MapPlan.test0.executor": "Run",
+    "JUnit.MapPlan.test1.executor": "Run",
     "JUnit.MapPlan.test_filledForm.executor": "Run",
     "JUnit.NameSpaces.executor": "Run",
     "JUnit.NameSpaces.test (1).executor": "Run",
@@ -149,7 +101,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/verba/Documents/projects/xsd2quasarform/lib",
+    "last_opened_file_path": "/Users/verba/Documents/projects/xsd2quasarform/src/examples/mapplanv01/interact_map_plan",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -164,24 +116,24 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/examples/mapplanv01/interact_map_plan" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/src/examples/mapplanv01/SchemaCommon" />
       <recent name="C:\gitlab\xsd2quasarform\src" />
       <recent name="$PROJECT_DIR$/src/examples/mapplanv01" />
-      <recent name="$PROJECT_DIR$/src/resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/resources/engine_v1_0_0" />
       <recent name="$PROJECT_DIR$/src/examples/boundaries-to-rosreestr/schema" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tests" />
       <recent name="com.java" />
       <recent name="examples.mapplanv01" />
       <recent name="examples.namespaces" />
-      <recent name="tests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BoundariesToRosreestr">
+  <component name="RunManager" selected="JUnit.MapPlan.test0">
     <configuration name="BoundariesToRosreestr" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
@@ -197,7 +149,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoundariesToRosreestr.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MapPlan" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
         <pattern>
@@ -206,14 +158,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.BoundariesToRosreestr" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="tests.MapPlan" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MapPlan.doc0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xsd2quasarform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.MapPlan" />
+      <option name="METHOD_NAME" value="doc0" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoundariesToRosreestr.test0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MapPlan.test0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
         <pattern>
@@ -222,24 +189,25 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.BoundariesToRosreestr" />
+      <option name="MAIN_CLASS_NAME" value="tests.MapPlan" />
       <option name="METHOD_NAME" value="test0" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MapPlan.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xsd2quasarform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="examples.namespaces.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="examples.namespaces" />
-      <option name="MAIN_CLASS_NAME" value="examples.namespaces.Test" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.MapPlan" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -275,36 +243,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test.test_cache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xsd2quasarform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.mapplanv01.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="examples.mapplanv01" />
-      <option name="MAIN_CLASS_NAME" value="examples.mapplanv01.Test" />
-      <option name="METHOD_NAME" value="test_cache" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.BoundariesToRosreestr" />
-      <item itemvalue="JUnit.BoundariesToRosreestr.test0" />
-      <item itemvalue="JUnit.BoundariesToRosreestr.test" />
-      <item itemvalue="JUnit.Test" />
-      <item itemvalue="JUnit.Test.test_cache" />
+      <item itemvalue="JUnit.MapPlan" />
+      <item itemvalue="JUnit.MapPlan.doc0" />
+      <item itemvalue="JUnit.MapPlan.test0" />
+      <item itemvalue="JUnit.MapPlan.test1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MapPlan.test0" />
+        <item itemvalue="JUnit.MapPlan.doc0" />
+        <item itemvalue="JUnit.MapPlan" />
+        <item itemvalue="JUnit.MapPlan.test1" />
         <item itemvalue="JUnit.BoundariesToRosreestr" />
-        <item itemvalue="JUnit.BoundariesToRosreestr.test0" />
-        <item itemvalue="JUnit.BoundariesToRosreestr.test" />
-        <item itemvalue="JUnit.Test" />
-        <item itemvalue="JUnit.Test.test_cache" />
       </list>
     </recent_temporary>
   </component>
@@ -335,7 +287,7 @@
       <workItem from="1723972618220" duration="7000" />
       <workItem from="1724125294652" duration="3618000" />
       <workItem from="1724199142705" duration="1187000" />
-      <workItem from="1724200522502" duration="2053000" />
+      <workItem from="1724200522502" duration="4143000" />
     </task>
     <task id="LOCAL-00001" summary="4.3 move">
       <option name="closed" value="true" />
@@ -417,7 +369,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723692668630</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="xalan">
+      <option name="closed" value="true" />
+      <created>1724203683521</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724203683521</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +406,9 @@
     <MESSAGE value="4.5.5" />
     <MESSAGE value="4.5.6" />
     <MESSAGE value="ghf" />
-    <option name="LAST_COMMIT_MESSAGE" value="ghf" />
+    <MESSAGE value="5.0" />
+    <MESSAGE value="xalan" />
+    <option name="LAST_COMMIT_MESSAGE" value="xalan" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

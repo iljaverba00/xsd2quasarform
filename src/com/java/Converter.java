@@ -30,8 +30,8 @@ public class Converter {
 
             // Создание фабрики трансформеров c xslt процессором xalan
             TransformerFactory factory = TransformerFactory.newInstance(
-                    "org.apache.xalan.processor.TransformerFactoryImpl",
-                    this.getClass().getClassLoader()
+//                    "org.apache.xalan.processor.TransformerFactoryImpl",
+//                    this.getClass().getClassLoader()
             );
 
 

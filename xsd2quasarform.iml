@@ -17,6 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="xalan-2.7.2" level="project" />
+    <orderEntry type="library" name="xalan" level="project" />
   </component>
 </module>
