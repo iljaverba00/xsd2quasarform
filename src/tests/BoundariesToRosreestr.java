@@ -22,4 +22,22 @@ public class BoundariesToRosreestr {
         new Converter().generateForm(xsd, html,0);
 
     }
+
+    @Test
+    public void doc1(){
+        String xsd = "/boundaries-to-rosreestr/schema/doc0.xml";
+        String html = "/boundaries-to-rosreestr/result/form-doc1.html";
+
+        new Converter().generateForm(xsd, html,1);
+
+    }
+
+    @Test
+    public void doc0(){
+        String xsd = "/boundaries-to-rosreestr/schema/doc0.xml";
+        String html = "/boundaries-to-rosreestr/result/form-doc0.html";
+
+        new Converter().generateForm(xsd, html,0);
+
+    }
 }

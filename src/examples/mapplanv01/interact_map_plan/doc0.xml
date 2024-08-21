@@ -17,6 +17,7 @@
                     <iMAP1:individual>
                         <Fio1:surname>eee</Fio1:surname>
                         <Fio1:name>rrr</Fio1:name>
+                        <Fio1:patronymic>zzz</Fio1:patronymic>
                     </iMAP1:individual>
                 </iMAP1:information_client>
             </iMAP1:client>

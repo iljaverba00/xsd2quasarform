@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<interact_entry_boundaries xmlns="urn://x-artefacts-rosreestr-ru/interact/interact-entry-boundaries/2.0.1"
+<iBND2:interact_entry_boundaries xmlns="urn://x-artefacts-rosreestr-ru/interact/interact-entry-boundaries/2.0.1"
                            xmlns:iBND2="urn://x-artefacts-rosreestr-ru/interact/interact-entry-boundaries/2.0.1"
                            xmlns:Are1="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1"
                            xmlns:EnSpa2="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1"
                            xmlns:RLaw1="urn://x-artefacts-rosreestr-ru/commons/complex-types/resolution-requisites-law/1.0.1"
                            xmlns:AdrCi2="urn://x-artefacts-rosreestr-ru/commons/complex-types/address-city/2.0.1"
                            xmlns:h2="urn://x-artefacts-rosreestr-ru/commons/complex-types/holder/2.0.1"
-                           guid="62A3B2C2-B1FE-4E10-87FF-8D9F0D26DA50" version="02">
+                           guid="62A3B2C2-B1FE-4E10-87FF-8D9F0D26DA50" version="02"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xsi:schemaLocation="main.xsd"
+>
     <iBND2:information_registry_boundaries>
         <iBND2:information_registry_boundary>
             <iBND2:type_boundary>6</iBND2:type_boundary>
@@ -415,4 +418,4 @@
             </iBND2:information_boundary>
         </iBND2:information_registry_boundary>
     </iBND2:information_registry_boundaries>
-</interact_entry_boundaries>
+</iBND2:interact_entry_boundaries>

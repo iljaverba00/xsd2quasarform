@@ -25,6 +25,15 @@ public class MapPlan {
 
 
     @Test
+    public void doc1(){
+        String xsd = "/mapplanv01/interact_map_plan/doc0.xml";
+        String html = "/mapplanv01/form-doc1.html";
+
+        new Converter().generateForm(xsd, html,0);
+
+    }
+
+    @Test
     public void doc0(){
         String xsd = "/mapplanv01/interact_map_plan/doc0.xml";
         String html = "/mapplanv01/form-doc0.html";
