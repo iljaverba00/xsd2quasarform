@@ -42,7 +42,7 @@
     				outline: 0;
     				border: 0;
     				vertical-align: middle;
-    				font-size: 14px;
+    				font-size: 11px;
     				line-height: 1.715em;
     				text-decoration: none;
     				font-weight: 500;
@@ -95,9 +95,11 @@
 					content: " (minutes)";
 				}
 				fieldset {
-    				border-style: none none none solid;
-    				border-width: 2px;
+    				//border-style: none none none solid;
+    				//border-width: 2px;
+					border: 0;
 					display: grid;
+					padding-inline-start: 1.2em;
 				}
 
 				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) {
@@ -107,7 +109,7 @@
 				legend {
     				cursor: pointer;
     				font-family: Arial, sans-serif;
-    				font-size: 1.2rem;
+    				//font-size: 1.2rem;
     				transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .4s cubic-bezier(.25,.8,.5,1);
 					user-select: none;
 				}
@@ -173,12 +175,13 @@
 				}
 
 				input[type="radio"] + span {
-					font-size: 1.5em;
+					//font-size: 1.5em;
 				}
 
 				span {
 					font-size: 16px;
     				color: #0009;
+					font-family: sans-serif;
 				}
 
 				textarea {

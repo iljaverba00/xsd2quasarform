@@ -147,6 +147,7 @@
 							alert(fileReader.error);
 							resetFilePicker(input);
 						} else {
+							// set value for input[type="file"]
 							input.setAttribute("value",
 								(type.endsWith(":base64binary"))
 								? fileReader.result.substring(fileReader.result.indexOf(",") + 1)

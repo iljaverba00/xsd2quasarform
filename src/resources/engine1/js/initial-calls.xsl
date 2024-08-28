@@ -12,6 +12,32 @@
 				document.addEventListener("DOMContentLoaded",
 					function() {
 						/* INITIAL CALLS */
+
+						function clickFilledRadio() {
+							// find all filled fields and check all radio contains that fields
+							const clicked = new Set();
+							document.querySelectorAll("[data-xsd2html2xml-filled='true']").forEach(function (o) {
+								let currentChoice = o.closest("[data-xsd2html2xml-choice]");
+								while (currentChoice) {
+									let node = currentChoice.previousElementSibling;
+									while (node) {
+										if (!node.hasAttribute("data-xsd2html2xml-choice")) {
+											// TODO chernik: node это label[radio]
+											const radioInput = node.querySelector("input[type='radio']");
+											if (!clicked.has(radioInput)) { // TODO chernik: чтобы не кликать по много раз
+												radioInput.click();
+												clicked.add(radioInput);
+											}
+											break;
+										} else {
+											node = node.previousElementSibling;
+										};
+									};
+									// TODO chernik: переходим к следующему блоку радио
+									currentChoice = currentChoice.parentElement.closest("[data-xsd2html2xml-choice]");
+								}
+							});
+						}
 						
 						addHiddenFields();
 						xmlToHTML(document);
@@ -19,20 +45,7 @@
 						setDynamicValues();
 						setValues();
 						ensureMinimum();
-						
-						document.querySelectorAll("[data-xsd2html2xml-filled='true']").forEach(function(o) {
-							if (o.closest("[data-xsd2html2xml-choice]")) {
-								var node = o.closest("[data-xsd2html2xml-choice]").previousElementSibling;
-								while (node) {
-									if (!node.hasAttribute("data-xsd2html2xml-choice")) {
-										node.querySelector("input[type='radio']").click();
-										break;										
-									} else {
-										node = node.previousElementSibling;
-									};
-								};
-							};
-						});
+						clickFilledRadio();
 					}
 				);
 			</xsl:text>

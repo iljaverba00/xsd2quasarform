@@ -28,24 +28,37 @@
 				};
 				
 				var ensureMinimum = function() {
+					// function checks if some field in fieldset (recursive) is filled
+					function isFilled(fieldset) {
+						if (!fieldset) {
+							return null;
+						}
+						//check for input elements existing to handle empty elements
+						if (!fieldset.querySelector("input, textarea, select")) {
+							return null;
+						}
+						//check if element has been populated with data from an xml document
+						const filledElement = ['input', 'textarea', 'select'].findIndex(
+							tag =&gt; !!fieldset.querySelector(`${tag}[data-xsd2html2xml-filled]`)
+						);
+						return filledElement &gt;= 0;
+					}
 					document.querySelectorAll("[data-xsd2html2xml-min], [data-xsd2html2xml-max]").forEach(function(o) {
 						//add minimum number of elements
 						if (o.hasAttribute("data-xsd2html2xml-min")) {
 							//if no minimum, remove element
-							if (o.getAttribute("data-xsd2html2xml-min") === "0"
-								//check for input elements existing to handle empty elements
-								&amp;&amp; o.previousElementSibling.previousElementSibling.querySelector("input, textarea, select")
-								//check if element has been populated with data from an xml document
-								&amp;&amp; !o.previousElementSibling.previousElementSibling.querySelector("input, textarea, select").hasAttribute("data-xsd2html2xml-filled")) {
+							if (
+								o.getAttribute("data-xsd2html2xml-min") === "0"
+								&amp;&amp; isFilled(o.previousElementSibling?.previousElementSibling) === false
+							) {
 								clickRemoveButton(
 									o.parentElement.children[0].querySelector("legend &gt; button.remove, span &gt; button.remove")
 								);
 							//if there is only one allowed element that has been filled, disable the button
-							} else if (o.getAttribute("data-xsd2html2xml-max") === "1"
-								//check for input elements existing to handle empty elements
-								&amp;&amp; o.previousElementSibling.previousElementSibling.querySelector("input, textarea, select")
-								//check if element has been populated with data from an xml document
-								&amp;&amp; o.previousElementSibling.previousElementSibling.querySelector("input, textarea, select").hasAttribute("data-xsd2html2xml-filled")) {
+							} else if (
+								o.getAttribute("data-xsd2html2xml-max") === "1"
+								&amp;&amp; isFilled(o.previousElementSibling?.previousElementSibling) === true
+							) {
 								o.setAttribute("disabled", "disabled");
 							//else, add up to minimum number of elements
 							} else {
@@ -79,6 +92,7 @@
 				};
 				
 				var setValue = function(element, value) {
+					// function updates field value (not used for radio)
 					element.querySelector("input, textarea, select").setAttribute("data-xsd2html2xml-filled", "true");
 					
 					if (element.querySelector("input") !== null) {
