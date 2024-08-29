@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<iBND2:interact_entry_boundaries xmlns="urn://x-artefacts-rosreestr-ru/interact/interact-entry-boundaries/2.0.1"
+<interact_entry_boundaries xmlns="urn://x-artefacts-rosreestr-ru/interact/interact-entry-boundaries/2.0.1"
                            xmlns:iBND2="urn://x-artefacts-rosreestr-ru/interact/interact-entry-boundaries/2.0.1"
                            xmlns:Are1="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1"
                            xmlns:EnSpa2="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1"
@@ -418,4 +418,4 @@
             </iBND2:information_boundary>
         </iBND2:information_registry_boundary>
     </iBND2:information_registry_boundaries>
-</iBND2:interact_entry_boundaries>
+</interact_entry_boundaries>

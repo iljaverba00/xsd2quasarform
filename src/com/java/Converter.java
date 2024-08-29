@@ -14,7 +14,7 @@ public class Converter {
 
         try {
             // Путь к XSL файлу
-            String xslFilePath = "src/resources/engine"+engineVersion+"/XslCombined.xsl";
+            String xslFilePath = "src/resources/engine" + engineVersion + "/XslCombined.xsl";
             String examplesFolder = "src/examples/";
 
             File xslFile = new File(xslFilePath);
@@ -30,9 +30,7 @@ public class Converter {
 
             // Создание фабрики трансформеров c xslt процессором xalan
             TransformerFactory factory = TransformerFactory.newInstance(
-//                    "org.apache.xalan.processor.TransformerFactoryImpl",
-//                    this.getClass().getClassLoader()
-            );
+                    "net.sf.saxon.TransformerFactoryImpl", this.getClass().getClassLoader());
 
 
             // Создание трансформера для XSLT
