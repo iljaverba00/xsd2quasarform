@@ -2,7 +2,7 @@
 <xsl:stylesheet version="3.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
+
 	<xsl:template name="add-ui-handlers">
 		<xsl:element name="script">
 			<xsl:attribute name="type">text/javascript</xsl:attribute>
@@ -104,15 +104,13 @@ function main() {
   const guid = generateGUID();
   guidInput.value = guid;
   guidInput.setAttribute('value', guid);
-  guidLabel.style.display = 'none';
-  // const
 }
 window.addEventListener("DOMContentLoaded", main);
 
 				///////
 
 			</xsl:text>
-		</xsl:element>	
+		</xsl:element>
 	</xsl:template>
-	
+
 </xsl:stylesheet>
