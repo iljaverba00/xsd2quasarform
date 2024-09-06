@@ -1,44 +1,53 @@
 package tests;
 
 import com.java.Converter;
+import com.java.Validator;
 import org.junit.Test;
 
 public class MapPlan {
 
     @Test
-    public void test1(){
+    public void test1() {
         String xsd = "/mapplanv01/interact_map_plan/root.xsd";
         String html = "/mapplanv01/form1.html";
 
-        new Converter().generateForm(xsd, html,1);
+        new Converter().generateForm(xsd, html, 1);
 
     }
 
     @Test
-    public void test0(){
+    public void test0() {
         String xsd = "/mapplanv01/interact_map_plan/root.xsd";
         String html = "/mapplanv01/form0.html";
 
-        new Converter().generateForm(xsd, html,0);
+        new Converter().generateForm(xsd, html, 0);
 
     }
 
 
     @Test
-    public void doc1(){
+    public void doc1() {
         String xsd = "/mapplanv01/interact_map_plan/doc0.xml";
         String html = "/mapplanv01/form-doc1.html";
 
-        new Converter().generateForm(xsd, html,0);
+        new Converter().generateForm(xsd, html, 0);
 
     }
 
     @Test
-    public void doc0(){
+    public void doc0() {
         String xsd = "/mapplanv01/interact_map_plan/doc0.xml";
         String html = "/mapplanv01/form-doc0.html";
 
-        new Converter().generateForm(xsd, html,0);
+        new Converter().generateForm(xsd, html, 0);
+
+    }
+
+    @Test
+    public void validation() {
+        String xsd = "/mapplanv01/interact_map_plan/root.xsd";
+        String xml = "/mapplanv01/interact_map_plan/doc0.xml";
+        new Validator().validate(xsd, xml);
 
     }
 }

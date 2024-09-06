@@ -10,42 +10,44 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class Validator {
+    String examplesFolder = "src/examples";
 
+    public boolean validate(String xsdPath, String xmlPath) {
+        try {
+            // Путь к XSD файлу
+            File xsdFile = new File(examplesFolder + xsdPath);
 
-    public static void main(String[] args) throws FileNotFoundException {
+            // Путь к XML файлу
+            File xmlFile = new File(examplesFolder + xmlPath);
 
-        // Путь к XML файлу
-        File xmlFile = new File("src/examples/test.xml");
+//            // Преобразуем XML файл в строку
+//            String xmlString = readFile(xmlFile);
+//
+//            // Преобразуем XSD схему в строку
+//            String xsdString = readFile(xsdFile);
 
-        // Путь к XSD файлу
-        File xsdFile = new File("src/examples/schema.xsd");
-
-        // Преобразуем XML файл в строку
-        String xmlString = readFile(xmlFile);
-
-        // Преобразуем XSD схему в строку
-        String xsdString = readFile(xsdFile);
-
-        // Выполняем валидацию XML файла XSD схемой
-        boolean validationResult = validateXMLAgainstXSD(xmlString, xsdString);
-
-        System.out.println("XML validation passed " + (validationResult ? "successfully" : "unsuccessfully"));
+            // Выполняем валидацию XML файла XSD схемой
+            return validateXMLAgainstXSD(xmlFile, xsdFile);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
-    public static boolean validateXMLAgainstXSD(String xmlString, String xsdString) {
+    private boolean validateXMLAgainstXSD(File xml, File xsd) {
         try {
             // Создание схемы из XSD
             SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-            InputStream xsdStream = new ByteArrayInputStream(xsdString.getBytes());
-            Schema schema = schemaFactory.newSchema(new StreamSource(xsdStream));
+            //InputStream xsdStream = new ByteArrayInputStream(xsdString.getBytes());
+            Schema schema = schemaFactory.newSchema(xsd);
 
             // Создание валидатора
             javax.xml.validation.Validator validator = schema.newValidator();
-            InputStream xmlStream = new ByteArrayInputStream(xmlString.getBytes());
+            //InputStream xmlStream = new ByteArrayInputStream(xmlString.getBytes());
 
             // Валидация XML
-            validator.validate(new StreamSource(xmlStream));
+            validator.validate(new StreamSource(xml));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +55,7 @@ public class Validator {
         }
     }
 
-    public static String readFile(File file) throws FileNotFoundException {
+    private String readFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
 
         StringBuilder xsdString = new StringBuilder();
