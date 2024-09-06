@@ -8,7 +8,7 @@
 			<xsl:attribute name="type">text/javascript</xsl:attribute>
 			<xsl:text disable-output-escaping="yes">
 				var globalValuesMap = [];
-				
+
 				document.addEventListener("DOMContentLoaded",
 					function() {
 						/* INITIAL CALLS */
@@ -22,9 +22,9 @@
 									let node = currentChoice.previousElementSibling;
 									while (node) {
 										if (!node.hasAttribute("data-xsd2html2xml-choice")) {
-											// TODO chernik: node это label[radio]
+											// node это label[radio]
 											const radioInput = node.querySelector("input[type='radio']");
-											if (!clicked.has(radioInput)) { // TODO chernik: чтобы не кликать по много раз
+											if (!clicked.has(radioInput)) { // чтобы не кликать по много раз
 												radioInput.click();
 												clicked.add(radioInput);
 											}
@@ -33,7 +33,7 @@
 											node = node.previousElementSibling;
 										};
 									};
-									// TODO chernik: переходим к следующему блоку радио
+									// переходим к следующему блоку радио
 									currentChoice = currentChoice.parentElement.closest("[data-xsd2html2xml-choice]");
 								}
 							});
