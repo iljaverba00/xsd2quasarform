@@ -31,7 +31,7 @@ public class MapPlan {
         String xsd = dir + "/schema/doc.xml";
         String html = dir + "/result/form-doc1.html";
 
-        new Converter().generateForm(xsd, html, 0);
+        new Converter().generateForm(xsd, html, 1);
 
     }
 
