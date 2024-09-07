@@ -49,6 +49,7 @@ public class MapPlan {
         String xsd = dir + "/schema/main.xsd";
         String xml = dir + "/schema/doc.xml";
         new Validator().validate(xsd, xml);
+        System.out.println("Validation passed.");
 
     }
 }
