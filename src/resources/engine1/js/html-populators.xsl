@@ -3,30 +3,38 @@
 	version="3.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
+
 	<xsl:template name="add-html-populators">
 		<xsl:element name="script">
 			<xsl:attribute name="type">text/javascript</xsl:attribute>
 			<xsl:text disable-output-escaping="yes">
 				/* HTML POPULATORS */
-				
+
+				// Set custom message during validation
+				var setCustomValidity = function() {
+				    document.querySelectorAll("input, textarea, select").forEach(function(p) {
+						if(p.pattern) p.title = p.pattern
+					});
+				}
+
+
 				var addHiddenFields = function() {
 					document.querySelectorAll("[data-xsd2html2xml-min], [data-xsd2html2xml-max]").forEach(function(o) {
 						//add hidden element
 						var newNode = o.previousElementSibling.cloneNode(true);
-						
+
 						newNode.setAttribute("hidden", "");
-						
+
 						newNode.querySelectorAll("input, textarea, select").forEach(function(p) {
 							p.setAttribute("disabled", "");
 						});
-						
+
 						o.parentElement.insertBefore(
 							newNode, o
 						);
 					});
 				};
-				
+
 				var ensureMinimum = function() {
 					// function checks if some field in fieldset (recursive) is filled
 					function isFilled(fieldset) {
@@ -63,7 +71,7 @@
 							//else, add up to minimum number of elements
 							} else {
 								var remainder = o.getAttribute("data-xsd2html2xml-min") - (o.parentNode.children.length - 2);
-								
+
 								for (i=0; i&lt;remainder; i++) {
 									clickAddButton(o);
 								};
@@ -71,18 +79,18 @@
 						};
 					});
 				};
-				
+
 				var xmlToHTML = function(root) {
 					var xmlDocument;
-					
-					//check if form was generated from an XML document 
+
+					//check if form was generated from an XML document
 					if (document.querySelector("meta[name='generator'][content='XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml']").getAttribute("data-xsd2html2xml-source")) {
 						//parse xml document from attribute
 						xmlDocument = new DOMParser().parseFromString(
 							document.querySelector("meta[name='generator'][content='XSD2HTML2XML v3: https://github.com/MichielCM/xsd2html2xml']").getAttribute("data-xsd2html2xml-source"),
 							"application/xml"
 						);
-						
+
 						//start parsing nodes, providing the root node and the corresponding document element
 						parseNode(
 							xmlDocument.childNodes[0],
@@ -90,11 +98,11 @@
 						);
 					};
 				};
-				
+
 				var setValue = function(element, value) {
 					// function updates field value (not used for radio)
 					element.querySelector("input, textarea, select").setAttribute("data-xsd2html2xml-filled", "true");
-					
+
 					if (element.querySelector("input") !== null) {
 						if (element.querySelector("input").getAttribute("data-xsd2html2xml-primitive") === "boolean") {
 							if (value === "true") {
@@ -103,17 +111,17 @@
 						} else {
 							element.querySelector("input").setAttribute("value", value);
 						};
-						
+
 						if (element.querySelector("input").getAttribute("type") === "file") {
 							element.querySelector("input").removeAttribute("required");
 							element.querySelector("input").setAttribute("data-xsd2html2xml-required", "true");
 						};
 					};
-					
+
 					if (element.querySelector("textarea") !== null) {
 						element.querySelector("textarea").textContent = value;
 					};
-					
+
 					if (element.querySelector("select") !== null) {
 						if (element.querySelector("select").getAttribute("data-xsd2html2xml-primitive") === "idref"
 							|| element.querySelector("select").getAttribute("data-xsd2html2xml-primitive") === "idrefs") {
@@ -130,7 +138,7 @@
 						}
 					};
 				};
-				
+
 				var parseNode = function(node, element) {
 					//iterate through the node's attributes and fill them out
 					for (var i=0; i&lt;node.attributes.length; i++) {
@@ -142,12 +150,12 @@
 								)
 							).concat("']")
 						);
-						
+
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};
 					};
-					
+
 					//if there is only one (non-element) node, it must contain the value; note: this will not work for potential mixed="true" support
 					if (node.childNodes.length === 1 &amp;&amp; node.childNodes[0].nodeType === Node.TEXT_NODE) {
 						//in the case of complexTypes with simpleContents, select the sub-element that actually contains the input element
@@ -159,10 +167,10 @@
 					//else, iterate through the children
 					} else {
 						var previousChildName;
-						
+
 						for (var i=0; i&lt;node.childNodes.length; i++) {
 							var childNode = node.childNodes[i];
-							
+
 							if (childNode.nodeType === Node.ELEMENT_NODE) {
 								//find the corresponding element
 								var childElement = element.querySelector(
@@ -173,20 +181,20 @@
 										)
 									).concat("']")
 								);
-								
+
 								//if there is an add-button (and it is not the first child node being parsed), add an element
 								var button;
-								
+
 								if (childElement.parentElement.lastElementChild.nodeName.toLowerCase() === "button") {
 									button = childElement.parentElement.lastElementChild;
 								} else if (childElement.parentElement.parentElement.parentElement.lastElementChild.nodeName.toLowerCase() === "button"
 									&amp;&amp; !childElement.parentElement.parentElement.parentElement.lastElementChild.hasAttribute("data-xsd2html2xml-element")) {
 									button = childElement.parentElement.parentElement.parentElement.lastElementChild;
 								};
-								
+
 								if (button !== null &amp;&amp; childNode.nodeName === previousChildName) {
 									clickAddButton(button);
-									
+
 									parseNode(
 										childNode,
 										button.previousElementSibling.previousElementSibling
@@ -199,13 +207,13 @@
 										childElement
 									);
 								};
-								
+
 								previousChildName = childNode.nodeName;
 							}
 						};
 					}
 				};
-				
+
 				var setDynamicValues = function() {
 					for (var i=0; i&lt;globalValuesMap.length; i++) {
 						for (var j=0; j&lt;globalValuesMap[i].values.length; j++) {
@@ -216,7 +224,7 @@
 					}
 				};
 			</xsl:text>
-		</xsl:element>	
+		</xsl:element>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

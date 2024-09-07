@@ -2,7 +2,7 @@
 <xsl:stylesheet version="3.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
+
 	<xsl:template name="add-initial-calls">
 		<xsl:element name="script">
 			<xsl:attribute name="type">text/javascript</xsl:attribute>
@@ -38,7 +38,8 @@
 								}
 							});
 						}
-						
+
+						setCustomValidity();
 						addHiddenFields();
 						xmlToHTML(document);
 						updateIdentifiers();
@@ -49,7 +50,7 @@
 					}
 				);
 			</xsl:text>
-		</xsl:element>	
+		</xsl:element>
 	</xsl:template>
-	
+
 </xsl:stylesheet>
