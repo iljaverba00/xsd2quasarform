@@ -21,19 +21,25 @@
 					margin-right: 5px;
 					min-width: 200px;
 				}
+				.bottom-bar {
+					display: flex;
+					justify-content: flex-end;
+					margin-right: 10px;
+				}
 				button {
 					transition: background .28s ease-in-out;
 					cursor: pointer;
 				}
-				button[type='submit'] {
-					position: absolute !important;
-					right: 4px;
-				}
 				button[type='submit']:before {
-					content: "OK";
+					content: "Сохранить";
+					color: white;
+				}			
+				button.cancel:before {
+					content: "Отмена";
 					color: white;
 				}
 				button.add,
+				button.cancel,
 				button[type="submit"] {
 					display: inline-flex;
     				flex-direction: row;

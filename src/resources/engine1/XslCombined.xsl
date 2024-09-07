@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet
-	version="3.0"
+<xsl:stylesheet version="3.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -67,7 +66,7 @@
 	<xsl:variable name="attributeGroup-stylesheet" select="document('matchers/attributeGroup@ref.xsl')" />
 	<xsl:variable name="attr-value-stylesheet" select="document('utils/attr-value.xsl')" />
 	<xsl:variable name="gui-attributes-stylesheet" select="document('utils/gui-attributes.xsl')" />
- 	<xsl:variable name="namespaces-stylesheet" select="document('utils/namespaces.xsl')" />
+	<xsl:variable name="namespaces-stylesheet" select="document('utils/namespaces.xsl')" />
 	<xsl:variable name="types-stylesheet" select="document('utils/types.xsl')" />
 
 	<xsl:template match="*" />
@@ -79,7 +78,8 @@
 				<xsl:when test="@xsi:noNamespaceSchemaLocation">
 					<xsl:call-template name="inform">
 						<xsl:with-param name="message">
-							<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="@xsi:noNamespaceSchemaLocation" />
+							<xsl:text>XML file detected. Loading schema: </xsl:text>
+							<xsl:value-of select="@xsi:noNamespaceSchemaLocation" />
 						</xsl:with-param>
 					</xsl:call-template>
 
@@ -111,7 +111,8 @@
 								<xsl:when test="contains($schema-location, ' ')">
 									<xsl:call-template name="inform">
 										<xsl:with-param name="message">
-											<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="normalize-space(substring-before($schema-location, ' '))" />
+											<xsl:text>XML file detected. Loading schema: </xsl:text>
+											<xsl:value-of select="normalize-space(substring-before($schema-location, ' '))" />
 										</xsl:with-param>
 									</xsl:call-template>
 
@@ -127,7 +128,8 @@
 								<xsl:otherwise>
 									<xsl:call-template name="inform">
 										<xsl:with-param name="message">
-											<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="$schema-location" />
+											<xsl:text>XML file detected. Loading schema: </xsl:text>
+											<xsl:value-of select="$schema-location" />
 										</xsl:with-param>
 									</xsl:call-template>
 
@@ -145,7 +147,8 @@
 						<xsl:otherwise>
 							<xsl:call-template name="inform">
 								<xsl:with-param name="message">
-									<xsl:text>XML file detected. Loading schema: </xsl:text><xsl:value-of select="@xsi:schemaLocation" />
+									<xsl:text>XML file detected. Loading schema: </xsl:text>
+									<xsl:value-of select="@xsi:schemaLocation" />
 								</xsl:with-param>
 							</xsl:call-template>
 
@@ -303,10 +306,16 @@
 						</xsl:call-template>
 					</xsl:if>
 				</xsl:for-each>
-
-				<xsl:element name="button">
-					<xsl:attribute name="type">submit</xsl:attribute>
-					<xsl:attribute name="onclick">onOk()</xsl:attribute>
+				<xsl:element name="div">
+					<xsl:attribute name="class">bottom-bar</xsl:attribute>
+					<xsl:element name="button">
+						<xsl:attribute name="class">cancel</xsl:attribute>
+						<xsl:attribute name="onclick">window.parent.postMessage('cancel','*')</xsl:attribute>
+					</xsl:element>
+					<xsl:element name="button">
+						<xsl:attribute name="type">submit</xsl:attribute>
+						<xsl:attribute name="onclick">onOk()</xsl:attribute>
+					</xsl:element>
 				</xsl:element>
 			</xsl:element>
 		</xsl:element>

@@ -147,9 +147,11 @@ function main() {
 
   const guidLabel = document.querySelector('[data-xsd2html2xml-name="guid"]');
   const guidInput = document.querySelector('[data-xsd2html2xml-name="guid"] input');
-  const guid = generateGUID();
-  guidInput.value = guid;
-  guidInput.setAttribute('value', guid);
+  if (guidInput) {
+    const guid = generateGUID();
+    guidInput.value = guid;
+    guidInput.setAttribute('value', guid);
+  }
 <!--  guidLabel.style.display = 'none';-->
   // const
 }
