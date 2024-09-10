@@ -134,7 +134,8 @@
 								element.querySelector("select option[value = '".concat(values[i]).concat("']")).setAttribute("selected", "selected");
 							}*/
 						} else {
-							element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
+							try{element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
+							}catch(e){console.log('Отсутствует функция setAttribute на элементе1', e)}
 						}
 					};
 				};
@@ -217,9 +218,12 @@
 				var setDynamicValues = function() {
 					for (var i=0; i&lt;globalValuesMap.length; i++) {
 						for (var j=0; j&lt;globalValuesMap[i].values.length; j++) {
-							globalValuesMap[i].object.querySelector(
+							try{globalValuesMap[i].object.querySelector(
 								"select option[value = '".concat(globalValuesMap[i].values[j]).concat("']")
 							).setAttribute("selected", "selected");
+							}catch(e){
+								console.log('Отсутствует функция setAttribute на элементе2', e)
+							}
 						}
 					}
 				};
