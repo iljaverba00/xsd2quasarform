@@ -486,10 +486,13 @@
 						);
 
 						//start parsing nodes, providing the root node and the corresponding document element
-						parseNode(
-							xmlDocument.childNodes[0],
-							document.querySelector("[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']"))
-						);
+						const nameToSelect = "[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']")
+						const rootEl = document.querySelector(nameToSelect);
+						if(rootEl){
+							parseNode(xmlDocument.childNodes[0], rootEl);
+						} else {
+							console.log('Absent root element. Can`t parse document');
+						}
 					};
 				};
 
@@ -536,16 +539,14 @@
 
 				var parseNode = function(node, element) {
 					//iterate through the node's attributes and fill them out
-					for (var i=0; i<node.attributes.length; i++) {
-						var attribute = element.querySelector(
-							"[data-xsd2html2xml-xpath = '".concat(
-								element.getAttribute("data-xsd2html2xml-xpath").concat(
-									"/@".concat(node.attributes[i].nodeName)
-									//"/@*[name() = \"".concat(node.attributes[i].nodeName).concat("\"]")
-								)
-							).concat("']")
-						);
+					if(!element) {
+						console.log('Absent element for parse')
+						return
+					}
 
+					for (var i=0; i<node.attributes.length; i++) {
+						const nameToSelect = element.getAttribute("data-xsd2html2xml-xpath").concat("/@".concat(node.attributes[i].nodeName));
+						var attribute = element.querySelector(`[data-xsd2html2xml-xpath = ${nameToSelect}]`);
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};
