@@ -2,7 +2,7 @@
 <xsl:stylesheet version="3.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
+
 	<xsl:template name="add-ui-handlers">
 		<xsl:element name="script">
 			<xsl:attribute name="type">text/javascript</xsl:attribute>
@@ -77,11 +77,17 @@ function setVisible(element) {
 
 function expandRequiredForms() {
   // Находим все обязательные поля
-  const requiredForms = Array.from(
+  let requiredForms = Array.from(
     document.querySelectorAll(
       'input[required]:not([disabled]):not([hidden] *):not([checked])'
     )
   );
+  requiredForms = requiredForms.concat(Array.from(
+    document.querySelectorAll(
+      'select[required]:not([disabled]):not([hidden] *):not([checked])'
+    )
+  ))
+  console.log(requiredForms);
   const radioWalkedFieldsets = new Set();
   requiredForms.forEach(function (element) {
     let fieldsetToAdd = null;
@@ -160,7 +166,7 @@ window.addEventListener("DOMContentLoaded", main);
 				///////
 
 			</xsl:text>
-		</xsl:element>	
+		</xsl:element>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

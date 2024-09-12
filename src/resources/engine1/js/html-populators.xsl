@@ -138,7 +138,7 @@
 							}*/
 						} else {
 							try{element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
-							}catch(e){console.log('Отсутствует функция setAttribute на элементе1', e)}
+							}catch(e){console.log('Отсутствует функция setAttribute на элементе1')}
 						}
 					};
 				};
@@ -223,7 +223,7 @@
 								"select option[value = '".concat(globalValuesMap[i].values[j]).concat("']")
 							).setAttribute("selected", "selected");
 							}catch(e){
-								console.log('Отсутствует функция setAttribute на элементе2', e)
+								console.log('Отсутствует функция setAttribute на элементе 2')
 							}
 						}
 					}
