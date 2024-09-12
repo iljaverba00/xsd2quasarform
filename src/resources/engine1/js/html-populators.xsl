@@ -152,7 +152,7 @@
 
 					for (var i=0; i&lt;node.attributes.length; i++) {
 						const nameToSelect = element.getAttribute("data-xsd2html2xml-xpath").concat("/@".concat(node.attributes[i].nodeName));
-						var attribute = element.querySelector(`[data-xsd2html2xml-xpath = ${nameToSelect}]`);
+						var attribute = element.querySelector(`[data-xsd2html2xml-xpath = '${nameToSelect}']`);
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};

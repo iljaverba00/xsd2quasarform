@@ -31,7 +31,7 @@
 				button[type='submit']:before {
 					content: "Сохранить";
 					color: white;
-				}
+				}			
 				button.cancel:before {
 					content: "Отмена";
 					color: white;
@@ -126,18 +126,18 @@
 				label[radio] + section > fieldset > legend:hover,
 				legend:has(+ label[radio]):hover {
     				border-radius: 0 !important;
-    				background: 0 !important;
+    				background: 0 !important;			
 				}
 
 				label[radio] + section > fieldset > legend:before,
 				legend:has(+ label[radio]):before {
-    				content: "" !important;
-				}
+    				content: "" !important;				
+				}				
 
 				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) > legend:before {
 					rotate: 210deg;
 				}
-
+				
 				label[radio]:has( > input[checked="checked"]) + section {
 					display: block !important;
 				}
@@ -223,12 +223,12 @@
 
 			</style><script type="text/javascript">
 				/* POLYFILLS */
-
+				
 				/* add .matches if not natively supported */
 				if (!Element.prototype.matches)
-					Element.prototype.matches = Element.prototype.msMatchesSelector ||
+					Element.prototype.matches = Element.prototype.msMatchesSelector || 
 												Element.prototype.webkitMatchesSelector;
-
+												
 				/* add .closest if not natively supported */
 				if (!Element.prototype.closest)
 					Element.prototype.closest = function(s) {
@@ -240,7 +240,7 @@
 						} while (el !== null);
 						return null;
 					};
-
+				
 				/* add .forEach if not natively supported */
 				if (!NodeList.prototype.forEach) {
 					NodeList.prototype.forEach = function(callback){
@@ -251,7 +251,7 @@
 						}
 					};
 				}
-
+        
         /* add .previousElementSibling if not supported */
         (function (arr) {
           arr.forEach(function (item) {
@@ -276,11 +276,11 @@
         })([Element.prototype, CharacterData.prototype]);
 			</script><script type="text/javascript">
 				/* XML GENERATORS */
-
+				
 				var htmlToXML = function(root) {
 					var namespaces = [];
 				    var prefixes = [];
-
+				    
 				    document.querySelectorAll("[data-xsd2html2xml-namespace]:not([data-xsd2html2xml-namespace=''])").forEach(function(o) {
 				    	if (namespaces.indexOf(
 				    		o.getAttribute("data-xsd2html2xml-namespace")
@@ -288,7 +288,7 @@
 					    	namespaces.push(
 					    		o.getAttribute("data-xsd2html2xml-namespace")
 					    	);
-
+					    	
 					    	prefixes.push(
 					    		o.getAttribute("data-xsd2html2xml-name").substring(
 				    				0, o.getAttribute("data-xsd2html2xml-name").indexOf(":")
@@ -296,9 +296,9 @@
 				    		);
 				    	}
 				    });
-
+				    
 				    var namespaceString = "";
-
+				    
 				    namespaces.forEach(function(o,i) {
 				    	namespaceString = namespaceString.concat(
 				    		"xmlns".concat(
@@ -308,10 +308,10 @@
 				    		)
 				    	)
 				    });
-
+				    
 				    return String.fromCharCode(60).concat("?xml version=\"1.0\"?").concat(String.fromCharCode(62)).concat(getXML(root, false, namespaceString.trim()));
 				};
-
+				
 				var getXML = function(parent, attributesOnly, namespaceString) {
 				    var xml = "";
 				    var children = [].slice.call(parent.children);
@@ -341,13 +341,13 @@
 				                    if (!attributesOnly) {
 				                    	if (!o.getAttribute("data-xsd2html2xml-choice"))
 				                    		xml = xml.concat(getXML(o));
-
+				                    		
 				                    	if (o.getAttribute("data-xsd2html2xml-choice")) {
 				                    		var node = o.previousElementSibling;
 				                    		while (node.hasAttribute("data-xsd2html2xml-choice")) {
 				                    			node = node.previousElementSibling;
 				                    		};
-
+				                    		
 				                    		if (node.getElementsByTagName("input")[0].checked)
 				                    			xml = xml.concat(getXML(o));
 				                    	};
@@ -356,14 +356,14 @@
 				            }
 				        }
 				    });
-
+				    
 				    if (namespaceString) {
 				    	xml = xml.substring(0, xml.indexOf(String.fromCharCode(62))).concat(" ").concat(namespaceString).concat(xml.substring(xml.indexOf(String.fromCharCode(62))));
 				    }
-
+				    
 				    return xml;
 				};
-
+				
 				var getContent = function(node) {
 				    if (node.getElementsByTagName("input").length != 0) {
 				        switch (node.getElementsByTagName("input")[0].getAttribute("type").toLowerCase()) {
@@ -486,10 +486,13 @@
 						);
 
 						//start parsing nodes, providing the root node and the corresponding document element
-						parseNode(
-							xmlDocument.childNodes[0],
-							document.querySelector("[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']"))
-						);
+						const nameToSelect = "[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']")
+						const rootEl = document.querySelector(nameToSelect);
+						if(rootEl){
+							parseNode(xmlDocument.childNodes[0], rootEl);
+						} else {
+							console.log('Absent root element. Can`t parse document');
+						}
 					};
 				};
 
@@ -528,23 +531,22 @@
 								element.querySelector("select option[value = '".concat(values[i]).concat("']")).setAttribute("selected", "selected");
 							}*/
 						} else {
-							element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
+							try{element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
+							}catch(e){console.log('Отсутствует функция setAttribute на элементе1', e)}
 						}
 					};
 				};
 
 				var parseNode = function(node, element) {
 					//iterate through the node's attributes and fill them out
-					for (var i=0; i<node.attributes.length; i++) {
-						var attribute = element.querySelector(
-							"[data-xsd2html2xml-xpath = '".concat(
-								element.getAttribute("data-xsd2html2xml-xpath").concat(
-									"/@".concat(node.attributes[i].nodeName)
-									//"/@*[name() = \"".concat(node.attributes[i].nodeName).concat("\"]")
-								)
-							).concat("']")
-						);
+					if(!element) {
+						console.log('Absent element for parse')
+						return
+					}
 
+					for (var i=0; i<node.attributes.length; i++) {
+						const nameToSelect = element.getAttribute("data-xsd2html2xml-xpath").concat("/@".concat(node.attributes[i].nodeName));
+						var attribute = element.querySelector(`[data-xsd2html2xml-xpath = '${nameToSelect}']`);
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};
@@ -611,15 +613,18 @@
 				var setDynamicValues = function() {
 					for (var i=0; i<globalValuesMap.length; i++) {
 						for (var j=0; j<globalValuesMap[i].values.length; j++) {
-							globalValuesMap[i].object.querySelector(
+							try{globalValuesMap[i].object.querySelector(
 								"select option[value = '".concat(globalValuesMap[i].values[j]).concat("']")
 							).setAttribute("selected", "selected");
+							}catch(e){
+								console.log('Отсутствует функция setAttribute на элементе2', e)
+							}
 						}
 					}
 				};
 			</script><script type="text/javascript">
 				/* VALUE FIXERS */
-
+				
 				var setValues = function() {
 					/* specifically set values on ranges */
 					document.querySelectorAll("[type='range']").forEach(function(o) {
@@ -633,10 +638,10 @@
 							o.value = 0;
 							o.onchange();
 						};
-
+						
 						o.previousElementSibling.textContent = o.value;
 					});
-
+					
 					/* specifically set values on datepickers */
 					document.querySelectorAll("[data-xsd2html2xml-primitive='gday']").forEach(function(o) {
 						if (o.getAttribute("value")) {
@@ -656,17 +661,17 @@
 				};
 			</script><script type="text/javascript">
 				/* EVENT HANDLERS */
-
+				
 				var clickAddButton = function(button) {
 					var newNode = button.previousElementSibling.cloneNode(true);
-
+					
 					newNode.removeAttribute("hidden");
-
+					
 					newNode.querySelectorAll("input, select, textarea").forEach(function(o) {
 						if (o.closest("[hidden]") == null)
 							o.removeAttribute("disabled");
 					});
-
+					
 					//set a new random id for radio buttons
 					newNode.querySelectorAll("input[type='radio']").forEach(function(o) {
 						if (o.parentElement.previousElementSibling != null
@@ -680,59 +685,59 @@
 								Math.random().toString().substring(2)
 							));
 						};
-
+						
 						o.setAttribute("onclick", "clickRadioInput(this, '".concat(o.getAttribute("name")).concat("');"));
 					});
-
+					
 					button.parentNode.insertBefore(
 						newNode, button.previousElementSibling
 					);
-
+					
 					if ((button.parentNode.children.length - 2) == button.getAttribute("data-xsd2html2xml-max"))
 						button.setAttribute("disabled", "disabled");
-
+						
 					if (newNode.querySelectorAll("[data-xsd2html2xml-primitive='id']").length > 0)
 						updateIdentifiers();
 				}
-
+				
 				var clickRemoveButton = function(button) {
 					var section = button.closest("section");
-
+					
 					if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-min"))
 						button.closest("section").lastElementChild.click();
-
+					
 					if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-max"))
 						button.closest("section").lastElementChild.removeAttribute("disabled");
-
+					
 					button.closest("section").removeChild(
 						button.closest("fieldset, label")
 					);
-
+					
 					if (section.querySelectorAll("[data-xsd2html2xml-primitive = 'id']").length > 0)
 						updateIdentifiers();
 				}
-
+				
 				var clickRadioInput = function(input, name) {
 					var activeSections = [];
 					var currentSection = input.parentElement.nextElementSibling;
-
+					
 					while (currentSection && currentSection.hasAttribute("data-xsd2html2xml-choice")) {
 						activeSections.push(currentSection);
 						currentSection = currentSection.nextElementSibling;
 					};
-
+					
 					document.querySelectorAll("[name=".concat(name).concat("]")).forEach(function(o) {
 						o.removeAttribute("checked");
-
+						
 						var section = o.parentElement.nextElementSibling;
-
+						
 						while (section && section.hasAttribute("data-xsd2html2xml-choice")) {
 							section.querySelectorAll("input, select, textarea").forEach(function(p) {
 								var contained = false;
 								activeSections.forEach(function(q) {
 									if (q.contains(p)) contained = true;
 								});
-
+								
 								if (contained) {
 									if (p.closest("[data-xsd2html2xml-choice]") === section) {
 										if (p.closest("*[hidden]") === null)
@@ -744,34 +749,34 @@
 									p.setAttribute("disabled", "disabled");
 								};
 							});
-
+							
 							section = section.nextElementSibling;
 						};
 					});
-
+					
 					input.setAttribute("checked","checked");
 				}
-
+				
 				var updateIdentifiers = function() {
 					var globalIdentifiers = [];
-
+					
 					document.querySelectorAll("[data-xsd2html2xml-primitive='id']:not([disabled])").forEach(function(o) {
 						if (o.hasAttribute("value")) {
 							globalIdentifiers.push(o.getAttribute("value"));
 						}
 					});
-
+					
 					globalIdentifiers = globalIdentifiers.filter(
-						function uniques(value, index, self) {
+						function uniques(value, index, self) { 
 							return self.indexOf(value) === index;
 						}
 					);
-
+					
 					document.querySelectorAll("[data-xsd2html2xml-primitive='idref'], [data-xsd2html2xml-primitive='idrefs']").forEach(function(o) {
 						while(o.firstChild) {
 							o.removeChild(o.firstChild);
 						}
-
+						
 						for (var i=0; i<globalIdentifiers.length; i++) {
 							var option = document.createElement('option');
 							option.textContent = globalIdentifiers[i];
@@ -780,16 +785,16 @@
 						}
 					});
 				}
-
+				
 				var pickFile = function(input, file, type) {
 					var resetFilePicker = function(input) {
 						input.removeAttribute("value");
 						input.removeAttribute("type");
 						input.setAttribute("type", "file");
 					}
-
+					
 					var fileReader = new FileReader();
-
+					
 					fileReader.onloadend = function() {
 						if (fileReader.error) {
 							alert(fileReader.error);
@@ -810,13 +815,13 @@
 							);
 						};
 					};
-
+					
 					if(file) {
 						fileReader.readAsDataURL(file);
 					} else {
 						resetFilePicker(input);
 					}
-
+					
 					if (input.getAttribute("data-xsd2html2xml-required")) input.setAttribute("required", "required");
 				}
 			</script><script type="text/javascript">
