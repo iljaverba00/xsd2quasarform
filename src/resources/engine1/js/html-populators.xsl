@@ -100,13 +100,10 @@
 						);
 
 						//start parsing nodes, providing the root node and the corresponding document element
-						const nameToSelect = "[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']")
-						const rootEl = document.querySelector(nameToSelect);
-						if(rootEl){
-							parseNode(xmlDocument.childNodes[0], rootEl);
-						} else {
-							console.log('Absent root element. Can`t parse document');
-						}
+						parseNode(
+							xmlDocument.childNodes[0],
+							document.querySelector("[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']"))
+						);
 					};
 				};
 
@@ -146,21 +143,23 @@
 							}*/
 						} else {
 							try{element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
-							}catch(e){console.log('Отсутствует функция setAttribute на элементе1')}
+							}catch(e){console.log('Отсутствует функция setAttribute на элементе1', e)}
 						}
 					};
 				};
 
 				var parseNode = function(node, element) {
 					//iterate through the node's attributes and fill them out
-					if(!element) {
-						console.log('Absent element for parse')
-						return
-					}
-
 					for (var i=0; i&lt;node.attributes.length; i++) {
-						const nameToSelect = element.getAttribute("data-xsd2html2xml-xpath").concat("/@".concat(node.attributes[i].nodeName));
-						var attribute = element.querySelector(`[data-xsd2html2xml-xpath = '${nameToSelect}']`);
+						var attribute = element.querySelector(
+							"[data-xsd2html2xml-xpath = '".concat(
+								element.getAttribute("data-xsd2html2xml-xpath").concat(
+									"/@".concat(node.attributes[i].nodeName)
+									//"/@*[name() = \"".concat(node.attributes[i].nodeName).concat("\"]")
+								)
+							).concat("']")
+						);
+
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};
@@ -231,7 +230,7 @@
 								"select option[value = '".concat(globalValuesMap[i].values[j]).concat("']")
 							).setAttribute("selected", "selected");
 							}catch(e){
-								console.log('Отсутствует функция setAttribute на элементе 2')
+								console.log('Отсутствует функция setAttribute на элементе2', e)
 							}
 						}
 					}

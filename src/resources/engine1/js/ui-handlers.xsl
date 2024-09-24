@@ -77,7 +77,7 @@ function setVisible(element) {
 
 function expandRequiredForms() {
   // Находим все обязательные поля
-  let requiredForms = Array.from(
+  const requiredForms = Array.from(
     document.querySelectorAll(
       'input[required]:not([disabled]):not([hidden] *):not([checked])'
     )
@@ -143,10 +143,16 @@ function expandRequiredForms() {
 }
 
 function generateGUID() {
-  return crypto.randomUUID();
+  if (window.isSecureContext) {
+    return crypto.randomUUID();
+  }
+  const objectURL = URL.createObjectURL(new Blob([]));
+  URL.revokeObjectURL(objectURL);
+  return objectURL.slice(-36);
 }
 
 function main() {
+  window.parent.postMessage('loaded', '*');
   startExpandSections();
 
 
