@@ -10,6 +10,14 @@
 			<xsl:text disable-output-escaping="yes">
 				/* HTML POPULATORS */
 
+				// Mark required fields
+				var markRequiredFields = function() {
+                    document.querySelectorAll("[required]").forEach(function(p) {
+                        console.log('reqc')
+                        p.parentElement.classList.add('reqc')
+                    });
+                }
+
 				// Set custom message during validation
 				var setCustomValidity = function() {
 				    document.querySelectorAll("input, textarea, select").forEach(function(p) {

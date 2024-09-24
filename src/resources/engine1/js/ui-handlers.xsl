@@ -87,7 +87,6 @@ function expandRequiredForms() {
       'select[required]:not([disabled]):not([hidden] *):not([checked])'
     )
   ))
-  console.log(requiredForms);
   const radioWalkedFieldsets = new Set();
   requiredForms.forEach(function (element) {
     let fieldsetToAdd = null;

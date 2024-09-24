@@ -39,6 +39,7 @@
 							});
 						}
 
+						markRequiredFields();
 						setCustomValidity();
 						addHiddenFields();
 						xmlToHTML(document);

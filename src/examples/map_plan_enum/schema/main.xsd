@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:dAp1="urn://x-artefacts-rosreestr-ru/commons/directories/applied-file/1.0.1"
+           targetNamespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1"
+           elementFormDefault="qualified">
+    <!--Приложенный файл-->
+    <xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/applied-file/1.0.1"
+               schemaLocation="dAppliedFiles_v01.xsd"/>
+    <!--=====ВЕРСИЯ 1:-->
+    <xs:complexType name="AttachmentPDF">
+        <xs:annotation>
+            <xs:documentation>Приложенный файл в формате PDF</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="kind">
+                <xs:annotation>
+                    <xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="dAp1:dApplied_file">
+                        <xs:pattern value="01"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -33,7 +33,7 @@
 				button[type='submit']:before {
 					content: "Сохранить";
 					color: white;
-				}			
+				}
 				button.cancel:before {
 					content: "Отмена";
 					color: white;
@@ -128,18 +128,18 @@
 				label[radio] + section > fieldset > legend:hover,
 				legend:has(+ label[radio]):hover {
     				border-radius: 0 !important;
-    				background: 0 !important;			
+    				background: 0 !important;
 				}
 
 				label[radio] + section > fieldset > legend:before,
 				legend:has(+ label[radio]):before {
-    				content: "" !important;				
-				}				
+    				content: "" !important;
+				}
 
 				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) > legend:before {
 					rotate: 210deg;
 				}
-				
+
 				label[radio]:has( > input[checked="checked"]) + section {
 					display: block !important;
 				}
@@ -223,6 +223,10 @@
     				margin: 5px;
 				}
 
+				.reqc:after {
+					content:" *";
+					color: red;
+				}
 			</xsl:text>
         </xsl:element>
     </xsl:template>
