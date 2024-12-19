@@ -72,7 +72,7 @@
 			<xs:documentation>Приложенный файл в формате PDF</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="kind">
+			<xs:element name="kind" type="dAp1:dApplied_file">
 				<xs:annotation>
 					<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
 				</xs:annotation>

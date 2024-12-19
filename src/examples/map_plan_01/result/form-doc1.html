@@ -31,7 +31,7 @@
 				button[type='submit']:before {
 					content: "Сохранить";
 					color: white;
-				}			
+				}
 				button.cancel:before {
 					content: "Отмена";
 					color: white;
@@ -126,18 +126,18 @@
 				label[radio] + section > fieldset > legend:hover,
 				legend:has(+ label[radio]):hover {
     				border-radius: 0 !important;
-    				background: 0 !important;			
+    				background: 0 !important;
 				}
 
 				label[radio] + section > fieldset > legend:before,
 				legend:has(+ label[radio]):before {
-    				content: "" !important;				
-				}				
+    				content: "" !important;
+				}
 
 				fieldset:has( > section[collapsed="true"]):not(:has( > section[collapsed="false"])) > legend:before {
 					rotate: 210deg;
 				}
-				
+
 				label[radio]:has( > input[checked="checked"]) + section {
 					display: block !important;
 				}
@@ -221,6 +221,10 @@
     				margin: 5px;
 				}
 
+				.reqc:after {
+					content:" *";
+					color: red;
+				}
 			</style><script type="text/javascript">
 				/* POLYFILLS */
 				
@@ -404,6 +408,14 @@
 			</script><script type="text/javascript">
 				/* HTML POPULATORS */
 
+				// Mark required fields
+				var markRequiredFields = function() {
+                    document.querySelectorAll("[required]").forEach(function(p) {
+                        console.log('reqc')
+                        p.parentElement.classList.add('reqc')
+                    });
+                }
+
 				// Set custom message during validation
 				var setCustomValidity = function() {
 				    document.querySelectorAll("input, textarea, select").forEach(function(p) {
@@ -486,13 +498,10 @@
 						);
 
 						//start parsing nodes, providing the root node and the corresponding document element
-						const nameToSelect = "[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']")
-						const rootEl = document.querySelector(nameToSelect);
-						if(rootEl){
-							parseNode(xmlDocument.childNodes[0], rootEl);
-						} else {
-							console.log('Absent root element. Can`t parse document');
-						}
+						parseNode(
+							xmlDocument.childNodes[0],
+							document.querySelector("[data-xsd2html2xml-xpath = '/".concat(xmlDocument.childNodes[0].nodeName).concat("']"))
+						);
 					};
 				};
 
@@ -532,21 +541,23 @@
 							}*/
 						} else {
 							try{element.querySelector("select option[value = '".concat(value).concat("']")).setAttribute("selected", "selected");
-							}catch(e){console.log('Отсутствует функция setAttribute на элементе1')}
+							}catch(e){console.log('Отсутствует функция setAttribute на элементе1', e)}
 						}
 					};
 				};
 
 				var parseNode = function(node, element) {
 					//iterate through the node's attributes and fill them out
-					if(!element) {
-						console.log('Absent element for parse')
-						return
-					}
-
 					for (var i=0; i<node.attributes.length; i++) {
-						const nameToSelect = element.getAttribute("data-xsd2html2xml-xpath").concat("/@".concat(node.attributes[i].nodeName));
-						var attribute = element.querySelector(`[data-xsd2html2xml-xpath = '${nameToSelect}']`);
+						var attribute = element.querySelector(
+							"[data-xsd2html2xml-xpath = '".concat(
+								element.getAttribute("data-xsd2html2xml-xpath").concat(
+									"/@".concat(node.attributes[i].nodeName)
+									//"/@*[name() = \"".concat(node.attributes[i].nodeName).concat("\"]")
+								)
+							).concat("']")
+						);
+
 						if (attribute !== null) {
 							setValue(attribute, node.attributes[i].nodeValue);
 						};
@@ -617,7 +628,7 @@
 								"select option[value = '".concat(globalValuesMap[i].values[j]).concat("']")
 							).setAttribute("selected", "selected");
 							}catch(e){
-								console.log('Отсутствует функция setAttribute на элементе 2')
+								console.log('Отсутствует функция setAttribute на элементе2', e)
 							}
 						}
 					}
@@ -661,17 +672,17 @@
 				};
 			</script><script type="text/javascript">
 				/* EVENT HANDLERS */
-				
+
 				var clickAddButton = function(button) {
 					var newNode = button.previousElementSibling.cloneNode(true);
-					
+
 					newNode.removeAttribute("hidden");
-					
+
 					newNode.querySelectorAll("input, select, textarea").forEach(function(o) {
 						if (o.closest("[hidden]") == null)
 							o.removeAttribute("disabled");
 					});
-					
+
 					//set a new random id for radio buttons
 					newNode.querySelectorAll("input[type='radio']").forEach(function(o) {
 						if (o.parentElement.previousElementSibling != null
@@ -685,59 +696,59 @@
 								Math.random().toString().substring(2)
 							));
 						};
-						
+
 						o.setAttribute("onclick", "clickRadioInput(this, '".concat(o.getAttribute("name")).concat("');"));
 					});
-					
+
 					button.parentNode.insertBefore(
 						newNode, button.previousElementSibling
 					);
-					
+
 					if ((button.parentNode.children.length - 2) == button.getAttribute("data-xsd2html2xml-max"))
 						button.setAttribute("disabled", "disabled");
-						
+
 					if (newNode.querySelectorAll("[data-xsd2html2xml-primitive='id']").length > 0)
 						updateIdentifiers();
 				}
-				
+
 				var clickRemoveButton = function(button) {
 					var section = button.closest("section");
-					
-					if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-min"))
-						button.closest("section").lastElementChild.click();
-					
+
+				/*if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-min"))
+						button.closest("section").lastElementChild.click();*/
+
 					if ((button.closest("section").children.length - 2) == button.closest("section").lastElementChild.getAttribute("data-xsd2html2xml-max"))
 						button.closest("section").lastElementChild.removeAttribute("disabled");
-					
+
 					button.closest("section").removeChild(
 						button.closest("fieldset, label")
 					);
-					
+
 					if (section.querySelectorAll("[data-xsd2html2xml-primitive = 'id']").length > 0)
 						updateIdentifiers();
 				}
-				
+
 				var clickRadioInput = function(input, name) {
 					var activeSections = [];
 					var currentSection = input.parentElement.nextElementSibling;
-					
+
 					while (currentSection && currentSection.hasAttribute("data-xsd2html2xml-choice")) {
 						activeSections.push(currentSection);
 						currentSection = currentSection.nextElementSibling;
 					};
-					
+
 					document.querySelectorAll("[name=".concat(name).concat("]")).forEach(function(o) {
 						o.removeAttribute("checked");
-						
+
 						var section = o.parentElement.nextElementSibling;
-						
+
 						while (section && section.hasAttribute("data-xsd2html2xml-choice")) {
 							section.querySelectorAll("input, select, textarea").forEach(function(p) {
 								var contained = false;
 								activeSections.forEach(function(q) {
 									if (q.contains(p)) contained = true;
 								});
-								
+
 								if (contained) {
 									if (p.closest("[data-xsd2html2xml-choice]") === section) {
 										if (p.closest("*[hidden]") === null)
@@ -749,34 +760,34 @@
 									p.setAttribute("disabled", "disabled");
 								};
 							});
-							
+
 							section = section.nextElementSibling;
 						};
 					});
-					
+
 					input.setAttribute("checked","checked");
 				}
-				
+
 				var updateIdentifiers = function() {
 					var globalIdentifiers = [];
-					
+
 					document.querySelectorAll("[data-xsd2html2xml-primitive='id']:not([disabled])").forEach(function(o) {
 						if (o.hasAttribute("value")) {
 							globalIdentifiers.push(o.getAttribute("value"));
 						}
 					});
-					
+
 					globalIdentifiers = globalIdentifiers.filter(
-						function uniques(value, index, self) { 
+						function uniques(value, index, self) {
 							return self.indexOf(value) === index;
 						}
 					);
-					
+
 					document.querySelectorAll("[data-xsd2html2xml-primitive='idref'], [data-xsd2html2xml-primitive='idrefs']").forEach(function(o) {
 						while(o.firstChild) {
 							o.removeChild(o.firstChild);
 						}
-						
+
 						for (var i=0; i<globalIdentifiers.length; i++) {
 							var option = document.createElement('option');
 							option.textContent = globalIdentifiers[i];
@@ -785,16 +796,16 @@
 						}
 					});
 				}
-				
+
 				var pickFile = function(input, file, type) {
 					var resetFilePicker = function(input) {
 						input.removeAttribute("value");
 						input.removeAttribute("type");
 						input.setAttribute("type", "file");
 					}
-					
+
 					var fileReader = new FileReader();
-					
+
 					fileReader.onloadend = function() {
 						if (fileReader.error) {
 							alert(fileReader.error);
@@ -815,13 +826,13 @@
 							);
 						};
 					};
-					
+
 					if(file) {
 						fileReader.readAsDataURL(file);
 					} else {
 						resetFilePicker(input);
 					}
-					
+
 					if (input.getAttribute("data-xsd2html2xml-required")) input.setAttribute("required", "required");
 				}
 			</script><script type="text/javascript">
@@ -895,17 +906,10 @@ function setVisible(element) {
 
 function expandRequiredForms() {
   // Находим все обязательные поля
-  let requiredForms = Array.from(
-    document.querySelectorAll(
-      'input[required]:not([disabled]):not([hidden] *):not([checked])'
-    )
-  );
-  requiredForms = requiredForms.concat(Array.from(
-    document.querySelectorAll(
-      'select[required]:not([disabled]):not([hidden] *):not([checked])'
-    )
-  ))
-  console.log(requiredForms);
+  const inputs = document.querySelectorAll('input[required]:not([disabled]):not([hidden] *):not([checked])');
+  const selects = document.querySelectorAll('select[required]:not([disabled]):not([hidden] *):not([checked])');
+  const requiredForms = [...inputs, ...selects];
+
   const radioWalkedFieldsets = new Set();
   requiredForms.forEach(function (element) {
     let fieldsetToAdd = null;
@@ -962,10 +966,16 @@ function expandRequiredForms() {
 }
 
 function generateGUID() {
-  return crypto.randomUUID();
+  if (window.isSecureContext) {
+    return crypto.randomUUID();
+  }
+  const objectURL = URL.createObjectURL(new Blob([]));
+  URL.revokeObjectURL(objectURL);
+  return objectURL.slice(-36);
 }
 
 function main() {
+  window.parent.postMessage('loaded', '*');
   startExpandSections();
 
 
@@ -1016,6 +1026,7 @@ window.addEventListener("DOMContentLoaded", main);
 							});
 						}
 
+						markRequiredFields();
 						setCustomValidity();
 						addHiddenFields();
 						xmlToHTML(document);
@@ -1946,9 +1957,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                          <section collapsed="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:attachment_pdf" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf">
                                                                <legend onclick="collapseSections(this);">Приложенный файл в формате PDF</legend>
-                                                               <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string">
-                                                                        <option value="01">Образ документа</option>
-                                                                        <option value="02">Электронный документ (должен быть представлен одним файлом)</option></select></label></section>
+                                                               <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string"></select></label></section>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:name" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:name"><span>Относительный путь к файлу с изображением\Имя файла с изображением</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern=".+\.[p|P][d|D][f|F]" maxlength="500" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Относительный путь к файлу с изображением\Имя файла с изображением"></label></section>
                                                             </fieldset>
                                                          </section>
@@ -2851,9 +2860,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                          <section collapsed="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:attachment_pdf" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:not_resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf">
                                                                <legend onclick="collapseSections(this);">Приложенный файл в формате PDF</legend>
-                                                               <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:not_resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string">
-                                                                        <option value="01">Образ документа</option>
-                                                                        <option value="02">Электронный документ (должен быть представлен одним файлом)</option></select></label></section>
+                                                               <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:not_resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string"></select></label></section>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:name" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:not_resident/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:name"><span>Относительный путь к файлу с изображением\Имя файла с изображением</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern=".+\.[p|P][d|D][f|F]" maxlength="500" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Относительный путь к файлу с изображением\Имя файла с изображением"></label></section>
                                                             </fieldset>
                                                          </section>
@@ -3755,9 +3762,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                          <section collapsed="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:attachment_pdf" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:government_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf">
                                                                <legend onclick="collapseSections(this);">Приложенный файл в формате PDF</legend>
-                                                               <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:government_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string">
-                                                                        <option value="01">Образ документа</option>
-                                                                        <option value="02">Электронный документ (должен быть представлен одним файлом)</option></select></label></section>
+                                                               <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:government_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string"></select></label></section>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:name" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:clients/iMAP1:client/iMAP1:information_client/iMAP1:government_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:name"><span>Относительный путь к файлу с изображением\Имя файла с изображением</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern=".+\.[p|P][d|D][f|F]" maxlength="500" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Относительный путь к файлу с изображением\Имя файла с изображением"></label></section>
                                                             </fieldset>
                                                          </section>
@@ -3777,7 +3782,7 @@ window.addEventListener("DOMContentLoaded", main);
                            <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:date_drawing" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:date_drawing"><span>Дата составления</span><input type="date" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required pattern=".{0,}" data-xsd2html2xml-primitive="date" data-xsd2html2xml-description="Дата составления"></label></section>
                            <section collapsed="true">
                               <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:information_contractor" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor">
-                                 <legend onclick="collapseSections(this);">Сведения об исполнителе</legend><label radio=""><input type="radio" name="d11058e789" required onclick="clickRadioInput(this, 'd11058e789');" data-xsd2html2xml-description="1"><span>1. Кадастровый инженер</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                 <legend onclick="collapseSections(this);">Сведения об исполнителе</legend><label radio=""><input type="radio" name="d11068e789" required onclick="clickRadioInput(this, 'd11068e789');" data-xsd2html2xml-description="1"><span>1. Кадастровый инженер</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:cadastral_engineer" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:cadastral_engineer">
                                        <legend onclick="collapseSections(this);">Кадастровый инженер</legend>
                                        <section collapsed="true">
@@ -3811,7 +3816,7 @@ window.addEventListener("DOMContentLoaded", main);
                                           </fieldset><button type="button" class="add" data-xsd2html2xml-min="0" data-xsd2html2xml-max="1" onclick="clickAddButton(this);">Сведения о юридическом лице, если кадастровый инженер является работником юридического
                                              лица</button></section>
                                     </fieldset>
-                                 </section><label radio=""><input type="radio" name="d11058e789" required onclick="clickRadioInput(this, 'd11058e789');" data-xsd2html2xml-description="2"><span>2. Индивидуальный предприниматель</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                 </section><label radio=""><input type="radio" name="d11068e789" required onclick="clickRadioInput(this, 'd11068e789');" data-xsd2html2xml-description="2"><span>2. Индивидуальный предприниматель</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:individual_entrepreneur" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:individual_entrepreneur">
                                        <legend onclick="collapseSections(this);">Индивидуальный предприниматель</legend>
                                        <section collapsed="true">
@@ -3826,7 +3831,7 @@ window.addEventListener("DOMContentLoaded", main);
                                        <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:telefon" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:individual_entrepreneur/iMAP1:telefon"><span>Телефон</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required maxlength="50" pattern=".{1,50}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Телефон"></label></section>
                                        <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:mailing_addess" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:individual_entrepreneur/iMAP1:mailing_addess"><span>Почтовый адрес</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required maxlength="4000" pattern=".{1,4000}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Почтовый адрес"></label></section>
                                     </fieldset>
-                                 </section><label radio=""><input type="radio" name="d11058e789" required onclick="clickRadioInput(this, 'd11058e789');" data-xsd2html2xml-description="3"><span>3. Юридическое лицо</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                 </section><label radio=""><input type="radio" name="d11068e789" required onclick="clickRadioInput(this, 'd11068e789');" data-xsd2html2xml-description="3"><span>3. Юридическое лицо</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:legal_entity" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:legal_entity">
                                        <legend onclick="collapseSections(this);">Юридическое лицо</legend>
                                        <section collapsed="true">
@@ -4728,9 +4733,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                    <section collapsed="true">
                                                       <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:attachment_pdf" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:legal_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf">
                                                          <legend onclick="collapseSections(this);">Приложенный файл в формате PDF</legend>
-                                                         <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:legal_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string">
-                                                                  <option value="01">Образ документа</option>
-                                                                  <option value="02">Электронный документ (должен быть представлен одним файлом)</option></select></label></section>
+                                                         <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:legal_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string"></select></label></section>
                                                          <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:name" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:contractor/iMAP1:information_contractor/iMAP1:legal_entity/iMAP1:authorized_representative/iMAP1:attorney_document/DocAtt1:attachment_pdf/DocAtt1:name"><span>Относительный путь к файлу с изображением\Имя файла с изображением</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern=".+\.[p|P][d|D][f|F]" maxlength="500" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Относительный путь к файлу с изображением\Имя файла с изображением"></label></section>
                                                       </fieldset>
                                                    </section>
@@ -4748,7 +4751,7 @@ window.addEventListener("DOMContentLoaded", main);
                            <legend onclick="collapseSections(this);">Сведения о согласованиях карты (плана) объекта землеустройства</legend>
                            <section collapsed="true">
                               <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:coordination" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:coordinations/iMAP1:coordination">
-                                 <legend onclick="collapseSections(this);">Сведения о согласовании карты (плана) объекта землеустройства<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d16891e824" required onclick="clickRadioInput(this, 'd16891e824');" data-xsd2html2xml-description="1"><span>1. Согласование карты (плана) на титульном листе</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                 <legend onclick="collapseSections(this);">Сведения о согласовании карты (плана) объекта землеустройства<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d16904e824" required onclick="clickRadioInput(this, 'd16904e824');" data-xsd2html2xml-description="1"><span>1. Согласование карты (плана) на титульном листе</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:coordination_title" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:coordinations/iMAP1:coordination/iMAP1:coordination_title">
                                        <legend onclick="collapseSections(this);">Согласование карты (плана) на титульном листе</legend>
                                        <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:name" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:coordinations/iMAP1:coordination/iMAP1:coordination_title/iMAP1:name"><span>Наименование органа (организации)</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern="( ?[0-9A-zА-яЁё&amp;'&#34;!№;%:?*()+/,.~@#$=|«»{}-])+" maxlength="500" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Наименование органа (организации)"></label></section>
@@ -4768,7 +4771,7 @@ window.addEventListener("DOMContentLoaded", main);
                                           </fieldset>
                                        </section>
                                     </fieldset>
-                                 </section><label radio=""><input type="radio" name="d16891e824" required onclick="clickRadioInput(this, 'd16891e824');" data-xsd2html2xml-description="2"><span>2. Согласование карты (плана) в виде письма на бланке соответствующего органа (организации)</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                 </section><label radio=""><input type="radio" name="d16904e824" required onclick="clickRadioInput(this, 'd16904e824');" data-xsd2html2xml-description="2"><span>2. Согласование карты (плана) в виде письма на бланке соответствующего органа (организации)</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:letterhead_document" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:coordinations/iMAP1:coordination/iMAP1:letterhead_document">
                                        <legend onclick="collapseSections(this);">Согласование карты (плана) в виде письма на бланке соответствующего органа (организации)</legend>
                                        <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:document_code" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:title/iMAP1:coordinations/iMAP1:coordination/iMAP1:letterhead_document/DocAtt1:document_code"><span>Код документа</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Код документа" data-xsd2html2xml-primitive="string">
@@ -6561,11 +6564,11 @@ window.addEventListener("DOMContentLoaded", main);
                               <option value="0">Описание части (частей) границы</option></select></label></section>
                      <section collapsed="true">
                         <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:information_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary">
-                           <legend onclick="collapseSections(this);">Описание объекта землеустройства (местоположение границы либо части (частей) границы)</legend><label radio=""><input type="radio" name="d22797e180" required onclick="clickRadioInput(this, 'd22797e180');" data-xsd2html2xml-description="1"><span>1. Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
+                           <legend onclick="collapseSections(this);">Описание объекта землеустройства (местоположение границы либо части (частей) границы)</legend><label radio=""><input type="radio" name="d22810e180" required onclick="clickRadioInput(this, 'd22810e180');" data-xsd2html2xml-description="1"><span>1. Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
                                  между субъектами Российской Федерации</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                               <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:subject_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary">
                                  <legend onclick="collapseSections(this);">Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
-                                    между субъектами Российской Федерации</legend><label radio=""><input type="radio" name="d22811e211" required onclick="clickRadioInput(this, 'd22811e211');" data-xsd2html2xml-description="1"><span>1. Установление границы (части (частей) границы) между субъектами Российской Федерации</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                    между субъектами Российской Федерации</legend><label radio=""><input type="radio" name="d22824e211" required onclick="clickRadioInput(this, 'd22824e211');" data-xsd2html2xml-description="1"><span>1. Установление границы (части (частей) границы) между субъектами Российской Федерации</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:establishment_subject_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:establishment_subject_boundary">
                                        <legend onclick="collapseSections(this);">Установление границы (части (частей) границы) между субъектами Российской Федерации</legend>
                                        <section collapsed="true">
@@ -6748,7 +6751,7 @@ window.addEventListener("DOMContentLoaded", main);
                                           </fieldset>
                                        </section>
                                     </fieldset>
-                                 </section><label radio=""><input type="radio" name="d22811e211" required onclick="clickRadioInput(this, 'd22811e211');" data-xsd2html2xml-description="2"><span>2. Изменение (уточнение) границы (части (частей) границы) между субъектами Российской
+                                 </section><label radio=""><input type="radio" name="d22824e211" required onclick="clickRadioInput(this, 'd22824e211');" data-xsd2html2xml-description="2"><span>2. Изменение (уточнение) границы (части (частей) границы) между субъектами Российской
                                        Федерации</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:changing_subject_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary">
                                        <legend onclick="collapseSections(this);">Изменение (уточнение) границы (части (частей) границы) между субъектами Российской
@@ -6869,7 +6872,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                    <legend onclick="collapseSections(this);">Контуры (контур) (существующие, новые координаты характерных точек контура)</legend>
                                                    <section collapsed="true">
                                                       <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour">
-                                                         <legend onclick="collapseSections(this);">Контур (существующие, новые координаты характерных точек контура)<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d26763e582" required onclick="clickRadioInput(this, 'd26763e582');" data-xsd2html2xml-description="1"><span>1. Добавить новый контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                                         <legend onclick="collapseSections(this);">Контур (существующие, новые координаты характерных точек контура)<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d26776e582" required onclick="clickRadioInput(this, 'd26776e582');" data-xsd2html2xml-description="1"><span>1. Добавить новый контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:new_contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:new_contour">
                                                                <legend onclick="collapseSections(this);">Добавить новый контур</legend>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:number_pp" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:new_contour/EnSpa1:number_pp"><span>Порядковый номер контура границы<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{10})[\d]{0,10}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Порядковый номер контура границы"></label><button type="button" class="add" data-xsd2html2xml-min="0" data-xsd2html2xml-max="1" onclick="clickAddButton(this);">Порядковый номер контура границы</button></section>
@@ -6916,7 +6919,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                                   </fieldset>
                                                                </section>
                                                             </fieldset>
-                                                         </section><label radio=""><input type="radio" name="d26763e582" required onclick="clickRadioInput(this, 'd26763e582');" data-xsd2html2xml-description="2"><span>2. Изменить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                                         </section><label radio=""><input type="radio" name="d26776e582" required onclick="clickRadioInput(this, 'd26776e582');" data-xsd2html2xml-description="2"><span>2. Изменить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:change_contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:change_contour">
                                                                <legend onclick="collapseSections(this);">Изменить существующий контур</legend>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:number_pp" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:change_contour/EnSpa1:number_pp"><span>Порядковый номер контура границы<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{10})[\d]{0,10}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Порядковый номер контура границы"></label><button type="button" class="add" data-xsd2html2xml-min="0" data-xsd2html2xml-max="1" onclick="clickAddButton(this);">Порядковый номер контура границы</button></section>
@@ -7043,7 +7046,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                                   </fieldset>
                                                                </section>
                                                             </fieldset>
-                                                         </section><label radio=""><input type="radio" name="d26763e582" required onclick="clickRadioInput(this, 'd26763e582');" data-xsd2html2xml-description="3"><span>3. Удалить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                                         </section><label radio=""><input type="radio" name="d26776e582" required onclick="clickRadioInput(this, 'd26776e582');" data-xsd2html2xml-description="3"><span>3. Удалить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:delete_contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:delete_contour">
                                                                <legend onclick="collapseSections(this);">Удалить существующий контур</legend>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:number_pp" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:subject_boundary/iMAP1:changing_subject_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:delete_contour/EnSpa1:number_pp"><span>Порядковый номер контура границы</span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{10})[\d]{0,10}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Порядковый номер контура границы"></label></section>
@@ -7076,11 +7079,11 @@ window.addEventListener("DOMContentLoaded", main);
                                     </fieldset>
                                  </section>
                               </fieldset>
-                           </section><label radio=""><input type="radio" name="d22797e180" required onclick="clickRadioInput(this, 'd22797e180');" data-xsd2html2xml-description="2"><span>2. Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
+                           </section><label radio=""><input type="radio" name="d22810e180" required onclick="clickRadioInput(this, 'd22810e180');" data-xsd2html2xml-description="2"><span>2. Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
                                  муниципального образования</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                               <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:municipal_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary">
                                  <legend onclick="collapseSections(this);">Сведения об установлении или изменении (уточнении) границы (части (частей) границы)
-                                    муниципального образования</legend><label radio=""><input type="radio" name="d35605e414" required onclick="clickRadioInput(this, 'd35605e414');" data-xsd2html2xml-description="1"><span>1. Установление границы (части (частей) границы) муниципального образования</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                    муниципального образования</legend><label radio=""><input type="radio" name="d35618e414" required onclick="clickRadioInput(this, 'd35618e414');" data-xsd2html2xml-description="1"><span>1. Установление границы (части (частей) границы) муниципального образования</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:establishment_municipal_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:establishment_municipal_boundary">
                                        <legend onclick="collapseSections(this);">Установление границы (части (частей) границы) муниципального образования</legend>
                                        <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:cadastral_district" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:establishment_municipal_boundary/iMAP1:cadastral_district"><span>Номер кадастрового района</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern="\d{1,2}:\d{1,2}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Номер кадастрового района"></label></section>
@@ -7285,7 +7288,7 @@ window.addEventListener("DOMContentLoaded", main);
                                           </fieldset>
                                        </section>
                                     </fieldset>
-                                 </section><label radio=""><input type="radio" name="d35605e414" required onclick="clickRadioInput(this, 'd35605e414');" data-xsd2html2xml-description="2"><span>2. Изменение (уточнение) границы (части (частей) границы) муниципального образования</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                 </section><label radio=""><input type="radio" name="d35618e414" required onclick="clickRadioInput(this, 'd35618e414');" data-xsd2html2xml-description="2"><span>2. Изменение (уточнение) границы (части (частей) границы) муниципального образования</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                     <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:changing_municipal_boundary" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary">
                                        <legend onclick="collapseSections(this);">Изменение (уточнение) границы (части (частей) границы) муниципального образования</legend>
                                        <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:reg_numb_border" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:reg_numb_border"><span>Реестровый номер границы</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required maxlength="50" pattern=".{1,50}" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Реестровый номер границы"></label></section>
@@ -7426,7 +7429,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                    <legend onclick="collapseSections(this);">Контуры (контур) (существующие, новые координаты характерных точек контура)</legend>
                                                    <section collapsed="true">
                                                       <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour">
-                                                         <legend onclick="collapseSections(this);">Контур (существующие, новые координаты характерных точек контура)<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d43445e582" required onclick="clickRadioInput(this, 'd43445e582');" data-xsd2html2xml-description="1"><span>1. Добавить новый контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                                         <legend onclick="collapseSections(this);">Контур (существующие, новые координаты характерных точек контура)<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d43458e582" required onclick="clickRadioInput(this, 'd43458e582');" data-xsd2html2xml-description="1"><span>1. Добавить новый контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:new_contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:new_contour">
                                                                <legend onclick="collapseSections(this);">Добавить новый контур</legend>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:number_pp" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:new_contour/EnSpa1:number_pp"><span>Порядковый номер контура границы<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{10})[\d]{0,10}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Порядковый номер контура границы"></label><button type="button" class="add" data-xsd2html2xml-min="0" data-xsd2html2xml-max="1" onclick="clickAddButton(this);">Порядковый номер контура границы</button></section>
@@ -7473,7 +7476,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                                   </fieldset>
                                                                </section>
                                                             </fieldset>
-                                                         </section><label radio=""><input type="radio" name="d43445e582" required onclick="clickRadioInput(this, 'd43445e582');" data-xsd2html2xml-description="2"><span>2. Изменить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                                         </section><label radio=""><input type="radio" name="d43458e582" required onclick="clickRadioInput(this, 'd43458e582');" data-xsd2html2xml-description="2"><span>2. Изменить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:change_contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:change_contour">
                                                                <legend onclick="collapseSections(this);">Изменить существующий контур</legend>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:number_pp" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:change_contour/EnSpa1:number_pp"><span>Порядковый номер контура границы<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{10})[\d]{0,10}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Порядковый номер контура границы"></label><button type="button" class="add" data-xsd2html2xml-min="0" data-xsd2html2xml-max="1" onclick="clickAddButton(this);">Порядковый номер контура границы</button></section>
@@ -7600,7 +7603,7 @@ window.addEventListener("DOMContentLoaded", main);
                                                                   </fieldset>
                                                                </section>
                                                             </fieldset>
-                                                         </section><label radio=""><input type="radio" name="d43445e582" required onclick="clickRadioInput(this, 'd43445e582');" data-xsd2html2xml-description="3"><span>3. Удалить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                                                         </section><label radio=""><input type="radio" name="d43458e582" required onclick="clickRadioInput(this, 'd43458e582');" data-xsd2html2xml-description="3"><span>3. Удалить существующий контур</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                                                             <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:delete_contour" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:delete_contour">
                                                                <legend onclick="collapseSections(this);">Удалить существующий контур</legend>
                                                                <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/entity-spatial/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="EnSpa1:number_pp" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:information_boundary/iMAP1:municipal_boundary/iMAP1:changing_municipal_boundary/iMAP1:contours_location/EnSpa1:contours/EnSpa1:contour/EnSpa1:delete_contour/EnSpa1:number_pp"><span>Порядковый номер контура границы</span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{10})[\d]{0,10}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Порядковый номер контура границы"></label></section>
@@ -7638,13 +7641,13 @@ window.addEventListener("DOMContentLoaded", main);
                      </section>
                      <section collapsed="true">
                         <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:area" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:area">
-                           <legend onclick="collapseSections(this);">Площадь и величина погрешности (в квадратных метрах или гектарах)<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d52296e563" required onclick="clickRadioInput(this, 'd52296e563');" data-xsd2html2xml-description="1"><span>1. Площадь в квадратных метрах</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                           <legend onclick="collapseSections(this);">Площадь и величина погрешности (в квадратных метрах или гектарах)<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend><label radio=""><input type="radio" name="d52309e563" required onclick="clickRadioInput(this, 'd52309e563');" data-xsd2html2xml-description="1"><span>1. Площадь в квадратных метрах</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                               <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:area_meter" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:area/iMAP1:area_meter">
                                  <legend onclick="collapseSections(this);">Площадь в квадратных метрах</legend>
                                  <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="Are1:value" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:area/iMAP1:area_meter/Are1:value"><span>Значение площади в квадратных метрах</span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required min="1" pattern="(?!\d{20})[\d]{0,20}" data-xsd2html2xml-primitive="positiveinteger" data-xsd2html2xml-description="Значение площади в квадратных метрах"></label></section>
                                  <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="Are1:inaccuracy" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:area/iMAP1:area_meter/Are1:inaccuracy"><span>Погрешность определения площади</span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required step="0.01" pattern="[-]?(?!\d{21})(?!.*\.\d{19,})[\d.]{0,21}" data-xsd2html2xml-primitive="decimal" data-xsd2html2xml-description="Погрешность определения площади"></label></section>
                               </fieldset>
-                           </section><label radio=""><input type="radio" name="d52296e563" required onclick="clickRadioInput(this, 'd52296e563');" data-xsd2html2xml-description="2"><span>2. Площадь в гектарах</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
+                           </section><label radio=""><input type="radio" name="d52309e563" required onclick="clickRadioInput(this, 'd52309e563');" data-xsd2html2xml-description="2"><span>2. Площадь в гектарах</span></label><section collapsed="true" data-xsd2html2xml-choice="true">
                               <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:area_hectare" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:area/iMAP1:area_hectare">
                                  <legend onclick="collapseSections(this);">Площадь в гектарах</legend>
                                  <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/area/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="Are1:value" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:information_registry_boundary/iMAP1:area/iMAP1:area_hectare/Are1:value"><span>Значение площади в гектарах</span><input type="number" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value.replace(/\s+/g, &#34; &#34;).trim()); } else { this.removeAttribute(&#34;value&#34;); };" required step="0.01" pattern="[-]?(?!\d{21})(?!.*\.\d{19,})[\d.]{0,21}" data-xsd2html2xml-primitive="decimal" data-xsd2html2xml-description="Значение площади в гектарах"></label></section>
@@ -7660,9 +7663,7 @@ window.addEventListener("DOMContentLoaded", main);
                      <section collapsed="true">
                         <fieldset data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/interact/interact-map-plan/2.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="iMAP1:attachment_pdf" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:border_plan/iMAP1:attachment_pdf">
                            <legend onclick="collapseSections(this);">Приложенный файл в формате PDF<button type="button" class="remove" onclick="clickRemoveButton(this);"></button></legend>
-                           <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:border_plan/iMAP1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string">
-                                    <option value="01">Образ документа</option>
-                                    <option value="02">Электронный документ (должен быть представлен одним файлом)</option></select></label></section>
+                           <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:kind" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:border_plan/iMAP1:attachment_pdf/DocAtt1:kind"><span>Вид файла по справочнику видов приложенных файлов</span><select onchange="this.childNodes.forEach(function(o) { if (o.nodeType == Node.ELEMENT_NODE) o.removeAttribute(&#34;selected&#34;); }); this.children[this.selectedIndex].setAttribute(&#34;selected&#34;,&#34;selected&#34;);" required data-xsd2html2xml-description="Вид файла по справочнику видов приложенных файлов" data-xsd2html2xml-primitive="string"></select></label></section>
                            <section collapsed="true"><label data-xsd2html2xml-namespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document-requisites-and-attachment/1.0.1" data-xsd2html2xml-type="element" data-xsd2html2xml-name="DocAtt1:name" data-xsd2html2xml-xpath="/iMAP1:map_plan/iMAP1:border_plan/iMAP1:attachment_pdf/DocAtt1:name"><span>Относительный путь к файлу с изображением\Имя файла с изображением</span><input type="text" onchange="if (this.value) { this.setAttribute(&#34;value&#34;, this.value); } else { this.removeAttribute(&#34;value&#34;); };" required pattern=".+\.[p|P][d|D][f|F]" maxlength="500" data-xsd2html2xml-primitive="string" data-xsd2html2xml-description="Относительный путь к файлу с изображением\Имя файла с изображением"></label></section>
                         </fieldset><button type="button" class="add" data-xsd2html2xml-min="1" data-xsd2html2xml-max="unbounded" onclick="clickAddButton(this);">Приложенный файл в формате PDF</button></section>
                   </fieldset>
