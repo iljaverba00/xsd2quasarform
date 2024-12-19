@@ -77,16 +77,10 @@ function setVisible(element) {
 
 function expandRequiredForms() {
   // Находим все обязательные поля
-  const requiredForms = Array.from(
-    document.querySelectorAll(
-      'input[required]:not([disabled]):not([hidden] *):not([checked])'
-    )
-  );
-  requiredForms = requiredForms.concat(Array.from(
-    document.querySelectorAll(
-      'select[required]:not([disabled]):not([hidden] *):not([checked])'
-    )
-  ))
+  const inputs = document.querySelectorAll('input[required]:not([disabled]):not([hidden] *):not([checked])');
+  const selects = document.querySelectorAll('select[required]:not([disabled]):not([hidden] *):not([checked])');
+  const requiredForms = [...inputs, ...selects];
+
   const radioWalkedFieldsets = new Set();
   requiredForms.forEach(function (element) {
     let fieldsetToAdd = null;

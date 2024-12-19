@@ -10,10 +10,155 @@
 			<xsl:text disable-output-escaping="yes">
 				/* HTML POPULATORS */
 
+				// Add import button for spatials_elements node
+				const initImportButtons = function() {
+				    const importTypeMessages = {
+				        START: 'import-start',
+				        CONTINUE: 'import-continue'
+				    }
+
+                    document.querySelectorAll("[data-xsd2html2xml-name='EnSpa2:spatials_elements']").forEach(function(fieldsetElement) {
+                        console.log('element')
+
+				  		const legendElement = fieldsetElement.firstElementChild;
+						const sectionElement = fieldsetElement.querySelector('section:last-of-type');
+						const buttons = sectionElement.getElementsByClassName('add');
+
+                        let addContourButton;
+                        for(const b of buttons){
+                            if(b.innerHTML == 'Элемент контура'){
+                                addContourButton = b;
+                                break
+                            }
+                        }
+
+
+						let button = legendElement.querySelector('*');
+						if(!button){
+							button = document.createElement('button');
+							button.classList.add('import');
+							button.type='button';
+							button.textContent = 'Импорт координат';
+
+							legendElement.appendChild(button);
+						}
+
+
+						button.onclick = (e) => {
+					        e.stopPropagation();
+
+					        const getContourNodes = () =>{
+					            return Array.from(sectionElement.childNodes).slice(1,sectionElement.childNodes.length - 2);
+					        }
+
+					        // Clear coordinates from node
+					        // No need touch hidden fieldset, this node for clone
+					        let contourNodes = getContourNodes();
+					        console.log(contourNodes)
+					        for (let contourNode of contourNodes){
+					       	    sectionElement.removeChild(contourNode);
+					        }
+
+					        const message = {type:importTypeMessages.START};
+							window.parent.postMessage(message);
+
+                            const importListener = (event)=> {
+								console.log('generate nodes', event);
+								if(event?.data?.type === importTypeMessages.CONTINUE){
+								    console.log('got import result for genetate nodes');
+								    window.removeEventListener('message', importListener);
+
+									// Generate nodes
+									if(event?.data?.value) {
+										console.log(event?.data?.value);
+
+                                        // Create contours nodes
+										const contours = JSON.parse(event?.data?.value);
+										for(const contour of contours){
+											addContourButton.click();
+										}
+
+                                        // Reinit contours
+										contourNodes = getContourNodes();
+
+										// Create coordinate nodes for every contour
+										const addCoordButtons = contourNodes.map((cn, i)=> {
+										    return {
+										        btn: cn.lastElementChild.lastElementChild.lastElementChild.lastElementChild,
+										        count: contours[i].length
+										    }
+										})
+										console.log(addCoordButtons);
+										for(const addCoordButton of addCoordButtons){
+										    for(let i = 0; i &lt; addCoordButton.count - 1; i++){
+										        addCoordButton.btn.click();
+										    }
+										}
+
+                                        const getOrdGeopointZacrep = (fieldNode, name)=>{
+										    return fieldNode.find(f =>{
+												const selectRes = f.querySelectorAll(`${name}`)
+												if (selectRes?.length){return selectRes[0]?.lastElementChild}
+											})
+										}
+										const getCoordinateInput = (fieldNode, name)=>{
+										    return fieldNode.find(f =>{
+												const selectRes = f.querySelectorAll(`${name}`)
+												if (selectRes?.length){return selectRes[0]?.lastElementChild}
+											})?.lastElementChild?.lastElementChild
+										}
+
+										const opredMethod = {
+                                                        "Геодезический метод":692001000000,
+                                                        "Фотограмметрический метод":692002000000,
+                                                        "Картометрический метод":692003000000,
+                                                        "Иное описание": 692004000000,
+                                                        "Метод спутниковых геодезических измерений (определений)":692005000000,
+                                                        "Аналитический метод":692006000000
+                                                    }
+
+										// Fill coordinates
+										for (const contourNode of contourNodes){
+										    const coordinateNodes = contourNode.lastElementChild.lastElementChild.lastElementChild.childNodes;
+										    const coordContour = contours[i];
+
+										    for(let i = 1; i &lt; coordinateNodes.length - 2; i++){
+												const fieldsCoordinateNones = Array.from(coordinateNodes[i].childNodes).filter(n=>n.nodeName =='SECTION');
+												const coord = coordContour[i - 1];
+												if (coord){
+
+                                                const xInput = getCoordinateInput(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:x']");
+                                                const yInput = getCoordinateInput(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:y']");
+                                                const ordNmbInput = getCoordinateInput(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:ord_nmb']");
+                                                const ordNmbGeopointInput = getCoordinateInput(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:num_geopoint']");
+                                                const ordGeopointZacrep = getOrdGeopointZacrep(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:geopoint_zacrep']");
+
+                                                const ordGeopointOpredSelect = getCoordinateInput(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:geopoint_opred']");
+                                                const ordDeltaGeopointInput = getCoordinateInput(fieldsCoordinateNones,"[data-xsd2html2xml-name='EnSpa2:delta_geopoint']");
+
+
+                                                if(xInput &amp;&amp; coord[1]) {xInput.value = Number(coord[1])};
+                                                if(yInput &amp;&amp; coord[2]) {yInput.value = Number(coord[2])};
+                                                if(ordNmbInput &amp;&amp; coord[6]) {ordNmbInput.value = coord[6]};
+                                                if(ordNmbGeopointInput &amp;&amp; coord[7]) {ordNmbGeopointInput.value = coord[7]};
+                                                if(ordGeopointZacrep &amp;&amp; coord[8]) {ordGeopointZacrep?.lastElementChild?.click(); ordGeopointZacrep.firstElementChild.lastElementChild.value = coord[8]};
+                                                if(ordGeopointOpredSelect &amp;&amp; coord[3]) {ordGeopointOpredSelect.value = opredMethod[coord[3]]};
+                                                if(ordDeltaGeopointInput &amp;&amp; coord[4]) {ordDeltaGeopointInput.value = coord[4]};
+                                                }
+
+										    }
+										}
+									}
+							    }
+							}
+							window.addEventListener('message', importListener);
+						}
+                    });
+                }
+
 				// Mark required fields
 				var markRequiredFields = function() {
                     document.querySelectorAll("[required]").forEach(function(p) {
-                        console.log('reqc')
                         p.parentElement.classList.add('reqc')
                     });
                 }

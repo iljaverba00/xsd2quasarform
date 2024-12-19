@@ -39,6 +39,7 @@
 							});
 						}
 
+
 						markRequiredFields();
 						setCustomValidity();
 						addHiddenFields();
@@ -48,6 +49,7 @@
 						setValues();
 						ensureMinimum();
 						clickFilledRadio();
+						initImportButtons();
 					}
 				);
 			</xsl:text>
