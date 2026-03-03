@@ -1,15 +1,13 @@
-package tests;
-
 import com.java.Converter;
 import com.java.Validator;
 import org.junit.Test;
 
-public class MapPlan {
-    public final String dir = "/map_plan";
+public class MapPlan1 {
+    public final String dir = "/map_plan_01";
 
     @Test
     public void test1() {
-        String xsd = dir + "/schema/main.xsd";
+        String xsd = dir + "/schema/f/main.xsd";
         String html = dir + "/result/form1.html";
 
         new Converter().generateForm(xsd, html, 1);
@@ -18,7 +16,7 @@ public class MapPlan {
 
     @Test
     public void test0() {
-        String xsd = dir + "/schema/main.xsd";
+        String xsd = dir + "/schema/f/main.xsd";
         String html = dir + "/result/form0.html";
 
         new Converter().generateForm(xsd, html, 0);
@@ -28,25 +26,17 @@ public class MapPlan {
 
     @Test
     public void doc1() {
-        String xsd = dir + "/schema/doc.xml";
+        String xsd = dir + "/schema/f/doc.xml";
         String html = dir + "/result/form-doc1.html";
 
         new Converter().generateForm(xsd, html, 1);
 
     }
 
-    @Test
-    public void doc11() {
-        String xsd = dir + "/schema/doc1.xml";
-        String html = dir + "/result/form-doc11.html";
-
-        new Converter().generateForm(xsd, html, 1);
-
-    }
 
     @Test
     public void doc0() {
-        String xsd = dir + "/schema/doc.xml";
+        String xsd = dir + "/schema/f/doc.xml";
         String html = dir + "/result/form-doc0.html";
 
         new Converter().generateForm(xsd, html, 0);
@@ -55,7 +45,7 @@ public class MapPlan {
 
     @Test
     public void validation() {
-        String xsd = dir + "/schema/main.xsd";
+        String xsd = dir + "/schema/f/main.xsd";
         String xml = dir + "/schema/doc.xml";
         new Validator().validate(xsd, xml);
         System.out.println("Validation passed.");

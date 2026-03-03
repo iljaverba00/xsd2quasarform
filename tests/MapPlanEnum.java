@@ -1,7 +1,4 @@
-package tests;
-
 import com.java.Converter;
-import com.java.Validator;
 import org.junit.Test;
 
 public class MapPlanEnum {
